@@ -522,11 +522,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>TRANS_UBICACION_GEOGRAFICA</from>
-      <to>ADD_FECHA_CARGA_UBICACION_GEOGRAFICA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>ADD_FECHA_PRESUPUESTO</from>
       <to>DSA_PRESUPUESTO</to>
       <enabled>Y</enabled>
@@ -614,6 +609,11 @@
     <hop>
       <from>FACTURA_DATE_PARSER</from>
       <to>ADD_FECHA_FACTURA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TRANS_UBICACION_GEOGRAFICA</from>
+      <to>ADD_FECHA_CARGA_UBICACION_GEOGRAFICA</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -822,7 +822,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>368</xloc>
       <yloc>592</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1709,6 +1709,39 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FACTURA_DATE_PARSER</name>
+    <type>SetValueConstant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>FECHA_EMISION</name>
+        <value />
+        <mask>dd/MM/yyyy</mask>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3490,7 +3523,7 @@
     <fields>
       <field>
         <name>COD_UBICACION</name>
-        <type>Number</type>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -3560,39 +3593,6 @@
     <GUI>
       <xloc>96</xloc>
       <yloc>592</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FACTURA_DATE_PARSER</name>
-    <type>SetValueConstant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>FECHA_EMISION</name>
-        <value />
-        <mask>dd/MM/yyyy</mask>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>880</xloc>
-      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
