@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DSA_TO_DWH_CLIENTE</name>
+    <name>DSA_TO_DWH</name>
     <description>CLIENT TRANSFORMATION</description>
     <extended_description />
     <trans_version />
@@ -458,72 +458,57 @@
   <order>
     <hop>
       <from>DSA_Cliente</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
       <to>SELECT_VALUES_CLIENTE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>SELECT_VALUES_CLIENTE</from>
-      <to>ADD_FECHA_CARGA</to>
+      <to>FILTER_REGEX</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>TIPO_SORT_BY_TYPE</from>
-      <to>MERGE_JOIN_TELEFONO</to>
+      <from>FILTER_REGEX</from>
+      <to>MERGE_ZERO_CEDULA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>TELEFONO_ SORT_BY_TYPE</from>
-      <to>MERGE_JOIN_TELEFONO</to>
+      <from>MERGE_ZERO_CEDULA</from>
+      <to>REMOVE_FILES</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DSA_TIPO</from>
-      <to>SELECT_VALUES_TIPO</to>
+      <from>FILTER_REGEX</from>
+      <to>REMOVE_ZERO_AUX</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SELECT_VALUES_TELEFONO</from>
-      <to>TELEFONO_ SORT_BY_TYPE</to>
+      <from>REMOVE_FILES</from>
+      <to>ADD_FECHA_CARGA_CLIENTE_TRUE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SELECT_VALUES_TIPO</from>
-      <to>TIPO_SORT_BY_TYPE</to>
+      <from>ADD_FECHA_CARGA_CLIENTE_TRUE</from>
+      <to>Insert / Update(CLIENTE_TRUE)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DSA_TELEFONO</from>
-      <to>SELECT_VALUES_TELEFONO</to>
+      <from>REMOVE_ZERO_AUX</from>
+      <to>ADD_FECHA_CARGA_CLIENTE_FALSE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA</from>
-      <to>Insert / Update(cliente)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>DIM_CLIENTE</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>DIM_CLIENTE_SORT_BY_CEDULA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>DIM_CLIENTE_SORT_BY_CEDULA</from>
-      <to>MERGE_TELEFONO_DIM_CLIENTE</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>MERGE_JOIN_TELEFONO</from>
-      <to>MERGE_TELEFONO_DIM_CLIENTE</to>
+      <from>ADD_FECHA_CARGA_CLIENTE_FALSE</from>
+      <to>Insert / Update(CLIENTE_FALSE)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ADD_FECHA_CARGA</name>
+    <name>ADD_FECHA_CARGA_CLIENTE_FALSE</name>
     <type>SystemInfo</type>
     <description />
     <distribute>N</distribute>
@@ -547,7 +532,121 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>752</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_CLIENTE_TRUE</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_DIRECCION</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_TELEFONO
+SET ID_CLIENTE = 
+(SELECT ID_CLIENTE FROM datawarehouse.DIM_CLIENTE
+WHERE CEDULA="-1"),
+COD_TELEFONO = "-1",
+NUMERO_TELEFONO = "NO DEFINIDO",
+COD_TIPO="NO DEFINIDO",
+TIPO= "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -590,8 +689,8 @@ FROM DSA_CLIENTE
     </GUI>
   </step>
   <step>
-    <name>DSA_TIPO</name>
-    <type>TableInput</type>
+    <name>FILTER_REGEX</name>
+    <type>FilterRows</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -600,18 +699,25 @@ FROM DSA_CLIENTE
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>mysql_transform</connection>
-    <sql>SELECT
-  COD_TIPO
-, TIPO
-, FECHA_CARGA
-FROM DSA_TIPO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <send_true_to>MERGE_ZERO_CEDULA</send_true_to>
+    <send_false_to>REMOVE_ZERO_AUX</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>CEDULA</leftvalue>
+        <function>REGEXP</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>^\D*\d{9}$</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -620,355 +726,8 @@ FROM DSA_TIPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_TELEFONO</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>mysql_transform</connection>
-    <sql>SELECT
-  COD_TELEFONO
-, NUMERO_TELEFONO
-, COD_TIPO
-, CEDULA
-, FECHA_CARGA
-FROM DSA_TELEFONO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>MERGE_JOIN_TELEFONO</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>TIPO_SORT_BY_TYPE</step1>
-    <step2>TELEFONO_ SORT_BY_TYPE</step2>
-    <keys_1>
-      <key>COD_TIPO</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_TIPO</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SELECT_VALUES_TELEFONO</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>COD_TELEFONO</name>
-        <rename />
-      </field>
-      <field>
-        <name>NUMERO_TELEFONO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_TIPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>CEDULA</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
-      <meta>
-        <name>COD_TELEFONO</name>
-        <rename>COD_TELEFONO</rename>
-        <type>String</type>
-        <length>100</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>NUMERO_TELEFONO</name>
-        <rename>NUMERO_TELEFONO</rename>
-        <type>String</type>
-        <length>50</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>COD_TIPO</name>
-        <rename>COD_TIPO</rename>
-        <type>String</type>
-        <length>100</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>CEDULA</name>
-        <rename>CEDULA</rename>
-        <type>String</type>
-        <length>100</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SELECT_VALUES_TIPO</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>COD_TIPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>TIPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
-      <meta>
-        <name>COD_TIPO</name>
-        <rename>COD_TIPO</rename>
-        <type>String</type>
-        <length>100</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>TIPO</name>
-        <rename>TIPO</rename>
-        <type>String</type>
-        <length>50</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TIPO_SORT_BY_TYPE</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_TIPO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TELEFONO_ SORT_BY_TYPE</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_TIPO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>416</yloc>
+      <xloc>560</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1012,97 +771,7 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
     </GUI>
   </step>
   <step>
-    <name>SELECT_VALUES_CLIENTE</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>CEDULA</name>
-        <rename />
-      </field>
-      <field>
-        <name>NOMBRES</name>
-        <rename />
-      </field>
-      <field>
-        <name>APELLIDOS</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>CEDULA</name>
-        <rename>CEDULA</rename>
-        <type>String</type>
-        <length>13</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>NOMBRES</name>
-        <rename>NOMBRES</rename>
-        <type>String</type>
-        <length>50</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>APELLIDOS</name>
-        <rename>APELLIDOS</rename>
-        <type>String</type>
-        <length>50</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update(cliente)</name>
+    <name>Insert / Update(CLIENTE_FALSE)</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -1165,14 +834,14 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>112</yloc>
+      <xloc>992</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>INSERT_UNDEFINED_DIRECCION</name>
-    <type>ExecSQL</type>
+    <name>Insert / Update(CLIENTE_TRUE)</name>
+    <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1182,27 +851,50 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
       <schema_name />
     </partitioning>
     <connection>mysql_transform</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>INSERT IGNORE INTO datawarehouse.DIM_TELEFONO
-SET ID_CLIENTE = 
-(SELECT ID_CLIENTE FROM datawarehouse.DIM_CLIENTE
-WHERE CEDULA="-1"),
-COD_TELEFONO = "-1",
-NUMERO_TELEFONO = "NO DEFINIDO",
-COD_TIPO="NO DEFINIDO",
-TIPO= "NO DEFINIDO",
-FECHA_CARGA= CURDATE();
-</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-    </arguments>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>datawarehouse</schema>
+      <table>DIM_CLIENTE</table>
+      <key>
+        <name>CEDULA</name>
+        <field>CEDULA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>NOMBRES</name>
+        <field>NOMBRES</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>APELLIDOS</name>
+        <field>APELLIDOS</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>CEDULA</name>
+        <rename>CEDULA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NOMBRES</name>
+        <rename>NOMBRES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>APELLIDOS</name>
+        <rename>APELLIDOS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1211,14 +903,14 @@ FECHA_CARGA= CURDATE();
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>192</yloc>
+      <xloc>1232</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>DIM_CLIENTE</name>
-    <type>TableInput</type>
+    <name>MERGE_ZERO_CEDULA</name>
+    <type>ConcatFields</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1227,20 +919,68 @@ FECHA_CARGA= CURDATE();
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>mysql_transform</connection>
-    <sql>SELECT
-  ID_CLIENTE
-, CEDULA
-, NOMBRES
-, APELLIDOS
-, FECHA_CARGA
-FROM DIM_CLIENTE
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <separator />
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CEDULA</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>CEDULA</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1249,13 +989,13 @@ FROM DIM_CLIENTE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>256</yloc>
+      <xloc>704</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>REMOVE_FILES</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -1267,28 +1007,26 @@ FROM DIM_CLIENTE
     </partitioning>
     <fields>
       <field>
-        <name>ID_CLIENTE</name>
-        <rename />
-      </field>
-      <field>
         <name>CEDULA</name>
-        <rename />
       </field>
       <field>
         <name>NOMBRES</name>
-        <rename />
       </field>
       <field>
         <name>APELLIDOS</name>
-        <rename />
       </field>
       <field>
-        <name>FECHA_CARGA</name>
-        <rename />
+        <name>ZERO</name>
+      </field>
+      <field>
+        <name>CEDULA_1</name>
       </field>
       <select_unspecified>N</select_unspecified>
       <remove>
-        <name>FECHA_CARGA</name>
+        <name>CEDULA_1</name>
+      </remove>
+      <remove>
+        <name>ZERO</name>
       </remove>
     </fields>
     <cluster_schema />
@@ -1299,14 +1037,14 @@ FROM DIM_CLIENTE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>256</yloc>
+      <xloc>832</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>DIM_CLIENTE_SORT_BY_CEDULA</name>
-    <type>SortRows</type>
+    <name>REMOVE_ZERO_AUX</name>
+    <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1315,22 +1053,23 @@ FROM DIM_CLIENTE
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
     <fields>
       <field>
         <name>CEDULA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
       </field>
+      <field>
+        <name>NOMBRES</name>
+      </field>
+      <field>
+        <name>APELLIDOS</name>
+      </field>
+      <field>
+        <name>ZERO</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>ZERO</name>
+      </remove>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1340,31 +1079,105 @@ FROM DIM_CLIENTE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>256</yloc>
+      <xloc>560</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>MERGE_TELEFONO_DIM_CLIENTE</name>
-    <type>MergeJoin</type>
+    <name>SELECT_VALUES_CLIENTE</name>
+    <type>SelectValues</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>MERGE_JOIN_TELEFONO</step1>
-    <step2>DIM_CLIENTE_SORT_BY_CEDULA</step2>
-    <keys_1>
-      <key>CEDULA</key>
-    </keys_1>
-    <keys_2>
-      <key>CEDULA</key>
-    </keys_2>
+    <fields>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>NOMBRES</name>
+      </field>
+      <field>
+        <name>APELLIDOS</name>
+      </field>
+      <field>
+        <name>ZERO</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>CEDULA</name>
+        <rename>CEDULA</rename>
+        <type>None</type>
+        <length>13</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>NOMBRES</name>
+        <rename>NOMBRES</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>APELLIDOS</name>
+        <rename>APELLIDOS</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ZERO</name>
+        <rename>ZERO</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1373,8 +1186,8 @@ FROM DIM_CLIENTE
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>256</yloc>
+      <xloc>368</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
