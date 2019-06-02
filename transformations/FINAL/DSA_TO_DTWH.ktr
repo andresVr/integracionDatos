@@ -506,6 +506,76 @@
       <to>Insert / Update(CLIENTE_FALSE)</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>DSA_SUBGRUPO</from>
+      <to>REMOVE_FECHA_CARGA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REMOVE_FECHA_CARGA</from>
+      <to>ADD_FECHA_CARGA_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_SUBGRUPO</from>
+      <to>Insert / Update (DIM_SUBGRUPO)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PROVINCIA</from>
+      <to>DORT_PROVINCIA_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CANTON</from>
+      <to>SORT_CANTON_UBICACION_PADRE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DORT_PROVINCIA_UBICACION</from>
+      <to>MERGE_JOIN_PROVINCIA_CANTON</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_CANTON_UBICACION_PADRE</from>
+      <to>MERGE_JOIN_PROVINCIA_CANTON</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PARROQUIA</from>
+      <to>PARROQUIA_SORT_UBICACION_PADRE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_PROVINCIA_CANTON</from>
+      <to>CANTON_MERGED_SORT_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CANTON_MERGED_SORT_UBICACION</from>
+      <to>MERGE_JOIN_CANTON_PARROQUIA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PARROQUIA_SORT_UBICACION_PADRE</from>
+      <to>MERGE_JOIN_CANTON_PARROQUIA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_CANTON_PARROQUIA</from>
+      <to>COLUMNS_TO_DIM_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>COLUMNS_TO_DIM_UBICACION</from>
+      <to>ADD_FECHA_CARGA_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_UBICACION</from>
+      <to>Insert / Update (DIM_UBICACION_GEOGRAFICA)</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>ADD_FECHA_CARGA_CLIENTE_FALSE</name>
@@ -564,6 +634,36 @@
     <GUI>
       <xloc>1008</xloc>
       <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_SUBGRUPO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -639,6 +739,42 @@ FROM DSA_CLIENTE
     <GUI>
       <xloc>96</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_SUBGRUPO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <sql>SELECT
+  COD_SUBGRUPO
+, SUBGRUPO
+, FECHA_CARGA
+FROM DSA_SUB_GRUPO_PRODUCTO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -725,7 +861,7 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
     </GUI>
   </step>
   <step>
-    <name>INSERT_UNDEFINED_DIRECCION</name>
+    <name>INSERT_UNDEFINED_SUBGRUPO</name>
     <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
@@ -740,16 +876,8 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>INSERT IGNORE INTO datawarehouse.DIM_TELEFONO
-SET ID_CLIENTE = 
-(SELECT ID_CLIENTE FROM datawarehouse.DIM_CLIENTE
-WHERE CEDULA="-1"),
-COD_TELEFONO = "-1",
-NUMERO_TELEFONO = "NO DEFINIDO",
-COD_TIPO="NO DEFINIDO",
-TIPO= "NO DEFINIDO",
-FECHA_CARGA= CURDATE();
-</sql>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_SUBGRUPO
+SET COD_SUBGRUPO = "-1", SUBGRUPO = "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
     <set_params>N</set_params>
     <insert_field />
     <update_field />
@@ -765,8 +893,66 @@ FECHA_CARGA= CURDATE();
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>32</yloc>
+      <xloc>96</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_SUBGRUPO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_SUBGRUPO</table>
+      <key>
+        <name>COD_SUBGRUPO</name>
+        <field>COD_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>SUBGRUPO</name>
+        <field>SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_SUBGRUPO</name>
+        <rename>COD_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SUBGRUPO</name>
+        <rename>SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -995,6 +1181,79 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
+    <name>REMOVE_FECHA_CARGA</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>SUBGRUPO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <meta>
+        <name>COD_SUBGRUPO</name>
+        <rename>COD_SUBGRUPO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>SUBGRUPO</name>
+        <rename>SUBGRUPO</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>REMOVE_FILES</name>
     <type>SelectValues</type>
     <description />
@@ -1188,6 +1447,572 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>368</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PROVINCIA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <sql>SELECT
+  COD_UBICACION
+, UBICACION
+, COD_PADRE_UBICACION
+, FECHA_CARGA
+FROM DSA_UBICACION_GEOGRAFICA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CANTON</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <sql>SELECT
+  COD_UBICACION
+, UBICACION
+, COD_PADRE_UBICACION
+, FECHA_CARGA
+FROM DSA_UBICACION_GEOGRAFICA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PARROQUIA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <sql>SELECT
+  COD_UBICACION
+, UBICACION
+, COD_PADRE_UBICACION
+, FECHA_CARGA
+FROM DSA_UBICACION_GEOGRAFICA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DORT_PROVINCIA_UBICACION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_CANTON_UBICACION_PADRE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_PADRE_UBICACION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PARROQUIA_SORT_UBICACION_PADRE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_PADRE_UBICACION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_PROVINCIA_CANTON</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>DORT_PROVINCIA_UBICACION</step1>
+    <step2>SORT_CANTON_UBICACION_PADRE</step2>
+    <keys_1>
+      <key>COD_UBICACION</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_PADRE_UBICACION</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CANTON_MERGED_SORT_UBICACION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION_1</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_CANTON_PARROQUIA</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>CANTON_MERGED_SORT_UBICACION</step1>
+    <step2>PARROQUIA_SORT_UBICACION_PADRE</step2>
+    <keys_1>
+      <key>COD_UBICACION_1</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_PADRE_UBICACION</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>COLUMNS_TO_DIM_UBICACION</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <rename>COD_UBICACION_PROVINCIA</rename>
+      </field>
+      <field>
+        <name>UBICACION</name>
+        <rename>UBICACION_PROVINCIA</rename>
+      </field>
+      <field>
+        <name>COD_PADRE_UBICACION</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_1</name>
+        <rename>COD_UBICACION_CANTON</rename>
+      </field>
+      <field>
+        <name>UBICACION_1</name>
+        <rename>UBICACION_CANTON</rename>
+      </field>
+      <field>
+        <name>COD_PADRE_UBICACION_1</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_2</name>
+        <rename>COD_UBICACION_PARROQUIA</rename>
+      </field>
+      <field>
+        <name>UBICACION_2</name>
+        <rename>UBICACION_PARROQUIA</rename>
+      </field>
+      <field>
+        <name>COD_PADRE_UBICACION_2</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA_2</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_PADRE_UBICACION</name>
+      </remove>
+      <remove>
+        <name>COD_PADRE_UBICACION_1</name>
+      </remove>
+      <remove>
+        <name>COD_PADRE_UBICACION_2</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_2</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_UBICACION_GEOGRAFICA)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_UBICACION_GEOGRAFICA</table>
+      <key>
+        <name>COD_UBICACION_PROVINCIA</name>
+        <field>COD_UBICACION_PROVINCIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>UBICACION_PROVINCIA</name>
+        <field>UBICACION_PROVINCIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COD_UBICACION_CANTON</name>
+        <field>COD_UBICACION_CANTON</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>UBICACION_CANTON</name>
+        <field>UBICACION_CANTON</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <field>COD_UBICACION_PARROQUIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>UBICACION_PARROQUIA</name>
+        <field>UBICACION_PARROQUIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_UBICACION_PROVINCIA</name>
+        <rename>COD_UBICACION_PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_PROVINCIA</name>
+        <rename>UBICACION_PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_UBICACION_CANTON</name>
+        <rename>COD_UBICACION_CANTON</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_CANTON</name>
+        <rename>UBICACION_CANTON</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <rename>COD_UBICACION_PARROQUIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_PARROQUIA</name>
+        <rename>UBICACION_PARROQUIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>816</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_UBICACION</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

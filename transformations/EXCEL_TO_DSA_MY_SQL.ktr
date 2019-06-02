@@ -519,7 +519,7 @@
     <hop>
       <from>ADD_FECHA_CARGA_UBICACION_GEOGRAFICA</from>
       <to>DSA_UBICACION_GEOGRAFICA</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>ADD_FECHA_PRESUPUESTO</from>
