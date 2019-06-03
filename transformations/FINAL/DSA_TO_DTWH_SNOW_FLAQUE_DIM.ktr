@@ -706,6 +706,96 @@
       <to>Insert / Update (DIM_PRODUCTO)</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>FILTER_REGEX</from>
+      <to>MERGE_ZERO_COD_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>FILTER_REGEX</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_SORT_UBICACION 2</from>
+      <to>Merge Join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>UBICACION_SORT_UBICACION_PARROQUIA</from>
+      <to>Merge Join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_SORT_UBICACION</from>
+      <to>Merge Join 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>UBICACION_SORT_UBICACION_PARROQUIA</from>
+      <to>Merge Join 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_LOCAL</from>
+      <to>SPLIT_CODIGO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SPLIT_CODIGO</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_REGEX</from>
+      <to>LOCAL_SORT_UBICACION 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_ZERO_COD_UBICACION</from>
+      <to>LOCAL_SORT_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge Join</from>
+      <to>SELECT_VALUES_TO_INSERT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge Join 2</from>
+      <to>SELECT_VALUES_TO_INSERT 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TO_INSERT</from>
+      <to>ADD_FECHA_CARGA_LOCAL_FALSE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_LOCAL_FALSE</from>
+      <to>Insert / Update (LOCAL-FALSE)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TO_INSERT 2</from>
+      <to>ADD_FECHA_CARGA_LOCAL_TRUE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_LOCAL_TRUE</from>
+      <to>Insert / Update (LOCAL-TRUE)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_UBICACION</from>
+      <to>SPLIT_CODIGO_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SPLIT_CODIGO_UBICACION</from>
+      <to>UBICACION_SORT_UBICACION_PARROQUIA</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>ADD_FECHA_CARGA_DIRECCION</name>
@@ -734,6 +824,66 @@
     <GUI>
       <xloc>1008</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL_FALSE</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>2016</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL_TRUE</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>1984</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -794,6 +944,44 @@
     <GUI>
       <xloc>1040</xloc>
       <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>1840</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -955,6 +1143,47 @@ FROM DIM_SUBGRUPO
     </GUI>
   </step>
   <step>
+    <name>DIM_UBICACION</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  ID_UBICACION
+, COD_UBICACION_PROVINCIA
+, UBICACION_PROVINCIA
+, COD_UBICACION_CANTON
+, UBICACION_CANTON
+, COD_UBICACION_PARROQUIA
+, UBICACION_PARROQUIA
+, FECHA_CARGA
+FROM DIM_UBICACION_GEOGRAFICA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>2112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>DIRECCION_SORT_BY_CLIENTE</name>
     <type>SortRows</type>
     <description />
@@ -1106,6 +1335,43 @@ FROM DSA_GRUPO_PRODUCTO
     <GUI>
       <xloc>80</xloc>
       <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_LOCAL</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_LOCAL
+, COD_UBICACION
+, LOCAL
+, FECHA_CARGA
+FROM DSA_LOCAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>1840</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1298,6 +1564,49 @@ FROM DSA_TIPO
     </GUI>
   </step>
   <step>
+    <name>FILTER_REGEX</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>MERGE_ZERO_COD_UBICACION</send_true_to>
+    <send_false_to>LOCAL_SORT_UBICACION 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>COD_UBICACION</leftvalue>
+        <function>REGEXP</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>^\D*\d{5}$</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>1840</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>GRUPO_SORT_GRUPO</name>
     <type>SortRows</type>
     <description />
@@ -1383,6 +1692,50 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>96</xloc>
       <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_LOCAL</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_LOCAL
+SET ID_UBICACION = 
+(SELECT ID_UBICACION FROM datawarehouse.DIM_UBICACION_GEOGRAFICA
+WHERE COD_UBICACION_PARROQUIA="-1"),
+COD_LOCAL = "-1",
+LOCAL="NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>1744</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1486,45 +1839,6 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
-    <name>REPLACE_NULL_SUBGRUPO</name>
-    <type>IfNull</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <replaceAllByValue />
-    <replaceAllMask />
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <value />
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Insert / Update (DIM_DIRECCION)</name>
     <type>InsertUpdate</type>
     <description />
@@ -1542,50 +1856,8 @@ FECHA_CARGA= CURDATE();
       <schema />
       <table>DIM_DIRECCION</table>
       <key>
-        <name>ID_CLIENTE</name>
-        <field>ID_CLIENTE</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
         <name>COD_DIRECCION</name>
         <field>COD_DIRECCION</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>DIRECCION</name>
-        <field>DIRECCION</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>CALLE_PRINCIPAL</name>
-        <field>CALLE_PRINCIPAL</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>NUMERO</name>
-        <field>NUMERO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>CALLE_SECUNDARIA</name>
-        <field>CALLE_SECUNDARIA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COD_TIPO</name>
-        <field>COD_TIPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>TIPO</name>
-        <field>TIPO</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -1649,6 +1921,108 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
+    <name>Insert / Update (DIM_PRODUCTO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_PRODUCTO</table>
+      <key>
+        <name>COD_PRODUCTO</name>
+        <field>COD_PRODUCTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_PRODUCTO</name>
+        <rename>COD_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <rename>DESCRIPCION_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MARCA</name>
+        <rename>COD_MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MODELO</name>
+        <rename>COD_MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_COLOR</name>
+        <rename>COD_COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_GRUPO</name>
+        <rename>COD_GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MARCA</name>
+        <rename>MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MODELO</name>
+        <rename>MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COLOR</name>
+        <rename>COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>GRUPO</name>
+        <rename>GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>1584</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Insert / Update (DIM_TELEFONO)</name>
     <type>InsertUpdate</type>
     <description />
@@ -1666,32 +2040,8 @@ FECHA_CARGA= CURDATE();
       <schema />
       <table>DIM_TELEFONO</table>
       <key>
-        <name>COD_TIPO</name>
-        <field>COD_TIPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>TIPO</name>
-        <field>TIPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
         <name>COD_TELEFONO</name>
         <field>COD_TELEFONO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>NUMERO_TELEFONO</name>
-        <field>NUMERO_TELEFONO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_CLIENTE</name>
-        <field>ID_CLIENTE</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -1736,6 +2086,194 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>1040</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (LOCAL-FALSE)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>1920</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (LOCAL-TRUE)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>1904</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_UBICACION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>1840</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_UBICACION 2</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>1920</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2078,6 +2616,92 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
+    <name>MERGE_ZERO_COD_UBICACION</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator />
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>COD_UBICACION</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>1840</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>MODELO_SORT_COD_MODELO</name>
     <type>SortRows</type>
     <description />
@@ -2115,6 +2739,72 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>288</xloc>
       <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>LOCAL_SORT_UBICACION 2</step1>
+    <step2>UBICACION_SORT_UBICACION_PARROQUIA</step2>
+    <keys_1>
+      <key>COD_UBICACION</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>2000</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge Join 2</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>LOCAL_SORT_UBICACION</step1>
+    <step2>UBICACION_SORT_UBICACION_PARROQUIA</step2>
+    <keys_1>
+      <key>COD_UBICACION</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>2112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2506,6 +3196,138 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>784</xloc>
       <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_SUBGRUPO</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <value />
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_VALUES</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>PRECIO</name>
+        <value>-1</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_MARCA</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_MODELO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_COLOR</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_GRUPO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MARCA</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MODELO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COLOR</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GRUPO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>1584</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3271,6 +4093,333 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
+    <name>SELECT_VALUES_TO_INSERT</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+        <rename />
+      </field>
+      <field>
+        <name>LOCAL</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+        <rename />
+      </field>
+      <field>
+        <name>ZERO</name>
+        <rename />
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_PROVINCIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_PROVINCIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_CANTON</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_CANTON</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_PARROQUIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_UBICACION</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>ZERO</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <meta>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>2032</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_TO_INSERT 2</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+        <rename />
+      </field>
+      <field>
+        <name>LOCAL</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+        <rename />
+      </field>
+      <field>
+        <name>ZERO</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_1</name>
+        <rename />
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_PROVINCIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_PROVINCIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_CANTON</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_CANTON</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>UBICACION_PARROQUIA</name>
+        <rename />
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_UBICACION</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>ZERO</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_1</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <meta>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>2016</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>SORT_BY_TYPE_DIRECCION</name>
     <type>SortRows</type>
     <description />
@@ -3349,6 +4498,94 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>656</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SPLIT_CODIGO</name>
+    <type>FieldSplitter</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <splitfield>COD_UBICACION</splitfield>
+    <delimiter>.</delimiter>
+    <enclosure />
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <id />
+        <idrem>N</idrem>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <currency />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>1936</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SPLIT_CODIGO_UBICACION</name>
+    <type>FieldSplitter</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <splitfield>COD_UBICACION_PARROQUIA</splitfield>
+    <delimiter>.</delimiter>
+    <enclosure />
+    <fields>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <id />
+        <idrem>N</idrem>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <currency />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>2064</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3476,83 +4713,31 @@ FECHA_CARGA= CURDATE();
     </GUI>
   </step>
   <step>
-    <name>REPLACE_NULL_VALUES</name>
-    <type>IfNull</type>
+    <name>UBICACION_SORT_UBICACION_PARROQUIA</name>
+    <type>SortRows</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <replaceAllByValue />
-    <replaceAllMask />
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>DESCRIPCION_PRODUCTO</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>PRECIO</name>
-        <value>-1</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>COD_MARCA</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>COD_MODELO</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>COD_COLOR</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>COD_GRUPO</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>MARCA</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>MODELO</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>COLOR</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>GRUPO</name>
-        <value>NO DEFINIDO</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <cluster_schema />
@@ -3563,176 +4748,8 @@ FECHA_CARGA= CURDATE();
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>1584</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (DIM_PRODUCTO)</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>MYSQL_TELEFONO</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_PRODUCTO</table>
-      <key>
-        <name>COD_PRODUCTO</name>
-        <field>COD_PRODUCTO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>DESCRIPCION_PRODUCTO</name>
-        <field>DESCRIPCION_PRODUCTO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>PRECIO</name>
-        <field>PRECIO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COD_MARCA</name>
-        <field>COD_MARCA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COD_MODELO</name>
-        <field>COD_MODELO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COD_COLOR</name>
-        <field>COD_COLOR</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COD_GRUPO</name>
-        <field>COD_GRUPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_SUBGRUPO</name>
-        <field>ID_SUBGRUPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>MARCA</name>
-        <field>MARCA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>MODELO</name>
-        <field>MODELO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>COLOR</name>
-        <field>COLOR</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>GRUPO</name>
-        <field>GRUPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>COD_PRODUCTO</name>
-        <rename>COD_PRODUCTO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>DESCRIPCION_PRODUCTO</name>
-        <rename>DESCRIPCION_PRODUCTO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>PRECIO</name>
-        <rename>PRECIO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_MARCA</name>
-        <rename>COD_MARCA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_MODELO</name>
-        <rename>COD_MODELO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_COLOR</name>
-        <rename>COD_COLOR</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_GRUPO</name>
-        <rename>COD_GRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_SUBGRUPO</name>
-        <rename>ID_SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>MARCA</name>
-        <rename>MARCA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>MODELO</name>
-        <rename>MODELO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COLOR</name>
-        <rename>COLOR</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>GRUPO</name>
-        <rename>GRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>1584</yloc>
+      <xloc>352</xloc>
+      <yloc>2112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
