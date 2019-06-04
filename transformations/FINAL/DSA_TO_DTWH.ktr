@@ -577,73 +577,28 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DSA_FACTURA_CABECERA</from>
-      <to>COPY_DATE</to>
+      <from>GENERATE_ROWS_DIM_FECHA</from>
+      <to>DAY_PLUS</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>COPY_DATE</from>
-      <to>Select values</to>
+      <from>DAY_PLUS</from>
+      <to>DATE_OPERATOR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Split Fields</to>
+      <from>DATE_OPERATOR</from>
+      <to>SELECT_VALUES_DIM_FECHA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Split Fields</from>
-      <to>Split Fields 2</to>
+      <from>SELECT_VALUES_DIM_FECHA</from>
+      <to>ADD_FECHA_CARGA_FECHA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Split Fields 2</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ADD_FECHA_CARGA_UBICACION 2</from>
-      <to>Insert / Update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
-      <to>ADD_FECHA_CARGA_UBICACION 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>COPY_DATE 2</from>
-      <to>Select values 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>DSA_FACTURA_CABECERA 2</from>
-      <to>COPY_DATE 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 3</from>
-      <to>Split Fields 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Split Fields 3</from>
-      <to>Split Fields 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Split Fields 2 2</from>
-      <to>Select values 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2 2</from>
-      <to>ADD_FECHA_CARGA_UBICACION 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ADD_FECHA_CARGA_UBICACION 2 2</from>
-      <to>Insert / Update 2</to>
+      <from>ADD_FECHA_CARGA_FECHA</from>
+      <to>Insert / Update (DIM_FECHA)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -704,6 +659,36 @@
     <GUI>
       <xloc>1008</xloc>
       <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_FECHA</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>896</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -971,7 +956,7 @@ FROM DSA_UBICACION_GEOGRAFICA
     </GUI>
   </step>
   <step>
-    <name>COPY_DATE</name>
+    <name>DATE_OPERATOR</name>
     <type>Calculator</type>
     <description />
     <distribute>Y</distribute>
@@ -982,12 +967,57 @@ FROM DSA_UBICACION_GEOGRAFICA
       <schema_name />
     </partitioning>
     <calculation>
+      <field_name>FECHA</field_name>
+      <calc_type>ADD_DAYS</calc_type>
+      <field_a>FECHA_AUX</field_a>
+      <field_b>valuename</field_b>
+      <field_c />
+      <value_type>Date</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask>dd/MM/yyyy</conversion_mask>
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <calculation>
       <field_name>ANIO</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FECHA_EMISION</field_a>
+      <calc_type>YEAR_OF_DATE</calc_type>
+      <field_a>FECHA</field_a>
       <field_b />
       <field_c />
-      <value_type>String</value_type>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <calculation>
+      <field_name>MES</field_name>
+      <calc_type>MONTH_OF_DATE</calc_type>
+      <field_a>FECHA</field_a>
+      <field_b />
+      <field_c />
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <calculation>
+      <field_name>DIA</field_name>
+      <calc_type>DAY_OF_MONTH</calc_type>
+      <field_a>FECHA</field_a>
+      <field_b />
+      <field_c />
+      <value_type>Integer</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
       <remove>N</remove>
@@ -1004,8 +1034,42 @@ FROM DSA_UBICACION_GEOGRAFICA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>944</yloc>
+      <xloc>432</xloc>
+      <yloc>896</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DAY_PLUS</name>
+    <type>Sequence</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <valuename>valuename</valuename>
+    <use_database>N</use_database>
+    <connection>mysql_transform</connection>
+    <schema />
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name />
+    <start_at>0</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>896</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1084,48 +1148,6 @@ FROM DSA_CLIENTE
     <GUI>
       <xloc>96</xloc>
       <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_FACTURA_CABECERA</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>mysql_transform</connection>
-    <sql>SELECT
-  NUMERO_FACTURA
-, CEDULA
-, FECHA_EMISION
-, AUTORIZACION
-, MONTO
-, IVA
-, DESCUENTO
-, COD_LOCAL
-, FECHA_CARGA
-FROM DSA_FACTURA
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1209,6 +1231,49 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </GUI>
   </step>
   <step>
+    <name>GENERATE_ROWS_DIM_FECHA</name>
+    <type>RowGenerator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_AUX</name>
+        <type>Date</type>
+        <format>dd/MM/yyyy</format>
+        <currency />
+        <decimal />
+        <group />
+        <nullif>01/01/2017</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1500</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>896</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>INSERT_UNDEFINED_CLIENTE</name>
     <type>ExecSQL</type>
     <description />
@@ -1244,6 +1309,94 @@ APELLIDOS= "NO DEFINIDO", FECHA_CARGA= CURDATE();</sql>
     <GUI>
       <xloc>96</xloc>
       <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_DOCUMENTO</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_DOCUMENTO
+SET 
+ID_FECHA=(SELECT ID_FECHA FROM datawarehouse.DIM_FECHA
+WHERE ANIO=1992),
+NUMERO_FACTURA = "-1",
+AUTORIZACION = "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_FECHA</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_FECHA
+SET 
+FECHA = "1992-01-01",
+ANIO = 1992,
+MES = 1,
+DIA = 1,
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>816</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1328,6 +1481,86 @@ FECHA_CARGA= CURDATE();
     <GUI>
       <xloc>96</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_FECHA)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>mysql_transform</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_FECHA</table>
+      <key>
+        <name>FECHA</name>
+        <field>FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ANIO</name>
+        <field>ANIO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>MES</name>
+        <field>MES</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>DIA</name>
+        <field>DIA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>FECHA</name>
+        <rename>FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ANIO</name>
+        <rename>ANIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MES</name>
+        <rename>MES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DIA</name>
+        <rename>DIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>896</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1450,7 +1683,7 @@ FECHA_CARGA= CURDATE();
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>976</xloc>
       <yloc>816</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2107,6 +2340,57 @@ FROM DSA_UBICACION_GEOGRAFICA
     </GUI>
   </step>
   <step>
+    <name>SELECT_VALUES_DIM_FECHA</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_AUX</name>
+      </field>
+      <field>
+        <name>valuename</name>
+      </field>
+      <field>
+        <name>FECHA</name>
+      </field>
+      <field>
+        <name>ANIO</name>
+      </field>
+      <field>
+        <name>MES</name>
+      </field>
+      <field>
+        <name>DIA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_AUX</name>
+      </remove>
+      <remove>
+        <name>valuename</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>896</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>SORT_CANTON_UBICACION_PADRE</name>
     <type>SortRows</type>
     <description />
@@ -2144,951 +2428,6 @@ FROM DSA_UBICACION_GEOGRAFICA
     <GUI>
       <xloc>288</xloc>
       <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>NUMERO_FACTURA</name>
-        <rename />
-      </field>
-      <field>
-        <name>CEDULA</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_EMISION</name>
-        <rename />
-      </field>
-      <field>
-        <name>AUTORIZACION</name>
-        <rename />
-      </field>
-      <field>
-        <name>MONTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>IVA</name>
-        <rename />
-      </field>
-      <field>
-        <name>DESCUENTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_LOCAL</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <field>
-        <name>ANIO</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>NUMERO_FACTURA</name>
-      </remove>
-      <remove>
-        <name>CEDULA</name>
-      </remove>
-      <remove>
-        <name>AUTORIZACION</name>
-      </remove>
-      <remove>
-        <name>MONTO</name>
-      </remove>
-      <remove>
-        <name>IVA</name>
-      </remove>
-      <remove>
-        <name>DESCUENTO</name>
-      </remove>
-      <remove>
-        <name>COD_LOCAL</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
-      <meta>
-        <name>FECHA_EMISION</name>
-        <rename>FECHA</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Split Fields</name>
-    <type>FieldSplitter</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <splitfield>ANIO</splitfield>
-    <delimiter> </delimiter>
-    <enclosure />
-    <fields>
-      <field>
-        <name>ANIO</name>
-        <id />
-        <idrem>N</idrem>
-        <type>String</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Split Fields 2</name>
-    <type>FieldSplitter</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <splitfield>ANIO</splitfield>
-    <delimiter>/</delimiter>
-    <enclosure />
-    <fields>
-      <field>
-        <name>ANIO</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>4</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>MES</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>2</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>DIA</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>2</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>mysql_transform</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_FECHA</table>
-      <key>
-        <name>FECHA</name>
-        <field>FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>FECHA</name>
-        <rename>FECHA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>MES</name>
-        <rename>MES</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>DIA</name>
-        <rename>DIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA</name>
-        <rename />
-      </field>
-      <field>
-        <name>ANIO</name>
-        <rename />
-      </field>
-      <field>
-        <name>MES</name>
-        <rename />
-      </field>
-      <field>
-        <name>DIA</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>FECHA</name>
-        <rename>FECHA</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <type>Integer</type>
-        <length>4</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>MES</name>
-        <rename>MES</rename>
-        <type>Integer</type>
-        <length>2</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>DIA</name>
-        <rename>DIA</rename>
-        <type>Integer</type>
-        <length>2</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_UBICACION 2</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>944</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>COPY_DATE 2</name>
-    <type>Calculator</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <calculation>
-      <field_name>ANIO</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FECHA</field_a>
-      <field_b />
-      <field_c />
-      <value_type>String</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_FACTURA_CABECERA 2</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>mysql_transform</connection>
-    <sql>SELECT
-  ID_PRESUPUESTO
-, COD_SUBGRUPO
-, COD_LOCAL
-, MONTO
-, FECHA
-, FECHA_CARGA
-FROM DSA_PRESUPUESTO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 3</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ID_PRESUPUESTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_LOCAL</name>
-        <rename />
-      </field>
-      <field>
-        <name>MONTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <field>
-        <name>ANIO</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>ID_PRESUPUESTO</name>
-      </remove>
-      <remove>
-        <name>COD_SUBGRUPO</name>
-      </remove>
-      <remove>
-        <name>COD_LOCAL</name>
-      </remove>
-      <remove>
-        <name>MONTO</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
-      <meta>
-        <name>FECHA</name>
-        <rename>FECHA</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Split Fields 3</name>
-    <type>FieldSplitter</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <splitfield>ANIO</splitfield>
-    <delimiter> </delimiter>
-    <enclosure />
-    <fields>
-      <field>
-        <name>ANIO</name>
-        <id />
-        <idrem>N</idrem>
-        <type>String</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Split Fields 2 2</name>
-    <type>FieldSplitter</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <splitfield>ANIO</splitfield>
-    <delimiter>/</delimiter>
-    <enclosure />
-    <fields>
-      <field>
-        <name>ANIO</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>4</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>MES</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>2</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>DIA</name>
-        <id />
-        <idrem>N</idrem>
-        <type>Integer</type>
-        <format />
-        <group />
-        <decimal />
-        <currency />
-        <length>2</length>
-        <precision>-1</precision>
-        <nullif />
-        <ifnull />
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update 2</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>mysql_transform</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_FECHA</table>
-      <key>
-        <name>FECHA</name>
-        <field>FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>FECHA</name>
-        <rename>FECHA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>MES</name>
-        <rename>MES</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>DIA</name>
-        <rename>DIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2 2</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA</name>
-      </field>
-      <field>
-        <name>ANIO</name>
-      </field>
-      <field>
-        <name>MES</name>
-      </field>
-      <field>
-        <name>DIA</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>FECHA</name>
-        <rename>FECHA</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ANIO</name>
-        <rename>ANIO</rename>
-        <type>Integer</type>
-        <length>4</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>MES</name>
-        <rename>MES</rename>
-        <type>Integer</type>
-        <length>2</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>DIA</name>
-        <rename>DIA</rename>
-        <type>Integer</type>
-        <length>2</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_UBICACION 2 2</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>1024</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
