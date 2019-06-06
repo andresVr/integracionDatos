@@ -516,11 +516,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DIM_LOCAL_INSERT</from>
-      <to>REPLACE_NULL_VALUE_LOCAL</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>INTEGRITY_FILTER_DATA_LOCAL</from>
       <to>DIM_LOCAL_INSERT</to>
       <enabled>Y</enabled>
@@ -593,11 +588,6 @@
     <hop>
       <from>MERGE_INTEGRITY_PRODUCTO</from>
       <to>INTEGRITY_FILTER_PRODUCTO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>INTEGRITY_FILTER_PRODUCTO</from>
-      <to>SELECT_VALUES_PRODUCTO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -681,11 +671,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SELECT_VALUES_LOCAL</from>
-      <to>REPLACE_NULL_VALUES_LOCAL_PRESUPUESTO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>INTEGRITY_FILTER_LOCAL</from>
       <to>SELECT_VALUES_LOCAL</to>
       <enabled>Y</enabled>
@@ -715,10 +700,105 @@
       <to>ADD_FECHA_CARGA_SUBGRUPO</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>DIM_LOCAL_INSERT</from>
+      <to>ADD_COD_PARROQUIA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_COD_PARROQUIA</from>
+      <to>SORT_LOCAL_INT_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_UBICACION_GEO</from>
+      <to>SORT_UBICACION_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_UBICACION_UBICACION</from>
+      <to>LOCAL_UBICACION_MERGED</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_LOCAL_INT_UBICACION</from>
+      <to>LOCAL_UBICACION_MERGED</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_UBICACION_MERGED</from>
+      <to>VALUES_TO_INSERT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>VALUES_TO_INSERT</from>
+      <to>REPLACE_NULL_VALUE_LOCAL</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_UBICACION_GEO_PRES</from>
+      <to>SORT_UBICACION_UBICACION_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_UBICACION_UBICACION_PRES</from>
+      <to>LOCAL_UBICACION_MERGED_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_LOCAL_INT_UBICACION_PRES</from>
+      <to>LOCAL_UBICACION_MERGED_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_LOCAL</from>
+      <to>ADD_COD_PARROQUIA_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_COD_PARROQUIA_PRES</from>
+      <to>SORT_LOCAL_INT_UBICACION_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_UBICACION_MERGED_PRES</from>
+      <to>REPLACE_NULL_VALUES_LOCAL_PRESUPUESTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>INTEGRITY_FILTER_PRODUCTO</from>
+      <to>ADD_COD_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_COD_SUBGRUPO</from>
+      <to>INTEGROTY_SORT_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>INTEGROTY_SORT_SUBGRUPO</from>
+      <to>MERGED_SUBGRUPO_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SUBGRUPO_SORT</from>
+      <to>MERGED_SUBGRUPO_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_SUBGRUPO_PROD</from>
+      <to>SUBGRUPO_SORT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGED_SUBGRUPO_PRODUCTO</from>
+      <to>SELECT_VALUES_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>DIM_CLIENTE</name>
-    <type>TableInput</type>
+    <name>ADD_FECHA_CARGA_CLIENTE</name>
+    <type>SystemInfo</type>
     <description />
     <distribute>N</distribute>
     <custom_distribution />
@@ -727,111 +807,10 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  ID_CLIENTE
-, CEDULA
-, NOMBRES
-, APELLIDOS
-, FECHA_CARGA
-FROM DIM_CLIENTE
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_FACTURA</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  NUMERO_FACTURA
-, CEDULA
-, FECHA_EMISION
-, AUTORIZACION
-, MONTO
-, IVA
-, DESCUENTO
-, COD_LOCAL
-, FECHA_CARGA
-FROM DSA_FACTURA
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GROUP_BY_CEDULA</name>
-    <type>GroupBy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>CEDULA</name>
-      </field>
-    </group>
     <fields>
       <field>
-        <aggregate>CEDULA_COMP</aggregate>
-        <subject>CEDULA</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>TOTAL</aggregate>
-        <subject>MONTO</subject>
-        <type>SUM</type>
-        <valuefield />
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
       </field>
     </fields>
     <cluster_schema />
@@ -842,8 +821,128 @@ FROM DSA_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>80</yloc>
+      <xloc>272</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>720</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL_PRESUPUESTO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>2032</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_PRODUCTO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>1296</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_SUBGRUPO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>1616</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -895,7 +994,7 @@ if(CEDULA.length == 9){
     </GUI>
   </step>
   <step>
-    <name>DSA_FACTURA_SORT_CEDULA</name>
+    <name>DETALLE_FACTURA_SORT_PRODUCTO</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -914,7 +1013,7 @@ if(CEDULA.length == 9){
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>CEDULA</name>
+        <name>COD_PRODUCTO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -930,39 +1029,36 @@ if(CEDULA.length == 9){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>80</yloc>
+      <xloc>288</xloc>
+      <yloc>1008</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>INTEGRITY_CLIENT_SORT_CEDULA</name>
-    <type>SortRows</type>
+    <name>DIM_CLIENTE</name>
+    <type>TableInput</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>CEDULA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_CLIENTE
+, CEDULA
+, NOMBRES
+, APELLIDOS
+, FECHA_CARGA
+FROM DIM_CLIENTE
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -971,81 +1067,7 @@ if(CEDULA.length == 9){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SORT_CLIENTE_CEDULA</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>CEDULA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>MERGE_INTEGRITY_CLIENTE</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>INTEGRITY_CLIENT_SORT_CEDULA</step1>
-    <step2>SORT_CLIENTE_CEDULA</step2>
-    <keys_1>
-      <key>CEDULA</key>
-    </keys_1>
-    <keys_2>
-      <key>CEDULA</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
+      <xloc>448</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1064,35 +1086,27 @@ if(CEDULA.length == 9){
     <fields>
       <field>
         <name>CEDULA</name>
-        <rename />
       </field>
       <field>
         <name>CEDULA_COMP</name>
-        <rename />
       </field>
       <field>
         <name>TOTAL</name>
-        <rename />
       </field>
       <field>
         <name>ID_CLIENTE</name>
-        <rename />
       </field>
       <field>
         <name>CEDULA_1</name>
-        <rename />
       </field>
       <field>
         <name>NOMBRES</name>
-        <rename />
       </field>
       <field>
         <name>APELLIDOS</name>
-        <rename />
       </field>
       <field>
         <name>FECHA_CARGA</name>
-        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
       <remove>
@@ -1120,166 +1134,6 @@ if(CEDULA.length == 9){
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INTEGRITY_FILTER_DATA_INSERT</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>DIM_CLIENT_INSERT</send_true_to>
-    <send_false_to />
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>ID_CLIENTE</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_CLIENTE</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (INTEGRITY_DIM_CLIENTE)</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_CLIENTE</table>
-      <key>
-        <name>CEDULA</name>
-        <field>CEDULA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>CEDULA</name>
-        <rename>CEDULA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>NOMBRES</name>
-        <rename>NOMBRES</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>APELLIDOS</name>
-        <rename>APELLIDOS</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>REPLACE_NULL_VALUE</name>
-    <type>SetValueConstant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>APELLIDOS</name>
-        <value>POR DEFINIR</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>NOMBRES</name>
-        <value>POR DEFINIR</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1323,7 +1177,7 @@ FROM DIM_LOCAL
     </GUI>
   </step>
   <step>
-    <name>DSA_FACTURA_LOCAL</name>
+    <name>DIM_LOCAL INPUT_INTEGRITY</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -1335,16 +1189,12 @@ FROM DIM_LOCAL
     </partitioning>
     <connection>integrity_con</connection>
     <sql>SELECT
-  NUMERO_FACTURA
-, CEDULA
-, FECHA_EMISION
-, AUTORIZACION
-, MONTO
-, IVA
-, DESCUENTO
+  ID_LOCAL
+, ID_UBICACION
 , COD_LOCAL
+, LOCAL
 , FECHA_CARGA
-FROM DSA_FACTURA
+FROM DIM_LOCAL
 </sql>
     <limit>0</limit>
     <lookup />
@@ -1359,92 +1209,8 @@ FROM DSA_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GROUP_BY_LOCAL</name>
-    <type>GroupBy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>COD_LOCAL</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>CEDULA_COMP</aggregate>
-        <subject>CEDULA</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>TOTAL</aggregate>
-        <subject>MONTO</subject>
-        <type>SUM</type>
-        <valuefield />
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>MERGE_INTEGRITY_LOCAL</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>GROUP_BY_LOCAL</step1>
-    <step2>LOCAL_SORT_COD_LOCAL</step2>
-    <keys_1>
-      <key>COD_LOCAL</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_LOCAL</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>560</yloc>
+      <xloc>304</xloc>
+      <yloc>1600</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1508,6 +1274,9 @@ FROM DSA_FACTURA
       <remove>
         <name>FECHA_CARGA</name>
       </remove>
+      <remove>
+        <name>ID_UBICACION</name>
+      </remove>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1517,319 +1286,8 @@ FROM DSA_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INTEGRITY_FILTER_DATA_LOCAL</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>DIM_LOCAL_INSERT</send_true_to>
-    <send_false_to />
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>ID_LOCAL</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_LOCAL</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (INTEGRITY_DIM_LOCAL) </name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_LOCAL</table>
-      <key>
-        <name>COD_LOCAL</name>
-        <field>COD_LOCAL</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>COD_LOCAL</name>
-        <rename>COD_LOCAL</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>LOCAL</name>
-        <rename>LOCAL</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>752</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>REPLACE_NULL_VALUE_LOCAL</name>
-    <type>SetValueConstant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>LOCAL</name>
-        <value>POR DEFINIR</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FACTURA_SORT_LOCAL</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>LOCAL_SORT_COD_LOCAL</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
+      <xloc>1040</xloc>
       <yloc>560</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_DETALLE_FACTURA</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  ID_DETALLE
-, NUMERO_FACTURA
-, CANTIDAD
-, PRECIO
-, COD_PRODUCTO
-, FECHA_CARGA
-FROM DSA_DETALLE_FACTURA
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>864</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DETALLE_FACTURA_SORT_PRODUCTO</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_PRODUCTO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1876,12 +1334,172 @@ FROM DIM_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>960</yloc>
+      <yloc>1104</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_PRODUTO_PRODUCTO</name>
+    <name>DIM_SUBGRUPO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_SUBGRUPO
+, COD_SUBGRUPO
+, SUBGRUPO
+, FECHA_CARGA
+FROM DIM_SUBGRUPO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>1504</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_DETALLE_FACTURA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_DETALLE
+, NUMERO_FACTURA
+, CANTIDAD
+, PRECIO
+, COD_PRODUCTO
+, FECHA_CARGA
+FROM DSA_DETALLE_FACTURA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1008</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_FACTURA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  NUMERO_FACTURA
+, CEDULA
+, FECHA_EMISION
+, AUTORIZACION
+, MONTO
+, IVA
+, DESCUENTO
+, COD_LOCAL
+, FECHA_CARGA
+FROM DSA_FACTURA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_FACTURA_LOCAL</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  NUMERO_FACTURA
+, CEDULA
+, FECHA_EMISION
+, AUTORIZACION
+, MONTO
+, IVA
+, DESCUENTO
+, COD_LOCAL
+, FECHA_CARGA
+FROM DSA_FACTURA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_FACTURA_SORT_CEDULA</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -1900,7 +1518,7 @@ FROM DIM_PRODUCTO
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>COD_PRODUCTO</name>
+        <name>CEDULA</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1916,31 +1534,37 @@ FROM DIM_PRODUCTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>960</yloc>
+      <xloc>256</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>MERGE_INTEGRITY_PRODUCTO</name>
-    <type>MergeJoin</type>
+    <name>DSA_PRESUPUESTO</name>
+    <type>TableInput</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>GROUP_COD_PRODUCTO</step1>
-    <step2>SORT_PRODUTO_PRODUCTO</step2>
-    <keys_1>
-      <key>COD_PRODUCTO</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_PRODUCTO</key>
-    </keys_2>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_PRESUPUESTO
+, COD_SUBGRUPO
+, COD_LOCAL
+, MONTO
+, FECHA
+, FECHA_CARGA
+FROM DSA_PRESUPUESTO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1949,8 +1573,241 @@ FROM DIM_PRODUCTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>960</yloc>
+      <xloc>80</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FACTURA_SORT_LOCAL</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>GROUP_BY_CEDULA</name>
+    <type>GroupBy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore />
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname />
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>CEDULA</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>CEDULA_COMP</aggregate>
+        <subject>CEDULA</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield />
+      </field>
+      <field>
+        <aggregate>TOTAL</aggregate>
+        <subject>MONTO</subject>
+        <type>SUM</type>
+        <valuefield />
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>GROUP_BY_LOCAL</name>
+    <type>GroupBy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore />
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname />
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>CEDULA_COMP</aggregate>
+        <subject>CEDULA</subject>
+        <type>FIRST_INCL_NULL</type>
+        <valuefield />
+      </field>
+      <field>
+        <aggregate>TOTAL</aggregate>
+        <subject>MONTO</subject>
+        <type>SUM</type>
+        <valuefield />
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>GROUP_BY_LOCAL PRESUPUESTO</name>
+    <type>GroupBy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore />
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname />
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>SUM</aggregate>
+        <subject>MONTO</subject>
+        <type>SUM</type>
+        <valuefield />
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1600</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>GROUP_BY_SUBGRUPO</name>
+    <type>GroupBy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore />
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname />
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>SUM</aggregate>
+        <subject>MONTO</subject>
+        <type>SUM</type>
+        <valuefield />
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>1392</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1995,7 +1852,150 @@ FROM DIM_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>512</xloc>
-      <yloc>864</yloc>
+      <yloc>1008</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGRITY_CLIENT_SORT_CEDULA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>CEDULA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGRITY_FILTER_DATA_INSERT</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>DIM_CLIENT_INSERT</send_true_to>
+    <send_false_to />
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>ID_CLIENTE</leftvalue>
+        <function>IS NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGRITY_FILTER_DATA_LOCAL</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>DIM_LOCAL_INSERT</send_true_to>
+    <send_false_to />
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>ID_LOCAL</leftvalue>
+        <function>IS NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGRITY_FILTER_LOCAL</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>SELECT_VALUES_LOCAL</send_true_to>
+    <send_false_to />
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>ID_LOCAL</leftvalue>
+        <function>IS NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1824</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2010,7 +2010,7 @@ FROM DIM_PRODUCTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <send_true_to>SELECT_VALUES_PRODUCTO</send_true_to>
+    <send_true_to>ADD_COD_SUBGRUPO</send_true_to>
     <send_false_to />
     <compare>
       <condition>
@@ -2029,7 +2029,773 @@ FROM DIM_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>752</xloc>
-      <yloc>960</yloc>
+      <yloc>1104</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGRITY_FILTER_SUBGRUPO</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>SELECT_VALUES_SUBGRUPO</send_true_to>
+    <send_false_to />
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>ID_SUBGRUPO</leftvalue>
+        <function>IS NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>944</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_LOCAL_PRESUPUESTO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>2032</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_PRODUCTO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_PRODUCTO</table>
+      <key>
+        <name>COD_PRODUCTO</name>
+        <field>COD_PRODUCTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_PRODUCTO</name>
+        <rename>COD_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <rename>DESCRIPCION_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MARCA</name>
+        <rename>COD_MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MARCA</name>
+        <rename>MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MODELO</name>
+        <rename>COD_MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MODELO</name>
+        <rename>MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_COLOR</name>
+        <rename>COD_COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COLOR</name>
+        <rename>COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_GRUPO</name>
+        <rename>COD_GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>GRUPO</name>
+        <rename>GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>1296</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_SUBGRUPO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_SUBGRUPO</table>
+      <key>
+        <name>COD_SUBGRUPO</name>
+        <field>COD_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_SUBGRUPO</name>
+        <rename>COD_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SUBGRUPO</name>
+        <rename>SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>944</xloc>
+      <yloc>1616</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (INTEGRITY_DIM_CLIENTE)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_CLIENTE</table>
+      <key>
+        <name>CEDULA</name>
+        <field>CEDULA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>CEDULA</name>
+        <rename>CEDULA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NOMBRES</name>
+        <rename>NOMBRES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>APELLIDOS</name>
+        <rename>APELLIDOS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (INTEGRITY_DIM_LOCAL) </name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>880</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_COD_LOCAL</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_LOCAL_CODE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>1696</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_INTEGRITY_CLIENTE</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>INTEGRITY_CLIENT_SORT_CEDULA</step1>
+    <step2>SORT_CLIENTE_CEDULA</step2>
+    <keys_1>
+      <key>CEDULA</key>
+    </keys_1>
+    <keys_2>
+      <key>CEDULA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_INTEGRITY_LOCAL</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>GROUP_BY_LOCAL</step1>
+    <step2>LOCAL_SORT_COD_LOCAL</step2>
+    <keys_1>
+      <key>COD_LOCAL</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_LOCAL</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_INTEGRITY_PRODUCTO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>GROUP_COD_PRODUCTO</step1>
+    <step2>SORT_PRODUTO_PRODUCTO</step2>
+    <keys_1>
+      <key>COD_PRODUCTO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_PRODUCTO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>1104</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_LOCAL_INTEGRITY</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>GROUP_BY_LOCAL PRESUPUESTO</step1>
+    <step2>LOCAL_SORT_LOCAL_CODE</step2>
+    <keys_1>
+      <key>COD_LOCAL</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_LOCAL</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1696</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_SUBGRUPO_INTEGRITY</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>GROUP_BY_SUBGRUPO</step1>
+    <step2>SUBGRUPO_SORT_SUBGRUPO</step2>
+    <keys_1>
+      <key>COD_SUBGRUPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_SUBGRUPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRESUPUESTO_SORT_LOCAL</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1504</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRESUPUESTO_SORT_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>1392</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_SUBGRUPO</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>SUBGRUPO</name>
+        <value>POR DEFINIR</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>1488</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_VALUE</name>
+    <type>SetValueConstant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>APELLIDOS</name>
+        <value>POR DEFINIR</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NOMBRES</name>
+        <value>POR DEFINIR</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2115,8 +2881,143 @@ FROM DIM_PRODUCTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>1152</yloc>
+      <xloc>704</xloc>
+      <yloc>1296</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_VALUES_LOCAL_PRESUPUESTO</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>LOCAL</name>
+        <value>POR DEFINIR</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>1920</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_VALUE_LOCAL</name>
+    <type>SetValueConstant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>LOCAL</name>
+        <value>POR DEFINIR</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>720</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_LOCAL</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+      <field>
+        <name>SUM</name>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+      </field>
+      <field>
+        <name>COD_LOCAL_1</name>
+      </field>
+      <field>
+        <name>LOCAL</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>SUM</name>
+      </remove>
+      <remove>
+        <name>ID_LOCAL</name>
+      </remove>
+      <remove>
+        <name>ID_UBICACION</name>
+      </remove>
+      <remove>
+        <name>COD_LOCAL_1</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>1824</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2196,6 +3097,18 @@ FROM DIM_PRODUCTO
         <name>FECHA_CARGA</name>
         <rename />
       </field>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <rename />
+      </field>
+      <field>
+        <name>ID_SUBGRUPO_1</name>
+        <rename />
+      </field>
+      <field>
+        <name>COD_SUBGRUPO_1</name>
+        <rename />
+      </field>
       <select_unspecified>N</select_unspecified>
       <remove>
         <name>CANTIDAD</name>
@@ -2204,137 +3117,282 @@ FROM DIM_PRODUCTO
         <name>ID_PRODUCTO</name>
       </remove>
       <remove>
-        <name>ID_SUBGRUPO</name>
-      </remove>
-      <remove>
         <name>COD_PRODUCTO_1</name>
       </remove>
       <remove>
         <name>FECHA_CARGA</name>
       </remove>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>752</xloc>
-      <yloc>1056</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_PRODUCTO</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>1152</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (DIM_PRODUCTO)</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_PRODUCTO</table>
-      <key>
-        <name>COD_PRODUCTO</name>
-        <field>COD_PRODUCTO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
+      <remove>
+        <name>ID_SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO_1</name>
+      </remove>
+      <meta>
         <name>COD_PRODUCTO</name>
         <rename>COD_PRODUCTO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>DESCRIPCION_PRODUCTO</name>
         <rename>DESCRIPCION_PRODUCTO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <type>None</type>
+        <length>4</length>
+        <precision>2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>COD_MARCA</name>
         <rename>COD_MARCA</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>MARCA</name>
         <rename>MARCA</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>COD_MODELO</name>
         <rename>COD_MODELO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>MODELO</name>
         <rename>MODELO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>COD_COLOR</name>
         <rename>COD_COLOR</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>COLOR</name>
         <rename>COLOR</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>COD_GRUPO</name>
         <rename>COD_GRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
         <name>GRUPO</name>
         <rename>GRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_SUBGRUPO_1</name>
+        <rename>ID_SUBGRUPO</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>1296</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_SUBGRUPO</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>SUM</name>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO_1</name>
+      </field>
+      <field>
+        <name>SUBGRUPO</name>
+      </field>
+      <field>
         <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>SUM</name>
+      </remove>
+      <remove>
+        <name>ID_SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO_1</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+    </fields>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -2343,52 +3401,13 @@ FROM DIM_PRODUCTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>1152</yloc>
+      <xloc>1184</xloc>
+      <yloc>1392</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>DSA_PRESUPUESTO</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  ID_PRESUPUESTO
-, COD_SUBGRUPO
-, COD_LOCAL
-, MONTO
-, FECHA
-, FECHA_CARGA
-FROM DSA_PRESUPUESTO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>1248</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>PRESUPUESTO_SORT_SUBGRUPO</name>
+    <name>SORT_CLIENTE_CEDULA</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -2407,7 +3426,7 @@ FROM DSA_PRESUPUESTO
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>COD_SUBGRUPO</name>
+        <name>CEDULA</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2423,13 +3442,13 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>1248</yloc>
+      <xloc>640</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>PRESUPUESTO_SORT_LOCAL</name>
+    <name>SORT_PRODUTO_PRODUCTO</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -2448,7 +3467,7 @@ FROM DSA_PRESUPUESTO
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>COD_LOCAL</name>
+        <name>COD_PRODUCTO</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2464,173 +3483,8 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>1360</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GROUP_BY_SUBGRUPO</name>
-    <type>GroupBy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>COD_SUBGRUPO</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>SUM</aggregate>
-        <subject>MONTO</subject>
-        <type>SUM</type>
-        <valuefield />
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>1248</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>GROUP_BY_LOCAL PRESUPUESTO</name>
-    <type>GroupBy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>COD_LOCAL</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>SUM</aggregate>
-        <subject>MONTO</subject>
-        <type>SUM</type>
-        <valuefield />
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>1456</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_LOCAL INPUT_INTEGRITY</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  ID_LOCAL
-, ID_UBICACION
-, COD_LOCAL
-, LOCAL
-, FECHA_CARGA
-FROM DIM_LOCAL
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>1456</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_SUBGRUPO</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>integrity_con</connection>
-    <sql>SELECT
-  ID_SUBGRUPO
-, COD_SUBGRUPO
-, SUBGRUPO
-, FECHA_CARGA
-FROM DIM_SUBGRUPO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>1360</yloc>
+      <xloc>240</xloc>
+      <yloc>1104</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2671,12 +3525,85 @@ FROM DIM_SUBGRUPO
     </remotesteps>
     <GUI>
       <xloc>688</xloc>
-      <yloc>1360</yloc>
+      <yloc>1504</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>LOCAL_SORT_LOCAL_CODE</name>
+    <name>ADD_COD_PARROQUIA</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>-1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_UBICACION_GEO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_UBICACION,COD_UBICACION_PARROQUIA
+FROM DIM_UBICACION_GEOGRAFICA
+WHERE COD_UBICACION_PARROQUIA = '-1';
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_UBICACION_UBICACION</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -2695,7 +3622,7 @@ FROM DIM_SUBGRUPO
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>COD_LOCAL</name>
+        <name>COD_UBICACION_PARROQUIA</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2711,13 +3638,54 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>1552</yloc>
+      <xloc>800</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>MERGE_SUBGRUPO_INTEGRITY</name>
+    <name>SORT_LOCAL_INT_UBICACION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_UBICACION_MERGED</name>
     <type>MergeJoin</type>
     <description />
     <distribute>Y</distribute>
@@ -2727,14 +3695,14 @@ FROM DIM_SUBGRUPO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>GROUP_BY_SUBGRUPO</step1>
-    <step2>SUBGRUPO_SORT_SUBGRUPO</step2>
+    <join_type>INNER</join_type>
+    <step1>SORT_LOCAL_INT_UBICACION</step1>
+    <step2>SORT_UBICACION_UBICACION</step2>
     <keys_1>
-      <key>COD_SUBGRUPO</key>
+      <key>COD_UBICACION_PARROQUIA</key>
     </keys_1>
     <keys_2>
-      <key>COD_SUBGRUPO</key>
+      <key>COD_UBICACION_PARROQUIA</key>
     </keys_2>
     <cluster_schema />
     <remotesteps>
@@ -2744,255 +3712,13 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>1248</yloc>
+      <xloc>1008</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>MERGE_LOCAL_INTEGRITY</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>GROUP_BY_LOCAL PRESUPUESTO</step1>
-    <step2>LOCAL_SORT_LOCAL_CODE</step2>
-    <keys_1>
-      <key>COD_LOCAL</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_LOCAL</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>1552</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INTEGRITY_FILTER_SUBGRUPO</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>SELECT_VALUES_SUBGRUPO</send_true_to>
-    <send_false_to />
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>ID_SUBGRUPO</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>1248</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INTEGRITY_FILTER_LOCAL</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>SELECT_VALUES_LOCAL</send_true_to>
-    <send_false_to />
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>ID_LOCAL</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>1680</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>REPLACE_NULL_SUBGRUPO</name>
-    <type>IfNull</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <replaceAllByValue />
-    <replaceAllMask />
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>SUBGRUPO</name>
-        <value>POR DEFINIR</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>1344</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SELECT_VALUES_SUBGRUPO</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>SUM</name>
-        <rename />
-      </field>
-      <field>
-        <name>ID_SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_SUBGRUPO_1</name>
-        <rename />
-      </field>
-      <field>
-        <name>SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>SUM</name>
-      </remove>
-      <remove>
-        <name>ID_SUBGRUPO</name>
-      </remove>
-      <remove>
-        <name>COD_SUBGRUPO_1</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>1248</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>REPLACE_NULL_VALUES_LOCAL_PRESUPUESTO</name>
-    <type>IfNull</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <replaceAllByValue />
-    <replaceAllMask />
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>LOCAL</name>
-        <value>POR DEFINIR</value>
-        <mask />
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>1776</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SELECT_VALUES_LOCAL</name>
+    <name>VALUES_TO_INSERT</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -3008,11 +3734,11 @@ FROM DIM_SUBGRUPO
         <rename />
       </field>
       <field>
-        <name>SUM</name>
+        <name>LOCAL</name>
         <rename />
       </field>
       <field>
-        <name>ID_LOCAL</name>
+        <name>COD_UBICACION_PARROQUIA</name>
         <rename />
       </field>
       <field>
@@ -3020,32 +3746,15 @@ FROM DIM_SUBGRUPO
         <rename />
       </field>
       <field>
-        <name>COD_LOCAL_1</name>
-        <rename />
-      </field>
-      <field>
-        <name>LOCAL</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
+        <name>COD_UBICACION_PARROQUIA_1</name>
         <rename />
       </field>
       <select_unspecified>N</select_unspecified>
       <remove>
-        <name>SUM</name>
+        <name>COD_UBICACION_PARROQUIA</name>
       </remove>
       <remove>
-        <name>ID_LOCAL</name>
-      </remove>
-      <remove>
-        <name>ID_UBICACION</name>
-      </remove>
-      <remove>
-        <name>COD_LOCAL_1</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA</name>
+        <name>COD_UBICACION_PARROQUIA_1</name>
       </remove>
     </fields>
     <cluster_schema />
@@ -3056,14 +3765,14 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>1680</yloc>
+      <xloc>1008</xloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ADD_FECHA_CARGA_SUBGRUPO</name>
-    <type>SystemInfo</type>
+    <name>DIM_UBICACION_GEO_PRES</name>
+    <type>TableInput</type>
     <description />
     <distribute>N</distribute>
     <custom_distribution />
@@ -3072,10 +3781,56 @@ FROM DIM_SUBGRUPO
       <method>none</method>
       <schema_name />
     </partitioning>
+    <connection>integrity_con</connection>
+    <sql>SELECT
+  ID_UBICACION,COD_UBICACION_PARROQUIA
+FROM DIM_UBICACION_GEOGRAFICA
+WHERE COD_UBICACION_PARROQUIA = '-1';
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1056</xloc>
+      <yloc>1824</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_UBICACION_UBICACION_PRES</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <cluster_schema />
@@ -3086,14 +3841,14 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
-      <yloc>1472</yloc>
+      <xloc>1056</xloc>
+      <yloc>1920</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / Update (DIM_SUBGRUPO)</name>
-    <type>InsertUpdate</type>
+    <name>SORT_LOCAL_INT_UBICACION_PRES</name>
+    <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -3102,62 +3857,21 @@ FROM DIM_SUBGRUPO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>integrity_con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_SUBGRUPO</table>
-      <key>
-        <name>COD_SUBGRUPO</name>
-        <field>COD_SUBGRUPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>COD_SUBGRUPO</name>
-        <rename>COD_SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>SUBGRUPO</name>
-        <rename>SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>1472</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_LOCAL_PRESUPUESTO</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <cluster_schema />
@@ -3168,14 +3882,123 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>1888</yloc>
+      <xloc>816</xloc>
+      <yloc>1824</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / Update (DIM_LOCAL_PRESUPUESTO)</name>
-    <type>InsertUpdate</type>
+    <name>LOCAL_UBICACION_MERGED_PRES</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>SORT_LOCAL_INT_UBICACION_PRES</step1>
+    <step2>SORT_UBICACION_UBICACION_PRES</step2>
+    <keys_1>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>1920</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_COD_PARROQUIA_PRES</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>-1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>1824</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_COD_SUBGRUPO</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>-1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>1104</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_SUBGRUPO_PROD</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -3185,33 +4008,17 @@ FROM DIM_SUBGRUPO
       <schema_name />
     </partitioning>
     <connection>integrity_con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_LOCAL</table>
-      <key>
-        <name>COD_LOCAL</name>
-        <field>COD_LOCAL</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>COD_LOCAL</name>
-        <rename>COD_LOCAL</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>LOCAL</name>
-        <rename>LOCAL</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <sql>SELECT
+  ID_SUBGRUPO
+, COD_SUBGRUPO
+FROM DIM_SUBGRUPO
+WHERE COD_SUBGRUPO = '-1'
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -3220,8 +4027,123 @@ FROM DIM_SUBGRUPO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>1888</yloc>
+      <xloc>528</xloc>
+      <yloc>1200</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SUBGRUPO_SORT</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>1200</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INTEGROTY_SORT_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>1200</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGED_SUBGRUPO_PRODUCTO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>INTEGROTY_SORT_SUBGRUPO</step1>
+    <step2>SUBGRUPO_SORT</step2>
+    <keys_1>
+      <key>COD_SUBGRUPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_SUBGRUPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>1200</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
