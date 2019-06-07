@@ -523,7 +523,7 @@
     </hop>
     <hop>
       <from>PROVINCIA</from>
-      <to>DORT_PROVINCIA_UBICACION</to>
+      <to>SORT_PROVINCIA_UBICACION</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -532,7 +532,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DORT_PROVINCIA_UBICACION</from>
+      <from>SORT_PROVINCIA_UBICACION</from>
       <to>MERGE_JOIN_PROVINCIA_CANTON</to>
       <enabled>Y</enabled>
     </hop>
@@ -1089,7 +1089,7 @@ FROM DSA_UBICACION_GEOGRAFICA
     </GUI>
   </step>
   <step>
-    <name>DORT_PROVINCIA_UBICACION</name>
+    <name>SORT_PROVINCIA_UBICACION</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -1125,7 +1125,7 @@ FROM DSA_UBICACION_GEOGRAFICA
     </remotesteps>
     <GUI>
       <xloc>288</xloc>
-      <yloc>464</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1818,7 +1818,7 @@ FECHA_CARGA= CURDATE();
       <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>DORT_PROVINCIA_UBICACION</step1>
+    <step1>SORT_PROVINCIA_UBICACION</step1>
     <step2>SORT_CANTON_UBICACION_PADRE</step2>
     <keys_1>
       <key>COD_UBICACION</key>
@@ -2403,7 +2403,7 @@ FROM DSA_UBICACION_GEOGRAFICA
     </GUI>
   </step>
   <step>
-    <name>SPLIT_PROVINCIA</name>
+    <name>SPLIT_CANTON</name>
     <type>FieldSplitter</type>
     <description />
     <distribute>Y</distribute>
@@ -2413,12 +2413,12 @@ FROM DSA_UBICACION_GEOGRAFICA
       <method>none</method>
       <schema_name />
     </partitioning>
-    <splitfield>COD_UBICACION_PROVINCIA</splitfield>
+    <splitfield>COD_UBICACION_CANTON</splitfield>
     <delimiter>.</delimiter>
     <enclosure />
     <fields>
       <field>
-        <name>COD_UBICACION_PROVINCIA</name>
+        <name>COD_UBICACION_CANTON</name>
         <id />
         <idrem>N</idrem>
         <type>String</type>
@@ -2441,8 +2441,8 @@ FROM DSA_UBICACION_GEOGRAFICA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
-      <yloc>688</yloc>
+      <xloc>1280</xloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2491,7 +2491,7 @@ FROM DSA_UBICACION_GEOGRAFICA
     </GUI>
   </step>
   <step>
-    <name>SPLIT_CANTON</name>
+    <name>SPLIT_PROVINCIA</name>
     <type>FieldSplitter</type>
     <description />
     <distribute>Y</distribute>
@@ -2501,12 +2501,12 @@ FROM DSA_UBICACION_GEOGRAFICA
       <method>none</method>
       <schema_name />
     </partitioning>
-    <splitfield>COD_UBICACION_CANTON</splitfield>
+    <splitfield>COD_UBICACION_PROVINCIA</splitfield>
     <delimiter>.</delimiter>
     <enclosure />
     <fields>
       <field>
-        <name>COD_UBICACION_CANTON</name>
+        <name>COD_UBICACION_PROVINCIA</name>
         <id />
         <idrem>N</idrem>
         <type>String</type>
@@ -2529,8 +2529,8 @@ FROM DSA_UBICACION_GEOGRAFICA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>784</yloc>
+      <xloc>1152</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
