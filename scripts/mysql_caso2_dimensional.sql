@@ -1,26 +1,7 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     6/3/2019 11:25:35 PM                         */
+/* Created on:     6/7/2019 3:24:30 AM                          */
 /*==============================================================*/
-
-
-drop table if exists DIM_CLIENTE;
-
-drop table if exists DIM_DIRECCION;
-
-drop table if exists DIM_DOCUMENTO;
-
-drop table if exists DIM_FECHA;
-
-drop table if exists DIM_LOCAL;
-
-drop table if exists DIM_PRODUCTO;
-
-drop table if exists DIM_SUBGRUPO;
-
-drop table if exists DIM_TELEFONO;
-
-drop table if exists DIM_UBICACION_GEOGRAFICA;
 
 drop table if exists FAC_CABECERA_FACTURA;
 
@@ -34,20 +15,39 @@ drop table if exists FAC_PRESUPUESTO_MENSUAL;
 
 drop table if exists FAC_VENTA_ACUMULADA;
 
+drop table if exists DIM_DIRECCION;
+
+drop table if exists DIM_TELEFONO;
+
+drop table if exists DIM_CLIENTE;
+
+drop table if exists DIM_DOCUMENTO;
+
+drop table if exists DIM_FECHA;
+
+drop table if exists DIM_LOCAL;
+
+drop table if exists DIM_PRODUCTO;
+
+drop table if exists DIM_SUBGRUPO;
+
+drop table if exists DIM_UBICACION_GEOGRAFICA;
+
+
 /*==============================================================*/
 /* Table: DIM_CLIENTE                                           */
 /*==============================================================*/
 create table DIM_CLIENTE
 (
-   ID_CLIENTE           bigint not null auto_increment comment 'Secuencial de la dimensión Cliente',
-   CEDULA               varchar(13) comment 'documento de identificación cliente',
+   ID_CLIENTE           bigint not null auto_increment comment 'Secuencial de la dimensiÃ³n Cliente',
+   CEDULA               varchar(13) comment 'documento de identificaciÃ³n cliente',
    NOMBRES              varchar(50) comment 'Nombres del Cliente',
    APELLIDOS            varchar(50) comment 'Apellidos del Cliente',
    FECHA_CARGA          datetime comment 'fecha de Carga DW del Cliente',
    primary key (ID_CLIENTE)
 );
 
-alter table DIM_CLIENTE comment 'dimensión que permite almacenar los clientes del transaccion';
+alter table DIM_CLIENTE comment 'dimensiÃ³n que permite almacenar los clientes del transaccion';
 
 /*==============================================================*/
 /* Table: DIM_DIRECCION                                         */
@@ -55,7 +55,7 @@ alter table DIM_CLIENTE comment 'dimensión que permite almacenar los clientes de
 create table DIM_DIRECCION
 (
    ID_DIRECCION         bigint not null auto_increment comment 'secuencial de la dimension direccion',
-   ID_CLIENTE           bigint comment 'Secuencial de la dimensión Cliente',
+   ID_CLIENTE           bigint comment 'Secuencial de la dimensiÃ³n Cliente',
    COD_DIRECCION        varchar(100) comment 'codigo transaccional de la direccion, se utiliza como clave alterna unica',
    DIRECCION            varchar(100) comment 'direccion del cliente',
    CALLE_PRINCIPAL      varchar(100) comment 'calle principal de la direccion del cliente',
@@ -67,7 +67,7 @@ create table DIM_DIRECCION
    primary key (ID_DIRECCION)
 );
 
-alter table DIM_DIRECCION comment 'dimensión que permite almacenar los las direcciones de los c';
+alter table DIM_DIRECCION comment 'dimensiÃ³n que permite almacenar los las direcciones de los c';
 
 /*==============================================================*/
 /* Table: DIM_DOCUMENTO                                         */
@@ -91,7 +91,7 @@ create table DIM_FECHA
 (
    ID_FECHA             bigint not null auto_increment comment 'secuencial dimension fecha',
    FECHA                date comment 'fecha',
-   ANIO                 int comment 'año fecha',
+   ANIO                 int comment 'aÃ±o fecha',
    MES                  int comment 'mes fecha',
    DIA                  int comment 'dia fecha',
    FECHA_CARGA          datetime comment 'fecha de carga del registro en el dtwh',
@@ -113,7 +113,7 @@ create table DIM_LOCAL
    primary key (ID_LOCAL)
 );
 
-alter table DIM_LOCAL comment 'dimensión que permite almacenar los locales de la empresa.
+alter table DIM_LOCAL comment 'dimensiÃ³n que permite almacenar los locales de la empresa.
                               ';
 
 /*==============================================================*/
@@ -121,7 +121,7 @@ alter table DIM_LOCAL comment 'dimensión que permite almacenar los locales de la
 /*==============================================================*/
 create table DIM_PRODUCTO
 (
-   ID_PRODUCTO          bigint not null auto_increment comment 'secuencial de la dimensió producto',
+   ID_PRODUCTO          bigint not null auto_increment comment 'secuencial de la dimensiÃ³ producto',
    ID_SUBGRUPO          bigint,
    COD_PRODUCTO         varchar(100),
    DESCRIPCION_PRODUCTO varchar(100),
@@ -134,11 +134,11 @@ create table DIM_PRODUCTO
    COLOR                varchar(100),
    COD_GRUPO            varchar(100),
    GRUPO                varchar(100),
-   FECHA_CARGA          date,
+   FECHA_CARGA          datetime,
    primary key (ID_PRODUCTO)
 );
 
-alter table DIM_PRODUCTO comment 'dimensión que permite almacenar los productos del transaccio';
+alter table DIM_PRODUCTO comment 'dimensiÃ³n que permite almacenar los productos del transaccio';
 
 /*==============================================================*/
 /* Table: DIM_SUBGRUPO                                          */
@@ -152,7 +152,7 @@ create table DIM_SUBGRUPO
    primary key (ID_SUBGRUPO)
 );
 
-alter table DIM_SUBGRUPO comment 'dimensión que permite almacenar los grupos de los productos ';
+alter table DIM_SUBGRUPO comment 'dimensiÃ³n que permite almacenar los grupos de los productos ';
 
 /*==============================================================*/
 /* Table: DIM_TELEFONO                                          */
@@ -160,7 +160,7 @@ alter table DIM_SUBGRUPO comment 'dimensión que permite almacenar los grupos de 
 create table DIM_TELEFONO
 (
    ID_TELEFONO          bigint not null auto_increment comment 'secuencial dimension telefono',
-   ID_CLIENTE           bigint comment 'Secuencial de la dimensión Cliente',
+   ID_CLIENTE           bigint comment 'Secuencial de la dimensiÃ³n Cliente',
    COD_TELEFONO         varchar(100) comment 'clave alterna unica proveniente del modelo transaccional',
    NUMERO_TELEFONO      varchar(50) comment 'numero de telefono del cliente',
    COD_TIPO             varchar(100) comment 'codigo de la referencia tipo',
@@ -188,7 +188,7 @@ create table DIM_UBICACION_GEOGRAFICA
    primary key (ID_UBICACION)
 );
 
-alter table DIM_UBICACION_GEOGRAFICA comment 'dimensión que permite almacenar los datos de la ubicacion ge';
+alter table DIM_UBICACION_GEOGRAFICA comment 'dimensiÃ³n que permite almacenar los datos de la ubicacion ge';
 
 /*==============================================================*/
 /* Table: FAC_CABECERA_FACTURA                                  */
@@ -231,9 +231,9 @@ alter table FAC_CABECERA_MENSUAL comment 'tabla de hechos que permite almacenar 
 /*==============================================================*/
 create table FAC_DETALLE_FACTURA
 (
-   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensió producto',
+   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensiÃ³ producto',
    ID_DOCUMENTO         bigint not null comment 'secuencial de la dimnesion documento',
-   ID_CLIENTE           bigint not null comment 'Secuencial de la dimensión Cliente',
+   ID_CLIENTE           bigint not null comment 'Secuencial de la dimensiÃ³n Cliente',
    ID_FECHA             bigint not null comment 'secuencial de la dimension fecha
             ',
    ID_LOCAL             bigint not null comment 'secuencial de la dimnesion local',
@@ -253,13 +253,12 @@ alter table FAC_DETALLE_FACTURA comment 'tabla de hechos permite almacenar el de
 /*==============================================================*/
 create table FAC_DETALLE_FACTURA_MENSUAL
 (
-   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensió producto',
+   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensiÃ³ producto',
    ID_FECHA             bigint not null,
    ID_LOCAL             bigint not null,
    ID_UBICACION         bigint not null,
    ID_SUBGRUPO          bigint not null,
    CANTIDAD             double,
-   PRECIO               double,
    FECHA_CARGA          datetime,
    primary key (ID_PRODUCTO, ID_FECHA, ID_LOCAL, ID_UBICACION, ID_SUBGRUPO)
 );
@@ -291,7 +290,7 @@ create table FAC_VENTA_ACUMULADA
    ID_LOCAL             bigint not null comment 'secuencial de la dimension local',
    ID_FECHA             bigint not null comment 'secuencial dimension fecha',
    ID_UBICACION         bigint not null comment 'secuencial dimension ubicacion',
-   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensió producto',
+   ID_PRODUCTO          bigint not null comment 'secuencial de la dimensiÃ³ producto',
    ID_SUBGRUPO          bigint not null comment 'secuencial de la dimension subgrupo',
    VALOR                double comment 'valor venta del mes',
    VALOR_MES_1          double comment 'valor de la venta del mes anterior',
@@ -410,3 +409,12 @@ alter table FAC_VENTA_ACUMULADA add constraint FK_DIM_PRODUCTO_FAC_VENTA_ACUMULA
 alter table FAC_VENTA_ACUMULADA add constraint FK_DIM_UBICACION_FAC_VENTA_ACUMULADA foreign key (ID_UBICACION)
       references DIM_UBICACION_GEOGRAFICA (ID_UBICACION) on delete restrict on update restrict;
 
+CREATE UNIQUE INDEX idx_DIM_CLIENTE_lookup ON datawarehouse.DIM_CLIENTE(CEDULA);
+CREATE UNIQUE INDEX idx_DIM_TELEFONO_lookup ON datawarehouse.DIM_TELEFONO(COD_TELEFONO);
+CREATE UNIQUE INDEX idx_DIM_DIRECCION_lookup ON datawarehouse.DIM_DIRECCION(COD_DIRECCION);
+CREATE UNIQUE INDEX idx_DIM_SUBGRUPO_lookup ON datawarehouse.DIM_SUBGRUPO(COD_SUBGRUPO);
+CREATE UNIQUE INDEX idx_DIM_PRODUCTO_lookup ON datawarehouse.DIM_PRODUCTO(COD_PRODUCTO);
+CREATE UNIQUE INDEX idx_DIM_LOCAL_lookup ON datawarehouse.DIM_LOCAL(COD_LOCAL);
+CREATE UNIQUE INDEX idx_DIM_UBICACION_lookup ON datawarehouse.DIM_UBICACION_GEOGRAFICA(COD_UBICACION_PARROQUIA);
+CREATE UNIQUE INDEX idx_DIM_FECHA_lookup ON datawarehouse.DIM_FECHA(FECHA);
+CREATE UNIQUE INDEX idx_DIM_DOCUMENTO_lookup ON datawarehouse.DIM_DOCUMENTO(NUMERO_FACTURA);
