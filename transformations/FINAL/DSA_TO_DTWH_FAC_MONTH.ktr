@@ -466,16 +466,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA_FAC_CABECERA_FACTURA</from>
-      <to>Insert / Update (FAC_CABECERA_FACTURA)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>FAC_GROUP_PRODUCTO</from>
-      <to>ADD_FECHA_CARGA_FAC_DETALLE_MONTH</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>SORT_DETALLE_MENSUAL</from>
       <to>FAC_GROUP_PRODUCTO</to>
       <enabled>Y</enabled>
@@ -486,23 +476,48 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FAC_CABECERA_FACTURA</from>
-      <to>AVOID_UNECESARY_FIELDS</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>AVOID_UNECESARY_FIELDS</from>
+      <from>FORMAT_ID_FECHA_TO_GROUP</from>
       <to>SORT_FAC_CLIENTE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FAC_DETALLE</from>
-      <to>AVOID_UNECESARY_FIELDS_DET</to>
+      <from>FAC_CABECERA_FACTURA</from>
+      <to>FORMAT_ID_FECHA_TO_GROUP</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>AVOID_UNECESARY_FIELDS_DET</from>
+      <from>ADD_FECHA_CARGA_FAC_CABECERA_FACTURA</from>
+      <to>CHANGE_ID_FIELD_NAME</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CHANGE_ID_FIELD_NAME</from>
+      <to>ADD_FECHA_CARGA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA</from>
+      <to>Insert / Update (FAC_CABECERA_FACTURA)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FAC_DETALLE</from>
+      <to>FORMAT_ID_FECHA_TO_GROUP_DET</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FORMAT_ID_FECHA_TO_GROUP_DET</from>
       <to>SORT_DETALLE_MENSUAL</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FAC_GROUP_PRODUCTO</from>
+      <to>CHANGE_ID_FIELD_NAME_DET</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CHANGE_ID_FIELD_NAME_DET</from>
+      <to>ADD_FECHA_CARGA_FAC_DETALLE_MONTH</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -562,7 +577,7 @@
     </remotesteps>
     <GUI>
       <xloc>1024</xloc>
-      <yloc>288</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -603,7 +618,7 @@ FROM FAC_CABECERA_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>160</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -646,7 +661,7 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>160</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -672,28 +687,19 @@ FROM FAC_DETALLE_FACTURA
     <give_back_row>N</give_back_row>
     <group>
       <field>
+        <name>ID_FECHA_AUX</name>
+      </field>
+      <field>
         <name>ID_CLIENTE</name>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
       </field>
     </group>
     <fields>
-      <field>
-        <aggregate>ID_LOCAL</aggregate>
-        <subject>ID_LOCAL</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>ID_UBICACION</aggregate>
-        <subject>ID_UBICACION</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>ID_FECHA</aggregate>
-        <subject>ID_FECHA</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield />
-      </field>
       <field>
         <aggregate>MONTO</aggregate>
         <subject>MONTO</subject>
@@ -709,7 +715,7 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>736</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -735,34 +741,22 @@ FROM FAC_DETALLE_FACTURA
     <give_back_row>N</give_back_row>
     <group>
       <field>
+        <name>ID_FECHA_AUX</name>
+      </field>
+      <field>
         <name>ID_PRODUCTO</name>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
       </field>
     </group>
     <fields>
-      <field>
-        <aggregate>ID_FECHA</aggregate>
-        <subject>ID_FECHA</subject>
-        <type>LAST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>ID_LOCAL</aggregate>
-        <subject>ID_LOCAL</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>ID_UBICACION</aggregate>
-        <subject>ID_UBICACION</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
-      <field>
-        <aggregate>ID_SUBGRUPO</aggregate>
-        <subject>ID_SUBGRUPO</subject>
-        <type>FIRST_INCL_NULL</type>
-        <valuefield />
-      </field>
       <field>
         <aggregate>CANTIDAD</aggregate>
         <subject>CANTIDAD</subject>
@@ -801,6 +795,12 @@ FROM FAC_DETALLE_FACTURA
       <schema />
       <table>FAC_CABECERA_MENSUAL</table>
       <key>
+        <name>ID_FECHA</name>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
         <name>ID_CLIENTE</name>
         <field>ID_CLIENTE</field>
         <condition>=</condition>
@@ -818,12 +818,11 @@ FROM FAC_DETALLE_FACTURA
         <condition>=</condition>
         <name2 />
       </key>
-      <key>
+      <value>
         <name>ID_FECHA</name>
-        <field>ID_FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
       <value>
         <name>ID_CLIENTE</name>
         <rename>ID_CLIENTE</rename>
@@ -837,11 +836,6 @@ FROM FAC_DETALLE_FACTURA
       <value>
         <name>ID_UBICACION</name>
         <rename>ID_UBICACION</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_FECHA</name>
-        <rename>ID_FECHA</rename>
         <update>Y</update>
       </value>
       <value>
@@ -863,8 +857,8 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>160</yloc>
+      <xloc>480</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -916,13 +910,13 @@ FROM FAC_DETALLE_FACTURA
         <name2 />
       </key>
       <value>
-        <name>ID_PRODUCTO</name>
-        <rename>ID_PRODUCTO</rename>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>ID_FECHA</name>
-        <rename>ID_FECHA</rename>
+        <name>ID_PRODUCTO</name>
+        <rename>ID_PRODUCTO</rename>
         <update>Y</update>
       </value>
       <value>
@@ -960,7 +954,7 @@ FROM FAC_DETALLE_FACTURA
     </remotesteps>
     <GUI>
       <xloc>1024</xloc>
-      <yloc>400</yloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -984,7 +978,39 @@ FROM FAC_DETALLE_FACTURA
     <unique_rows>N</unique_rows>
     <fields>
       <field>
+        <name>ID_FECHA_AUX</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>ID_PRODUCTO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1009,7 +1035,7 @@ FROM FAC_DETALLE_FACTURA
     <name>SORT_FAC_CLIENTE</name>
     <type>SortRows</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
@@ -1025,7 +1051,31 @@ FROM FAC_DETALLE_FACTURA
     <unique_rows>N</unique_rows>
     <fields>
       <field>
+        <name>ID_FECHA_AUX</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
         <name>ID_CLIENTE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1047,7 +1097,61 @@ FROM FAC_DETALLE_FACTURA
     </GUI>
   </step>
   <step>
-    <name>AVOID_UNECESARY_FIELDS</name>
+    <name>FORMAT_ID_FECHA_TO_GROUP</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var ID_FECHA_STR = ID_FECHA.toString().substring(0,6) + "01"
+var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>ID_FECHA_STR</name>
+        <rename>ID_FECHA_STR</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>ID_FECHA_AUX</name>
+        <rename>ID_FECHA_AUX</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CHANGE_ID_FIELD_NAME</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -1058,6 +1162,10 @@ FROM FAC_DETALLE_FACTURA
       <schema_name />
     </partitioning>
     <fields>
+      <field>
+        <name>ID_FECHA_AUX</name>
+        <rename />
+      </field>
       <field>
         <name>ID_CLIENTE</name>
         <rename />
@@ -1071,39 +1179,179 @@ FROM FAC_DETALLE_FACTURA
         <rename />
       </field>
       <field>
-        <name>ID_FECHA</name>
-        <rename />
-      </field>
-      <field>
-        <name>ID_DOCUMENTO</name>
-        <rename />
-      </field>
-      <field>
         <name>MONTO</name>
         <rename />
       </field>
-      <field>
-        <name>IVA</name>
-        <rename />
-      </field>
-      <field>
-        <name>DESCUENTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
       <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>IVA</name>
-      </remove>
-      <remove>
-        <name>DESCUENTO</name>
-      </remove>
-      <remove>
+      <meta>
+        <name>ID_FECHA_AUX</name>
+        <rename>ID_FECHA</rename>
+        <type>None</type>
+        <length>16</length>
+        <precision>2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>MONTO</name>
+        <rename>MONTO</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
         <name>FECHA_CARGA</name>
-      </remove>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FORMAT_ID_FECHA_TO_GROUP_DET</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var ID_FECHA_STR = ID_FECHA.toString().substring(0,6) + "01"
+var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>ID_FECHA_STR</name>
+        <rename>ID_FECHA_STR</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>ID_FECHA_AUX</name>
+        <rename>ID_FECHA_AUX</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1114,12 +1362,12 @@ FROM FAC_DETALLE_FACTURA
     </remotesteps>
     <GUI>
       <xloc>336</xloc>
-      <yloc>48</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>AVOID_UNECESARY_FIELDS_DET</name>
+    <name>CHANGE_ID_FIELD_NAME_DET</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -1131,19 +1379,11 @@ FROM FAC_DETALLE_FACTURA
     </partitioning>
     <fields>
       <field>
+        <name>ID_FECHA_AUX</name>
+        <rename />
+      </field>
+      <field>
         <name>ID_PRODUCTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>ID_DOCUMENTO</name>
-        <rename />
-      </field>
-      <field>
-        <name>ID_CLIENTE</name>
-        <rename />
-      </field>
-      <field>
-        <name>ID_FECHA</name>
         <rename />
       </field>
       <field>
@@ -1162,21 +1402,109 @@ FROM FAC_DETALLE_FACTURA
         <name>CANTIDAD</name>
         <rename />
       </field>
-      <field>
-        <name>PRECIO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
       <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>PRECIO</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA</name>
-      </remove>
+      <meta>
+        <name>ID_FECHA_AUX</name>
+        <rename>ID_FECHA</rename>
+        <type>None</type>
+        <length>16</length>
+        <precision>2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_PRODUCTO</name>
+        <rename>ID_PRODUCTO</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CANTIDAD</name>
+        <rename>CANTIDAD</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1186,7 +1514,7 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
+      <xloc>1024</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
