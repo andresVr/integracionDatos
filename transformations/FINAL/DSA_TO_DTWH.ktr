@@ -577,13 +577,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DAY_PLUS</from>
-      <to>DATE_OPERATOR</to>
+      <from>ADD_FECHA_CARGA_UBICACION</from>
+      <to>SPLIT_PROVINCIA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA_UBICACION</from>
-      <to>SPLIT_PROVINCIA</to>
+      <from>DAY_PLUS</from>
+      <to>DATE_OPERATOR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>

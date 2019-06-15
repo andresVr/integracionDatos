@@ -447,7 +447,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>864</xloc>
       <yloc>160</yloc>
     </entry>
     <entry>
@@ -483,7 +483,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>864</xloc>
       <yloc>272</yloc>
     </entry>
     <entry>
@@ -519,7 +519,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>864</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -555,7 +555,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>864</xloc>
       <yloc>512</yloc>
     </entry>
     <entry>
@@ -599,7 +599,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
+      <xloc>1088</xloc>
       <yloc>160</yloc>
     </entry>
     <entry>
@@ -610,7 +610,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
+      <xloc>1088</xloc>
       <yloc>272</yloc>
     </entry>
     <entry>
@@ -621,7 +621,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
+      <xloc>1088</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -641,7 +641,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>816</xloc>
+      <xloc>864</xloc>
       <yloc>624</yloc>
     </entry>
     <entry>
@@ -652,7 +652,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
+      <xloc>1088</xloc>
       <yloc>512</yloc>
     </entry>
   </entries>
@@ -698,7 +698,7 @@
       <to>DSA_TO_DTWH_FAC_MONTH</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -779,7 +779,7 @@
       <to>DUMMY</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -788,7 +788,7 @@
       <to>ABORT_DSA_TO_DTWH_FAC_MONTH</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
