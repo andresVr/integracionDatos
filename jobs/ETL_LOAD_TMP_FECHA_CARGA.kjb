@@ -365,7 +365,7 @@
       <name>SLEEP_TIME</name>
       <description />
       <type>DELAY</type>
-      <maximumTimeout>10</maximumTimeout>
+      <maximumTimeout>5</maximumTimeout>
       <scaletime>0</scaletime>
       <parallel>N</parallel>
       <draw>Y</draw>
