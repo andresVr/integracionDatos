@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DSA_TO_DTWH_FAC_MONTH</name>
+    <name>DSA_TO_DTWH_PRES</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/06/07 03:08:29.559</created_date>
+    <created_date>2019/07/13 18:01:13.476</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/06/07 03:08:29.559</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/07/13 18:01:13.476</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>MONTH_CON</name>
+    <name>TRANS</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -492,73 +492,83 @@
   </connection>
   <order>
     <hop>
-      <from>FAC_GROUP_CLIENTE</from>
-      <to>ADD_FECHA_CARGA_FAC_CABECERA_FACTURA</to>
+      <from>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</from>
+      <to>SELECT_VALUES</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SORT_FAC_CLIENTE</from>
-      <to>FAC_GROUP_CLIENTE</to>
+      <from>DIM_FECHA_PRE</from>
+      <to>SORT_FECHAS_LOCAL_PRE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SORT_DETALLE_MENSUAL</from>
-      <to>FAC_GROUP_PRODUCTO</to>
+      <from>DIM_LOCAL_PRE</from>
+      <to>SORT_LOCAL_PRE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA_FAC_DETALLE_MONTH</from>
-      <to>Insert / Update (FAC_DETALLE_FACTURA_MONTH)</to>
+      <from>DIM_SUBGRUPO_PRE</from>
+      <to>SORT_SUBGRUPO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FORMAT_ID_FECHA_TO_GROUP</from>
-      <to>SORT_FAC_CLIENTE</to>
+      <from>DSA_PRESUPUESTO</from>
+      <to>PRESUPUESTO_SORT_LOCAL</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FAC_CABECERA_FACTURA</from>
-      <to>FORMAT_ID_FECHA_TO_GROUP</to>
+      <from>FECHA_MERGE</from>
+      <to>TABLE_MERGED_SUBGRUPO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA_FAC_CABECERA_FACTURA</from>
-      <to>CHANGE_ID_FIELD_NAME</to>
+      <from>LOCAL_MERGE_PRESUPUESTO</from>
+      <to>TABLE_MERGED_TIEMPO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CHANGE_ID_FIELD_NAME</from>
-      <to>ADD_FECHA_CARGA</to>
+      <from>MERGED_SUBGRUPO</from>
+      <to>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ADD_FECHA_CARGA</from>
-      <to>Insert / Update (FAC_CABECERA_FACTURA)</to>
+      <from>PRESUPUESTO_SORT_LOCAL</from>
+      <to>LOCAL_MERGE_PRESUPUESTO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FAC_DETALLE</from>
-      <to>FORMAT_ID_FECHA_TO_GROUP_DET</to>
+      <from>SELECT_VALUES</from>
+      <to>Insert / Update (FAC_PRESUPUESTO)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FORMAT_ID_FECHA_TO_GROUP_DET</from>
-      <to>SORT_DETALLE_MENSUAL</to>
+      <from>SORT_FECHAS_LOCAL_PRE</from>
+      <to>FECHA_MERGE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>FAC_GROUP_PRODUCTO</from>
-      <to>CHANGE_ID_FIELD_NAME_DET</to>
+      <from>SORT_LOCAL_PRE</from>
+      <to>LOCAL_MERGE_PRESUPUESTO</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>CHANGE_ID_FIELD_NAME_DET</from>
-      <to>ADD_FECHA_CARGA_FAC_DETALLE_MONTH</to>
+      <from>SORT_SUBGRUPO</from>
+      <to>MERGED_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TABLE_MERGED_SUBGRUPO</from>
+      <to>MERGED_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TABLE_MERGED_TIEMPO</from>
+      <to>FECHA_MERGE</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ADD_FECHA_CARGA</name>
+    <name>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</name>
     <type>SystemInfo</type>
     <description />
     <distribute>N</distribute>
@@ -582,347 +592,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>176</yloc>
+      <xloc>768</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ADD_FECHA_CARGA_FAC_CABECERA_FACTURA</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_FECHA_CARGA_FAC_DETALLE_MONTH</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CHANGE_ID_FIELD_NAME</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ID_FECHA_AUX</name>
-      </field>
-      <field>
-        <name>ID_CLIENTE</name>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
-      </field>
-      <field>
-        <name>MONTO</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>ID_FECHA_AUX</name>
-        <rename>ID_FECHA</rename>
-        <type>None</type>
-        <length>16</length>
-        <precision>2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_CLIENTE</name>
-        <rename>ID_CLIENTE</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_LOCAL</name>
-        <rename>ID_LOCAL</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_UBICACION</name>
-        <rename>ID_UBICACION</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>MONTO</name>
-        <rename>MONTO</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CHANGE_ID_FIELD_NAME_DET</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ID_FECHA_AUX</name>
-      </field>
-      <field>
-        <name>ID_PRODUCTO</name>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
-      </field>
-      <field>
-        <name>ID_SUBGRUPO</name>
-      </field>
-      <field>
-        <name>CANTIDAD</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>ID_FECHA_AUX</name>
-        <rename>ID_FECHA</rename>
-        <type>None</type>
-        <length>16</length>
-        <precision>2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_PRODUCTO</name>
-        <rename>ID_PRODUCTO</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_LOCAL</name>
-        <rename>ID_LOCAL</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_UBICACION</name>
-        <rename>ID_UBICACION</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>ID_SUBGRUPO</name>
-        <rename>ID_SUBGRUPO</rename>
-        <type>None</type>
-        <length>15</length>
-        <precision>0</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-      <meta>
-        <name>CANTIDAD</name>
-        <rename>CANTIDAD</rename>
-        <type>None</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask />
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale />
-        <date_format_timezone />
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding />
-        <decimal_symbol />
-        <grouping_symbol />
-        <currency_symbol />
-        <storage_type />
-      </meta>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FAC_CABECERA_FACTURA</name>
+    <name>DIM_FECHA_PRE</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -932,62 +608,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>MONTH_CON</connection>
+    <connection />
     <sql>SELECT
-  ID_CLIENTE
-, ID_LOCAL
-, ID_UBICACION
-, ID_FECHA
-, ID_DOCUMENTO
-, MONTO
-, IVA
-, DESCUENTO
+  ID_FECHA
+, FECHA
+, ANIO
+, MES
+, DIA
 , FECHA_CARGA
-FROM FAC_CABECERA_FACTURA
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FAC_DETALLE</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>MONTH_CON</connection>
-    <sql>SELECT
-  ID_PRODUCTO
-, ID_DOCUMENTO
-, ID_CLIENTE
-, ID_FECHA
-, ID_LOCAL
-, ID_UBICACION
-, ID_SUBGRUPO
-, CANTIDAD
-, PRECIO
-, FECHA_CARGA
-FROM FAC_DETALLE_FACTURA
-
+FROM DIM_FECHA
 </sql>
     <limit>0</limit>
     <lookup />
@@ -1002,14 +631,14 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>288</yloc>
+      <xloc>64</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>FAC_GROUP_CLIENTE</name>
-    <type>GroupBy</type>
+    <name>DIM_LOCAL_PRE</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1018,36 +647,20 @@ FROM FAC_DETALLE_FACTURA
       <method>none</method>
       <schema_name />
     </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ID_FECHA_AUX</name>
-      </field>
-      <field>
-        <name>ID_CLIENTE</name>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>MONTO</aggregate>
-        <subject>MONTO</subject>
-        <type>SUM</type>
-        <valuefield />
-      </field>
-    </fields>
+    <connection>TRANS</connection>
+    <sql>SELECT
+  ID_LOCAL
+, ID_UBICACION
+, COD_LOCAL
+, LOCAL
+, FECHA_CARGA
+FROM DIM_LOCAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1056,14 +669,91 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>80</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_SUBGRUPO_PRE</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection />
+    <sql>SELECT
+  ID_SUBGRUPO
+, COD_SUBGRUPO
+, SUBGRUPO
+, FECHA_CARGA
+FROM DIM_SUBGRUPO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_PRESUPUESTO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>TRANS</connection>
+    <sql>SELECT
+  ID_PRESUPUESTO
+, COD_SUBGRUPO
+, COD_LOCAL
+, MONTO
+, FECHA
+, FECHA_CARGA
+FROM DSA_PRESUPUESTO
+
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>FAC_GROUP_PRODUCTO</name>
-    <type>GroupBy</type>
+    <name>FECHA_MERGE</name>
+    <type>MergeJoin</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1072,39 +762,15 @@ FROM FAC_DETALLE_FACTURA
       <method>none</method>
       <schema_name />
     </partitioning>
-    <all_rows>N</all_rows>
-    <ignore_aggregate>N</ignore_aggregate>
-    <field_ignore />
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>grp</prefix>
-    <add_linenr>N</add_linenr>
-    <linenr_fieldname />
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>ID_FECHA_AUX</name>
-      </field>
-      <field>
-        <name>ID_PRODUCTO</name>
-      </field>
-      <field>
-        <name>ID_SUBGRUPO</name>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>CANTIDAD</aggregate>
-        <subject>CANTIDAD</subject>
-        <type>SUM</type>
-        <valuefield />
-      </field>
-    </fields>
+    <join_type>INNER</join_type>
+    <step1>TABLE_MERGED_TIEMPO</step1>
+    <step2>SORT_FECHAS_LOCAL_PRE</step2>
+    <keys_1>
+      <key>FECHA</key>
+    </keys_1>
+    <keys_2>
+      <key>FECHA</key>
+    </keys_2>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1113,121 +779,13 @@ FROM FAC_DETALLE_FACTURA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>288</yloc>
+      <xloc>496</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>FORMAT_ID_FECHA_TO_GROUP</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var ID_FECHA_STR = ID_FECHA.toString().substring(0,6) + "01"
-var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>ID_FECHA_STR</name>
-        <rename>ID_FECHA_STR</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>ID_FECHA_AUX</name>
-        <rename>ID_FECHA_AUX</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FORMAT_ID_FECHA_TO_GROUP_DET</name>
-    <type>ScriptValueMod</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var ID_FECHA_STR = ID_FECHA.toString().substring(0,6) + "01"
-var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>ID_FECHA_STR</name>
-        <rename>ID_FECHA_STR</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>ID_FECHA_AUX</name>
-        <rename>ID_FECHA_AUX</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (FAC_CABECERA_FACTURA)</name>
+    <name>Insert / Update (FAC_PRESUPUESTO)</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -1237,24 +795,12 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>MONTH_CON</connection>
+    <connection>TRANS</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
-      <table>FAC_CABECERA_MENSUAL</table>
-      <key>
-        <name>ID_FECHA</name>
-        <field>ID_FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_CLIENTE</name>
-        <field>ID_CLIENTE</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
+      <table>FAC_PRESUPUESTO_MENSUAL</table>
       <key>
         <name>ID_LOCAL</name>
         <field>ID_LOCAL</field>
@@ -1267,88 +813,9 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
         <condition>=</condition>
         <name2 />
       </key>
-      <value>
-        <name>ID_FECHA</name>
-        <rename>ID_FECHA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_CLIENTE</name>
-        <rename>ID_CLIENTE</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_LOCAL</name>
-        <rename>ID_LOCAL</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_UBICACION</name>
-        <rename>ID_UBICACION</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>MONTO</name>
-        <rename>MONTO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (FAC_DETALLE_FACTURA_MONTH)</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>MONTH_CON</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>FAC_DETALLE_FACTURA_MENSUAL</table>
-      <key>
-        <name>ID_PRODUCTO</name>
-        <field>ID_PRODUCTO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
       <key>
         <name>ID_FECHA</name>
         <field>ID_FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_LOCAL</name>
-        <field>ID_LOCAL</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_UBICACION</name>
-        <field>ID_UBICACION</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -1359,13 +826,13 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
         <name2 />
       </key>
       <value>
-        <name>ID_FECHA</name>
-        <rename>ID_FECHA</rename>
+        <name>MONTO</name>
+        <rename>MONTO</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>ID_PRODUCTO</name>
-        <rename>ID_PRODUCTO</rename>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1379,18 +846,13 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
         <update>Y</update>
       </value>
       <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>ID_SUBGRUPO</name>
         <rename>ID_SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>CANTIDAD</name>
-        <rename>CANTIDAD</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -1402,13 +864,79 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>512</yloc>
+      <xloc>1216</xloc>
+      <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_DETALLE_MENSUAL</name>
+    <name>LOCAL_MERGE_PRESUPUESTO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>PRESUPUESTO_SORT_LOCAL</step1>
+    <step2>SORT_LOCAL_PRE</step2>
+    <keys_1>
+      <key>COD_LOCAL</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_LOCAL</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGED_SUBGRUPO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>TABLE_MERGED_SUBGRUPO</step1>
+    <step2>SORT_SUBGRUPO</step2>
+    <keys_1>
+      <key>COD_SUBGRUPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_SUBGRUPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRESUPUESTO_SORT_LOCAL</name>
     <type>SortRows</type>
     <description />
     <distribute>Y</distribute>
@@ -1427,39 +955,7 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>ID_FECHA_AUX</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_PRODUCTO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_SUBGRUPO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
+        <name>COD_LOCAL</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1475,16 +971,157 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>288</yloc>
+      <xloc>416</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_FAC_CLIENTE</name>
+    <name>SELECT_VALUES</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ID_PRESUPUESTO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+      <field>
+        <name>MONTO</name>
+      </field>
+      <field>
+        <name>FECHA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <field>
+        <name>ID_LOCAL</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+      </field>
+      <field>
+        <name>COD_LOCAL_1</name>
+      </field>
+      <field>
+        <name>LOCAL</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+      </field>
+      <field>
+        <name>ID_FECHA</name>
+      </field>
+      <field>
+        <name>FECHA_1</name>
+      </field>
+      <field>
+        <name>ANIO</name>
+      </field>
+      <field>
+        <name>MES</name>
+      </field>
+      <field>
+        <name>DIA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_2</name>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO_1</name>
+      </field>
+      <field>
+        <name>SUBGRUPO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_3</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_4</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>ID_PRESUPUESTO</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>COD_LOCAL</name>
+      </remove>
+      <remove>
+        <name>FECHA</name>
+      </remove>
+      <remove>
+        <name>COD_LOCAL_1</name>
+      </remove>
+      <remove>
+        <name>LOCAL</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <remove>
+        <name>FECHA_1</name>
+      </remove>
+      <remove>
+        <name>ANIO</name>
+      </remove>
+      <remove>
+        <name>MES</name>
+      </remove>
+      <remove>
+        <name>DIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_2</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO_1</name>
+      </remove>
+      <remove>
+        <name>SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_3</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_4</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_FECHAS_LOCAL_PRE</name>
     <type>SortRows</type>
     <description />
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
@@ -1500,31 +1137,7 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>ID_FECHA_AUX</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_CLIENTE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
+        <name>FECHA</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1540,8 +1153,172 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>48</yloc>
+      <xloc>208</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_LOCAL_PRE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TABLE_MERGED_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TABLE_MERGED_TIEMPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

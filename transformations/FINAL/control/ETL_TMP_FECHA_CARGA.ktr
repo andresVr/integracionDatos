@@ -563,6 +563,82 @@
     </hop>
   </order>
   <step>
+    <name>ADD_VARIABLE_PARAM</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>END_LOOP</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_VARIABLE_PARAM_SUCCESS</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>END_LOOP</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>CALCULATE_DIFFERENCE_OF_DATES</name>
     <type>Calculator</type>
     <description />
@@ -598,6 +674,39 @@
     <GUI>
       <xloc>400</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CONTINUE_LOOP_VAR</name>
+    <type>SetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>END_LOOP</field_name>
+        <variable_name>END_LOOP</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value />
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -671,6 +780,39 @@
     </GUI>
   </step>
   <step>
+    <name>END_LOOP_VAR</name>
+    <type>SetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>END_LOOP</field_name>
+        <variable_name>END_LOOP</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value />
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>ETL_FECHA_CARGA</name>
     <type>TableInput</type>
     <description />
@@ -710,6 +852,70 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
     </GUI>
   </step>
   <step>
+    <name>INSERT_LAST_REGISTER</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CON_CONTROL</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>TMP_FECHA_CARGA</table>
+      <key>
+        <name>FECHA_INICIO</name>
+        <field>FECHA_INICIO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>FECHA_FIN</name>
+        <field>FECHA_FIN</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>MODULO</name>
+        <field>MODULO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>MODULO</name>
+        <rename>MODULO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_FIN</name>
+        <rename>FECHA_FIN</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_INICIO</name>
+        <rename>FECHA_INICIO</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>INSERT_TMP</name>
     <type>InsertUpdate</type>
     <description />
@@ -735,6 +941,12 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
       <key>
         <name>FFIN</name>
         <field>FECHA_FIN</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>MODULO</name>
+        <field>MODULO</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -764,6 +976,72 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
     <GUI>
       <xloc>816</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOG_INPUT</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>END LOOP--NOT SUCCESS
+
+${END_LOOP}</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOG_OUT</name>
+    <type>WriteToLog</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>END LOOP--SUCCESS
+
+${END_LOOP}</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -864,115 +1142,6 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
     </GUI>
   </step>
   <step>
-    <name>VALIDATOR_DATES</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>SUM_DAYS_CONST</send_true_to>
-    <send_false_to>INSERT_LAST_REGISTER</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>DIFERENCIA_FECHAS_INI_FIN</leftvalue>
-        <function>&gt;=</function>
-        <rightvalue />
-        <value>
-          <name>constant</name>
-          <type>Integer</type>
-          <text>25</text>
-          <length>-1</length>
-          <precision>0</precision>
-          <isnull>N</isnull>
-          <mask>####0;-####0</mask>
-        </value>
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>END_LOOP_VAR</name>
-    <type>SetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>END_LOOP</field_name>
-        <variable_name>END_LOOP</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value />
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CONTINUE_LOOP_VAR</name>
-    <type>SetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>END_LOOP</field_name>
-        <variable_name>END_LOOP</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value />
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>UPDATE_ETL_FECHA_CARGA</name>
     <type>InsertUpdate</type>
     <description />
@@ -1015,8 +1184,8 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
     </GUI>
   </step>
   <step>
-    <name>LOG_INPUT</name>
-    <type>WriteToLog</type>
+    <name>VALIDATOR_DATES</name>
+    <type>FilterRows</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1025,182 +1194,25 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>END LOOP--NOT SUCCESS
-
-${END_LOOP}</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_VARIABLE_PARAM</name>
-    <type>Constant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>END_LOOP</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>0</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_VARIABLE_PARAM_SUCCESS</name>
-    <type>Constant</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>END_LOOP</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>LOG_OUT</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>END LOOP--SUCCESS
-
-${END_LOOP}</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INSERT_LAST_REGISTER</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CON_CONTROL</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>TMP_FECHA_CARGA</table>
-      <key>
-        <name>FECHA_INICIO</name>
-        <field>FECHA_INICIO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>FECHA_FIN</name>
-        <field>FECHA_FIN</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>MODULO</name>
-        <rename>MODULO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_FIN</name>
-        <rename>FECHA_FIN</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_INICIO</name>
-        <rename>FECHA_INICIO</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <send_true_to>SUM_DAYS_CONST</send_true_to>
+    <send_false_to>INSERT_LAST_REGISTER</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>DIFERENCIA_FECHAS_INI_FIN</leftvalue>
+        <function>&gt;=</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>Integer</type>
+          <text>25</text>
+          <length>-1</length>
+          <precision>0</precision>
+          <isnull>N</isnull>
+          <mask>####0;-####0</mask>
+        </value>
+      </condition>
+    </compare>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1210,7 +1222,7 @@ ${END_LOOP}</logmessage>
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>240</yloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
