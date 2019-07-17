@@ -465,7 +465,7 @@
       <logmessage>-------data control job--------------
 fecha inicio = ${FECHA_INICIO}
 fecha fin = ${FECHA_FIN}</logmessage>
-      <loglevel />
+      <loglevel>Basic</loglevel>
       <logsubject />
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -483,8 +483,8 @@ fecha fin = ${FECHA_FIN}</logmessage>
       <fields>
         <field>
           <variable_name>MODULE_NAME</variable_name>
-          <variable_value>PRESUPUESTO</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_value>VENTAS</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
@@ -514,158 +514,6 @@ fecha fin = ${FECHA_FIN}</logmessage>
       <nr>0</nr>
       <xloc>480</xloc>
       <yloc>48</yloc>
-    </entry>
-    <entry>
-      <name>SET_ENVIROMENT_DATA_PRESUPUESTO</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/SET_ENVIROMENT_VARS.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>368</yloc>
-    </entry>
-    <entry>
-      <name>LOAD_TRANS_DATA_PRESUPUESTO</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/LOAD_TRANS_PRESUPUESTO_TO_DSA.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>944</xloc>
-      <yloc>368</yloc>
-    </entry>
-    <entry>
-      <name>SET_CONTROL_VAR_PRESUPUESTO</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/SET_CONTROL_STEP_VARIABLE.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1456</xloc>
-      <yloc>368</yloc>
-    </entry>
-    <entry>
-      <name>Simple evaluation_PRESUPUESTO</name>
-      <description />
-      <type>SIMPLE_EVAL</type>
-      <valuetype>variable</valuetype>
-      <fieldname />
-      <variablename>${CONTROL}</variablename>
-      <fieldtype>string</fieldtype>
-      <mask />
-      <comparevalue>0</comparevalue>
-      <minvalue />
-      <maxvalue />
-      <successcondition>equal</successcondition>
-      <successnumbercondition>equal</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1456</xloc>
-      <yloc>480</yloc>
-    </entry>
-    <entry>
-      <name>Wait for 2</name>
-      <description />
-      <type>DELAY</type>
-      <maximumTimeout>5</maximumTimeout>
-      <scaletime>0</scaletime>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>944</xloc>
-      <yloc>480</yloc>
-    </entry>
-    <entry>
-      <name>Success 2</name>
-      <description />
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1456</xloc>
-      <yloc>576</yloc>
     </entry>
     <entry>
       <name>DSA_TO_DTWH_FACTURA</name>
@@ -738,42 +586,6 @@ fecha fin = ${FECHA_FIN}</logmessage>
       <nr>0</nr>
       <xloc>1264</xloc>
       <yloc>48</yloc>
-    </entry>
-    <entry>
-      <name>DSA_TO_DTWH_PRES</name>
-      <description />
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/DSA_TO_DTWH_PRES.ktr</filename>
-      <transname />
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile />
-      <logext />
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name />
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1200</xloc>
-      <yloc>368</yloc>
     </entry>
   </entries>
   <hops>
@@ -859,60 +671,6 @@ fecha fin = ${FECHA_FIN}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>SET_ENVIROMENT_DATA_PRESUPUESTO</from>
-      <to>LOAD_TRANS_DATA_PRESUPUESTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>EVALUATE_MODULE</from>
-      <to>SET_ENVIROMENT_DATA_PRESUPUESTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>SET_CONTROL_VAR_PRESUPUESTO</from>
-      <to>Simple evaluation_PRESUPUESTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Simple evaluation_PRESUPUESTO</from>
-      <to>Wait for 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Simple evaluation_PRESUPUESTO</from>
-      <to>Success 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Wait for 2</from>
-      <to>SET_ENVIROMENT_DATA_PRESUPUESTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>LOAD_TRANS_DATA</from>
       <to>DSA_TO_DTWH_FACTURA</to>
       <from_nr>0</from_nr>
@@ -933,24 +691,6 @@ fecha fin = ${FECHA_FIN}</logmessage>
     <hop>
       <from>DSA_TO_DTWH_DET_FAC</from>
       <to>SET_CONTROL_VAR</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>LOAD_TRANS_DATA_PRESUPUESTO</from>
-      <to>DSA_TO_DTWH_PRES</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>DSA_TO_DTWH_PRES</from>
-      <to>SET_CONTROL_VAR_PRESUPUESTO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

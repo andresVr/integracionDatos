@@ -533,7 +533,7 @@
     </hop>
     <hop>
       <from>ADD_FECHA_CARGA</from>
-      <to>Insert / Update (FAC_CABECERA_FACTURA)</to>
+      <to>Insert / Update (FAC_CABECERA_FACTURA_MONTH)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1227,7 +1227,7 @@ var ID_FECHA_AUX =  parseInt(ID_FECHA_STR, 10);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Insert / Update (FAC_CABECERA_FACTURA)</name>
+    <name>Insert / Update (FAC_CABECERA_FACTURA_MONTH)</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
