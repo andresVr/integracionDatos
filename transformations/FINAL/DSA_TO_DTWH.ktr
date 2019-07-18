@@ -1566,7 +1566,7 @@ FECHA_CARGA= CURDATE();
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema />
+      <schema>datawarehouse</schema>
       <table>DIM_FECHA</table>
       <key>
         <name>ID_FECHA</name>
@@ -1633,7 +1633,7 @@ FECHA_CARGA= CURDATE();
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema />
+      <schema>datawarehouse</schema>
       <table>DIM_SUBGRUPO</table>
       <key>
         <name>COD_SUBGRUPO</name>

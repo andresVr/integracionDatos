@@ -402,8 +402,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
-      <yloc>32</yloc>
+      <xloc>1040</xloc>
+      <yloc>128</yloc>
     </entry>
     <entry>
       <name>ETL_PROGRESIVE_LOAD_PRES</name>
@@ -435,8 +435,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
-      <yloc>144</yloc>
+      <xloc>1040</xloc>
+      <yloc>240</yloc>
     </entry>
     <entry>
       <name>ETL_LOAD_CUMULATIVE_DATA</name>
@@ -468,8 +468,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
-      <yloc>256</yloc>
+      <xloc>1040</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>LOAD_TMP_FECHA_CARGA_VENTAS</name>

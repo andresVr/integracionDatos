@@ -335,7 +335,7 @@
       <variablename>${MODULE_NAME}</variablename>
       <fieldtype>string</fieldtype>
       <mask />
-      <comparevalue>VENTAS</comparevalue>
+      <comparevalue>PRESUPUESTO</comparevalue>
       <minvalue />
       <maxvalue />
       <successcondition>equal</successcondition>
@@ -482,7 +482,7 @@
       <name>Wait for 2</name>
       <description />
       <type>DELAY</type>
-      <maximumTimeout>5</maximumTimeout>
+      <maximumTimeout>1</maximumTimeout>
       <scaletime>0</scaletime>
       <parallel>N</parallel>
       <draw>Y</draw>

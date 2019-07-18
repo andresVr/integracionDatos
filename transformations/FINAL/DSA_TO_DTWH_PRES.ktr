@@ -430,7 +430,7 @@
     <created_date>2019/07/13 18:01:13.476</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/07/13 18:01:13.476</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -608,7 +608,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection />
+    <connection>TRANS</connection>
     <sql>SELECT
   ID_FECHA
 , FECHA
@@ -685,12 +685,11 @@ FROM DIM_LOCAL
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection />
+    <connection>TRANS</connection>
     <sql>SELECT
   ID_SUBGRUPO
 , COD_SUBGRUPO
 , SUBGRUPO
-, FECHA_CARGA
 FROM DIM_SUBGRUPO
 </sql>
     <limit>0</limit>
@@ -1048,12 +1047,6 @@ FROM DSA_PRESUPUESTO
       <field>
         <name>SUBGRUPO</name>
       </field>
-      <field>
-        <name>FECHA_CARGA_3</name>
-      </field>
-      <field>
-        <name>FECHA_CARGA_4</name>
-      </field>
       <select_unspecified>N</select_unspecified>
       <remove>
         <name>ID_PRESUPUESTO</name>
@@ -1096,12 +1089,6 @@ FROM DSA_PRESUPUESTO
       </remove>
       <remove>
         <name>SUBGRUPO</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA_3</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA_4</name>
       </remove>
     </fields>
     <cluster_schema />
@@ -1301,7 +1288,7 @@ FROM DSA_PRESUPUESTO
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>COD_LOCAL</name>
+        <name>FECHA</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>

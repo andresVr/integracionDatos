@@ -2596,7 +2596,7 @@ FECHA_CARGA= CURDATE();
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
+      <xloc>1104</xloc>
       <yloc>2400</yloc>
       <draw>Y</draw>
     </GUI>
