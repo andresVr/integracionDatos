@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ETL_FECHA_CARGA_PARAMETERS</name>
+    <name>UPDATE_ETL_FECHA_CARGA</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/06/07 23:04:22.530</created_date>
+    <created_date>2019/07/19 23:17:12.389</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/06/07 23:04:22.530</modified_date>
+    <modified_date>2019/07/19 23:17:12.389</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>control_con</name>
+    <name>control</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -449,67 +449,26 @@
     <index_tablespace />
     <attributes>
       <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>3306</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STREAM_RESULTS</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
       </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>ETL FECHA CARGA</from>
-      <to>COPY_FIELDS</to>
+      <from>FECHA_INICIO_VENTAS</from>
+      <to>GET_VAR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>COPY_FIELDS</from>
-      <to>PARSER_ID_FECHA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>PARSER_ID_FECHA</from>
-      <to>INSERT_ETL_FECHA_CARGA</to>
+      <from>GET_VAR</from>
+      <to>Insert / Update (VENTAS)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>COPY_FIELDS</name>
-    <type>Calculator</type>
+    <name>FECHA_INICIO_VENTAS</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -518,36 +477,15 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <calculation>
-      <field_name>AUX_ID_FECHA_INICIO</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FECHA_INICIO</field_a>
-      <field_b />
-      <field_c />
-      <value_type>String</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask>yyyyMMdd</conversion_mask>
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <calculation>
-      <field_name>AUX_ID_FECHA_FIN</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FECHA_FIN</field_a>
-      <field_b />
-      <field_c />
-      <value_type>String</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask>yyyyMMdd</conversion_mask>
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
+    <connection>control</connection>
+    <sql>SELECT min(FECHA_INICIO)
+FROM TMP_FECHA_CARGA WHERE MODULO = '${MODULE_NAME}'
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -556,97 +494,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>64</yloc>
+      <xloc>160</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ETL FECHA CARGA</name>
-    <type>DataGrid</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>MODULO</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>100</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>FECHA_INICIO</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>FECHA_FIN</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>FORSAT</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>VENTAS</item>
-        <item>2016-01-01</item>
-        <item>2019-12-30</item>
-        <item>S</item>
-      </line>
-      <line>
-        <item>PRESUPUESTO</item>
-        <item>2016-01-01</item>
-        <item>2018-06-30</item>
-        <item>S</item>
-      </line>
-    </data>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INSERT_ETL_FECHA_CARGA</name>
+    <name>Insert / Update (VENTAS)</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -656,7 +510,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>control_con</connection>
+    <connection>control</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -669,33 +523,8 @@
         <name2 />
       </key>
       <value>
-        <name>MODULO</name>
-        <rename>MODULO</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>FECHA_INICIO</name>
-        <rename>FECHA_INICIO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_FIN</name>
-        <rename>FECHA_FIN</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FORSAT</name>
-        <rename>FORSAT</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_FECHA_INICIO</name>
-        <rename>ID_FECHA_INICIO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ID_FECHA_FIN</name>
-        <rename>ID_FECHA_FIN</rename>
+        <rename>min(FECHA_INICIO)</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -707,14 +536,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>64</yloc>
+      <xloc>560</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>PARSER_ID_FECHA</name>
-    <type>ScriptValueMod</type>
+    <name>GET_VAR</name>
+    <type>GetVariable</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -723,35 +552,18 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var ID_FECHA_INICIO = parseInt(AUX_ID_FECHA_INICIO, 10);
-var ID_FECHA_FIN = parseInt(AUX_ID_FECHA_FIN,10);
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
     <fields>
       <field>
-        <name>ID_FECHA_INICIO</name>
-        <rename>ID_FECHA_INICIO</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>ID_FECHA_FIN</name>
-        <rename>ID_FECHA_FIN</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
+        <name>MODULO</name>
+        <variable>${MODULE_NAME}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
     </fields>
     <cluster_schema />
@@ -762,8 +574,8 @@ var ID_FECHA_FIN = parseInt(AUX_ID_FECHA_FIN,10);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>64</yloc>
+      <xloc>352</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

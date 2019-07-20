@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ETL_TMP_FECHA_CARGA</name>
+    <name>ETL_VERIFY_FORSAT</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/07/03 23:43:23.819</created_date>
+    <created_date>2019/07/19 21:22:58.000</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/07/03 23:43:23.819</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/07/19 21:22:58.000</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>CON_CONTROL</name>
+    <name>CONTROL</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -449,131 +449,226 @@
     <index_tablespace />
     <attributes>
       <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>3306</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STREAM_RESULTS</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
       </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>ETL_FECHA_CARGA</from>
-      <to>CALCULATE_DIFFERENCE_OF_DATES</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Calculator</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>INSERT_TMP</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>INSERT_TMP</from>
-      <to>UPDATE_ETL_FECHA_CARGA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>CONTINUE_LOOP_VAR</from>
-      <to>LOG_INPUT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>UPDATE_ETL_FECHA_CARGA</from>
-      <to>ADD_VARIABLE_PARAM</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ADD_VARIABLE_PARAM</from>
-      <to>CONTINUE_LOOP_VAR</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ADD_VARIABLE_PARAM_SUCCESS</from>
-      <to>END_LOOP_VAR</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>END_LOOP_VAR</from>
-      <to>LOG_OUT</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>VALIDATOR_DATES</from>
-      <to>INSERT_LAST_REGISTER</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>VALIDATOR_DATES</from>
-      <to>SUM_CNST</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SUM_CNST</from>
-      <to>Calculator</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>CALCULATE_DIFFERENCE_OF_DATES</from>
+      <from>VERIFY_FORSAT</from>
       <to>FILTER</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>FILTER</from>
-      <to>VALIDATOR_DATES</to>
+      <to>ADD_FECHA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>FILTER</from>
-      <to>ADD_VARIABLE_PARAM_SUCCESS</to>
+      <to>ADD_CONS_VALUE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>INSERT_LAST_REGISTER</from>
-      <to>ADD_VARIABLE_PARAM_SUCCESS</to>
+      <from>ADD_FECHA</from>
+      <to>ADD_CONST</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_CONS_VALUE</from>
+      <to>FILTER_VENTAS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_VENTAS</from>
+      <to>SET_CONTINUE_PROCESS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_CONST</from>
+      <to>CHANGE_FORSAT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CHANGE_FORSAT</from>
+      <to>Calculator</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_PRESUPUESTO</from>
+      <to>SET_STOP_PROCESS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Insert / Update(ETL_FECHA_CARGA)</from>
+      <to>ADD_CONS_VALUE_PRES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_CONS_VALUE_PRES</from>
+      <to>FILTER_PRESUPUESTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>COPY_FIELDS</from>
+      <to>PARSER_ID_FECHA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PARSER_ID_FECHA</from>
+      <to>Insert / Update(ETL_FECHA_CARGA)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculator</from>
+      <to>COPY_FIELDS</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ADD_VARIABLE_PARAM</name>
+    <name>VERIFY_FORSAT</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>CONTROL</connection>
+    <sql>SELECT
+  MODULO
+, FORSAT
+FROM ETL_FECHA_CARGA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FILTER</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>ADD_FECHA</send_true_to>
+    <send_false_to>ADD_CONS_VALUE</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>FORSAT</leftvalue>
+        <function>=</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>N</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_FIN_AUX</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SET_CONTINUE_PROCESS</name>
+    <type>SetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>CONTINUE_PROCESS</field_name>
+        <variable_name>CONTINUE_PROCESS</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value />
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_CONS_VALUE</name>
     <type>Constant</type>
     <description />
     <distribute>Y</distribute>
@@ -585,45 +680,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>END_LOOP</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>0</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1232</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ADD_VARIABLE_PARAM_SUCCESS</name>
-    <type>Constant</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>END_LOOP</name>
+        <name>CONTINUE_PROCESS</name>
         <type>String</type>
         <format />
         <currency />
@@ -643,53 +700,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>240</yloc>
+      <xloc>384</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>CALCULATE_DIFFERENCE_OF_DATES</name>
-    <type>Calculator</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <calculation>
-      <field_name>DIFERENCIA_FECHAS_INI_FIN</field_name>
-      <calc_type>DATE_DIFF</calc_type>
-      <field_a>FECHA_FIN</field_a>
-      <field_b>FECHA_INICIO</field_b>
-      <field_c />
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>CONTINUE_LOOP_VAR</name>
-    <type>SetVariable</type>
+    <name>ADD_CONST</name>
+    <type>Constant</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -700,13 +718,18 @@
     </partitioning>
     <fields>
       <field>
-        <field_name>END_LOOP</field_name>
-        <variable_name>END_LOOP</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value />
+        <name>REST_VALUE</name>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>-1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-    <use_formatting>Y</use_formatting>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -715,8 +738,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
-      <yloc>512</yloc>
+      <xloc>688</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -732,40 +755,10 @@
       <schema_name />
     </partitioning>
     <calculation>
-      <field_name>FINI</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FECHA_INICIO</field_a>
-      <field_b />
-      <field_c />
-      <value_type>Date</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <calculation>
-      <field_name>FFIN</field_name>
-      <calc_type>ADD_DAYS</calc_type>
-      <field_a>FECHA_INICIO</field_a>
-      <field_b>SUM_FECHA</field_b>
-      <field_c />
-      <value_type>Date</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <calculation>
-      <field_name>FECHA_INICIO</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>FFIN</field_a>
-      <field_b />
+      <field_name>FECHA_INICIO_AUX</field_name>
+      <calc_type>ADD_MONTHS</calc_type>
+      <field_a>FECHA_FIN_AUX</field_a>
+      <field_b>REST_VALUE</field_b>
       <field_c />
       <value_type>Date</value_type>
       <value_length>-1</value_length>
@@ -784,85 +777,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
-      <yloc>160</yloc>
+      <xloc>1024</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>END_LOOP_VAR</name>
-    <type>SetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>END_LOOP</field_name>
-        <variable_name>END_LOOP</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value />
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ETL_FECHA_CARGA</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CON_CONTROL</connection>
-    <sql>SELECT
-  MODULO
-, FECHA_INICIO
-, FECHA_FIN
-, ID_FECHA_INICIO
-, ID_FECHA_FIN
-, FORSAT
-FROM ETL_FECHA_CARGA
-WHERE MODULO = '${MODULE_NAME}'</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>FILTER</name>
+    <name>FILTER_VENTAS</name>
     <type>FilterRows</type>
     <description />
     <distribute>Y</distribute>
@@ -872,22 +793,22 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <send_true_to>VALIDATOR_DATES</send_true_to>
-    <send_false_to>ADD_VARIABLE_PARAM_SUCCESS</send_false_to>
+    <send_true_to>SET_CONTINUE_PROCESS</send_true_to>
+    <send_false_to />
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>DIFERENCIA_FECHAS_INI_FIN</leftvalue>
-        <function>&gt;</function>
+        <leftvalue>MODULO</leftvalue>
+        <function>=</function>
         <rightvalue />
         <value>
           <name>constant</name>
-          <type>Integer</type>
-          <text>0</text>
+          <type>String</type>
+          <text>VENTAS</text>
           <length>-1</length>
-          <precision>0</precision>
+          <precision>-1</precision>
           <isnull>N</isnull>
-          <mask>####0;-####0</mask>
+          <mask />
         </value>
       </condition>
     </compare>
@@ -899,303 +820,13 @@ WHERE MODULO = '${MODULE_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>48</yloc>
+      <xloc>384</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>INSERT_LAST_REGISTER</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CON_CONTROL</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>TMP_FECHA_CARGA</table>
-      <key>
-        <name>FECHA_INICIO</name>
-        <field>FECHA_INICIO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>FECHA_FIN</name>
-        <field>FECHA_FIN</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>MODULO</name>
-        <field>MODULO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>MODULO</name>
-        <rename>MODULO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_FIN</name>
-        <rename>FECHA_FIN</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_INICIO</name>
-        <rename>FECHA_INICIO</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>INSERT_TMP</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>CON_CONTROL</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>TMP_FECHA_CARGA</table>
-      <key>
-        <name>FINI</name>
-        <field>FECHA_INICIO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>FFIN</name>
-        <field>FECHA_FIN</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>MODULO</name>
-        <field>MODULO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>MODULO</name>
-        <rename>MODULO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_FIN</name>
-        <rename>FFIN</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_INICIO</name>
-        <rename>FINI</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>LOG_INPUT</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>END LOOP--NOT SUCCESS
-
-${END_LOOP}</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>864</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>LOG_OUT</name>
-    <type>WriteToLog</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>END LOOP--SUCCESS
-
-${END_LOOP}</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SUM_CNST</name>
-    <type>GetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>SUM_FECHA</name>
-        <variable>${INTERVALO_DIVISION}</variable>
-        <type>Integer</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>MODULO</name>
-      </field>
-      <field>
-        <name>FECHA_FIN</name>
-      </field>
-      <field>
-        <name>ID_FECHA_INICIO</name>
-      </field>
-      <field>
-        <name>ID_FECHA_FIN</name>
-      </field>
-      <field>
-        <name>FORSAT</name>
-      </field>
-      <field>
-        <name>DIFERENCIA_FECHAS_INI_FIN</name>
-      </field>
-      <field>
-        <name>SUM_FECHA</name>
-      </field>
-      <field>
-        <name>FINI</name>
-      </field>
-      <field>
-        <name>FFIN</name>
-      </field>
-      <field>
-        <name>FECHA_INICIO_1</name>
-        <rename>FECHA_INICIO</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>UPDATE_ETL_FECHA_CARGA</name>
+    <name>Insert / Update(ETL_FECHA_CARGA)</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -1205,7 +836,7 @@ ${END_LOOP}</logmessage>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>CON_CONTROL</connection>
+    <connection>CONTROL</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1219,7 +850,27 @@ ${END_LOOP}</logmessage>
       </key>
       <value>
         <name>FECHA_INICIO</name>
-        <rename>FECHA_INICIO</rename>
+        <rename>FECHA_INICIO_AUX</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_FIN</name>
+        <rename>FECHA_FIN_AUX</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FORSAT</name>
+        <rename>FORSAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_FECHA_INICIO</name>
+        <rename>ID_FECHA_INICIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_FECHA_FIN</name>
+        <rename>ID_FECHA_FIN</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -1231,13 +882,79 @@ ${END_LOOP}</logmessage>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
-      <yloc>400</yloc>
+      <xloc>1648</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>VALIDATOR_DATES</name>
+    <name>CHANGE_FORSAT</name>
+    <type>SetValueConstant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>FORSAT</name>
+        <value>S</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SET_STOP_PROCESS</name>
+    <type>SetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>CONTINUE_PROCESS</field_name>
+        <variable_name>CONTINUE_PROCESS</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value />
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1648</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FILTER_PRESUPUESTO</name>
     <type>FilterRows</type>
     <description />
     <distribute>Y</distribute>
@@ -1247,22 +964,22 @@ ${END_LOOP}</logmessage>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <send_true_to>SUM_CNST</send_true_to>
-    <send_false_to>INSERT_LAST_REGISTER</send_false_to>
+    <send_true_to>SET_STOP_PROCESS</send_true_to>
+    <send_false_to />
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>DIFERENCIA_FECHAS_INI_FIN</leftvalue>
-        <function>&gt;=</function>
+        <leftvalue>MODULO</leftvalue>
+        <function>=</function>
         <rightvalue />
         <value>
           <name>constant</name>
-          <type>Integer</type>
-          <text>25</text>
+          <type>String</type>
+          <text>PRESUPUESTO</text>
           <length>-1</length>
-          <precision>0</precision>
+          <precision>-1</precision>
           <isnull>N</isnull>
-          <mask>####0;-####0</mask>
+          <mask />
         </value>
       </condition>
     </compare>
@@ -1274,8 +991,155 @@ ${END_LOOP}</logmessage>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>48</yloc>
+      <xloc>1648</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_CONS_VALUE_PRES</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>CONTINUE_PROCESS</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1648</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>COPY_FIELDS</name>
+    <type>Calculator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <calculation>
+      <field_name>AUX_ID_FECHA_INICIO</field_name>
+      <calc_type>COPY_FIELD</calc_type>
+      <field_a>FECHA_INICIO_AUX</field_a>
+      <field_b />
+      <field_c />
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask>yyyyMMdd</conversion_mask>
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <calculation>
+      <field_name>AUX_ID_FECHA_FIN</field_name>
+      <calc_type>COPY_FIELD</calc_type>
+      <field_a>FECHA_FIN_AUX</field_a>
+      <field_b />
+      <field_c />
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask>yyyyMMdd</conversion_mask>
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1248</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PARSER_ID_FECHA</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var ID_FECHA_INICIO = parseInt(AUX_ID_FECHA_INICIO, 10);
+var ID_FECHA_FIN = parseInt(AUX_ID_FECHA_FIN,10);
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>ID_FECHA_INICIO</name>
+        <rename>ID_FECHA_INICIO</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>ID_FECHA_FIN</name>
+        <rename>ID_FECHA_FIN</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1456</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

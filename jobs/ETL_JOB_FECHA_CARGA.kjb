@@ -307,12 +307,12 @@
       <yloc>80</yloc>
     </entry>
     <entry>
-      <name>LOAD_ETL_FECHA_CARGA</name>
+      <name>ETL_VERIFY_FORSAT</name>
       <description />
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/ETL_FECHA_CARGA_PARAMETERS.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/ETL_VERIFY_FORSAT.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -339,14 +339,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
+      <xloc>320</xloc>
       <yloc>80</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>LOAD_ETL_FECHA_CARGA</to>
+      <to>ETL_VERIFY_FORSAT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
