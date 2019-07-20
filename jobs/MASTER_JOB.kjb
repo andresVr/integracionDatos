@@ -547,12 +547,12 @@
       <fields>
         <field>
           <variable_name>INTERVALO_DIVISION</variable_name>
-          <variable_value>120</variable_value>
+          <variable_value>25</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>CARGAR_ETL_FECHA_CARGA</variable_name>
-          <variable_value>0</variable_value>
+          <variable_value>1</variable_value>
           <variable_type>JVM</variable_type>
         </field>
       </fields>

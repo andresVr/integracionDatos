@@ -80,7 +80,7 @@ inner join datawarehouse.DSA_UBICACION_GEOGRAFICA parroquia on  parroquia.COD_PA
 
 select * from datawarehouse.DSA_UBICACION_GEOGRAFICA;
 select * from control.ETL_FECHA_CARGA;
-select * from control.TMP_FECHA_CARGA;
+select * from control.TMP_FECHA_CARGA ORDER BY MODULO ASC;
 DELETE from control.TMP_FECHA_CARGA WHERE MODULO = 'VENTAS';
 
 SELECT MIN(FECHA_INICIO) FROM control.TMP_FECHA_CARGA;
