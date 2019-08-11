@@ -402,8 +402,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>256</yloc>
+      <xloc>1040</xloc>
+      <yloc>368</yloc>
     </entry>
     <entry>
       <name>ETL_PROGRESIVE_LOAD_PRES</name>
@@ -435,8 +435,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>368</yloc>
+      <xloc>1040</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>ETL_LOAD_CUMULATIVE_DATA</name>
@@ -468,8 +468,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>480</yloc>
+      <xloc>1040</xloc>
+      <yloc>592</yloc>
     </entry>
     <entry>
       <name>LOAD_TMP_FECHA_CARGA_VENTAS</name>
@@ -501,8 +501,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>32</yloc>
+      <xloc>1040</xloc>
+      <yloc>144</yloc>
     </entry>
     <entry>
       <name>LOAD_TMP_FECHA_CARGA_PRES</name>
@@ -534,8 +534,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>160</yloc>
+      <xloc>1040</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>SET_ENV_VARS</name>
@@ -668,7 +668,7 @@
       <to>ETL_LOAD_CUMULATIVE_DATA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
