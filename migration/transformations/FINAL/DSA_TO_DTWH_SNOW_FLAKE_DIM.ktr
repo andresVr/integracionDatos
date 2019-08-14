@@ -1,0 +1,5291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>DSA_TO_DTWH_SNOW_FLAKE_DIM</name>
+    <description />
+    <extended_description />
+    <trans_version />
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>/</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <trans-log-table>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STATUS</id>
+          <enabled>Y</enabled>
+          <name>STATUS</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+          <subject />
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>STARTDATE</id>
+          <enabled>Y</enabled>
+          <name>STARTDATE</name>
+        </field>
+        <field>
+          <id>ENDDATE</id>
+          <enabled>Y</enabled>
+          <name>ENDDATE</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>DEPDATE</id>
+          <enabled>Y</enabled>
+          <name>DEPDATE</name>
+        </field>
+        <field>
+          <id>REPLAYDATE</id>
+          <enabled>Y</enabled>
+          <name>REPLAYDATE</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>Y</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+        <field>
+          <id>EXECUTING_SERVER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_SERVER</name>
+        </field>
+        <field>
+          <id>EXECUTING_USER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_USER</name>
+        </field>
+        <field>
+          <id>CLIENT</id>
+          <enabled>N</enabled>
+          <name>CLIENT</name>
+        </field>
+      </trans-log-table>
+      <perf-log-table>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>SEQ_NR</id>
+          <enabled>Y</enabled>
+          <name>SEQ_NR</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>INPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>INPUT_BUFFER_ROWS</name>
+        </field>
+        <field>
+          <id>OUTPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>OUTPUT_BUFFER_ROWS</name>
+        </field>
+      </perf-log-table>
+      <channel-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>LOGGING_OBJECT_TYPE</id>
+          <enabled>Y</enabled>
+          <name>LOGGING_OBJECT_TYPE</name>
+        </field>
+        <field>
+          <id>OBJECT_NAME</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_NAME</name>
+        </field>
+        <field>
+          <id>OBJECT_COPY</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_COPY</name>
+        </field>
+        <field>
+          <id>REPOSITORY_DIRECTORY</id>
+          <enabled>Y</enabled>
+          <name>REPOSITORY_DIRECTORY</name>
+        </field>
+        <field>
+          <id>FILENAME</id>
+          <enabled>Y</enabled>
+          <name>FILENAME</name>
+        </field>
+        <field>
+          <id>OBJECT_ID</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_ID</name>
+        </field>
+        <field>
+          <id>OBJECT_REVISION</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_REVISION</name>
+        </field>
+        <field>
+          <id>PARENT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>PARENT_CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>ROOT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>ROOT_CHANNEL_ID</name>
+        </field>
+      </channel-log-table>
+      <step-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>N</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+      </step-log-table>
+      <metrics-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_DATE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_CODE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_CODE</name>
+        </field>
+        <field>
+          <id>METRICS_DESCRIPTION</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DESCRIPTION</name>
+        </field>
+        <field>
+          <id>METRICS_SUBJECT</id>
+          <enabled>Y</enabled>
+          <name>METRICS_SUBJECT</name>
+        </field>
+        <field>
+          <id>METRICS_TYPE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_TYPE</name>
+        </field>
+        <field>
+          <id>METRICS_VALUE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_VALUE</name>
+        </field>
+      </metrics-log-table>
+    </log>
+    <maxdate>
+      <connection />
+      <table />
+      <field />
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file />
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+    <created_user>-</created_user>
+    <created_date>2019/06/01 11:39:58.206</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2019/06/01 11:39:58.206</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>MYSQL_TELEFONO</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>datawarehouse</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted </password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <order>
+    <hop>
+      <from>DIM_CLIENTE</from>
+      <to>REMOVE_FECHA_CARGA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_CLIENTE_SORT_BY_CEDULA</from>
+      <to>MERGE_TELEFONO_DIM_CLIENTE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_TELEFONO</from>
+      <to>SELECT_VALUES_TELEFONO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_TIPO</from>
+      <to>SELECT_VALUES_TIPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_TELEFONO</from>
+      <to>SORT_TELEFONO_BY_CLIENT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_TELEFONO_DIM_CLIENTE</from>
+      <to>REMOVE_AUX_COLUMNS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REMOVE_AUX_COLUMNS</from>
+      <to>ADD_FECHA_CARGA_TELEFONO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REMOVE_FECHA_CARGA</from>
+      <to>DIM_CLIENTE_SORT_BY_CEDULA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TELEFONO</from>
+      <to>TELEFONO_ SORT_BY_TYPE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TIPO</from>
+      <to>TIPO_SORT_BY_TYPE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TELEFONO_ SORT_BY_TYPE</from>
+      <to>MERGE_JOIN_TELEFONO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TIPO_SORT_BY_TYPE</from>
+      <to>MERGE_JOIN_TELEFONO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_TELEFONO_BY_CLIENT</from>
+      <to>MERGE_TELEFONO_DIM_CLIENTE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_DIRECCION</from>
+      <to>SELECT_VALUES_DIRECCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>TIPO_SORT_BY_TYPE</from>
+      <to>MERGE_JOIN_DIRECCION_TIPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_DIRECCION</from>
+      <to>SORT_BY_TYPE_DIRECCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SORT_BY_TYPE_DIRECCION</from>
+      <to>MERGE_JOIN_DIRECCION_TIPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_CLIENTE_SORT_BY_CEDULA</from>
+      <to>MERGE_JOIN_CLIENTE_DIRECCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_DIRECCION_TIPO</from>
+      <to>DIRECCION_SORT_BY_CLIENTE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIRECCION_SORT_BY_CLIENTE</from>
+      <to>MERGE_JOIN_CLIENTE_DIRECCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_CLIENTE_DIRECCION</from>
+      <to>SELECT_FIELDS_DIM_DIRECCCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_FIELDS_DIM_DIRECCCION</from>
+      <to>ADD_FECHA_CARGA_DIRECCION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_DIRECCION</from>
+      <to>Insert / Update (DIM_DIRECCION)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SUBGRUPO_SORT_COD_SUBGRUPO</from>
+      <to>MERGE_JOIN_SUBGRUPO_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PRODUCTO_SORT_COD_SUBGRUPO</from>
+      <to>MERGE_JOIN_SUBGRUPO_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_SUBGRUPO_PRODUCTO</from>
+      <to>REMOVE_UNNECESARY_COLUMNS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REMOVE_UNNECESARY_COLUMNS</from>
+      <to>PRODUCTO_MERGED_SORT_MARCA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MARCA_SORT_COD_MARCA</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_MARCA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PRODUCTO_MERGED_SORT_MARCA</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_MARCA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_PRODUCTO_MERGED_MARCA</from>
+      <to>PRODUCTO_MERGED_SORT_MODELO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PRODUCTO_MERGED_SORT_MODELO</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_MODELO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MODELO_SORT_COD_MODELO</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_MODELO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_PRODUCTO_MERGED_MODELO</from>
+      <to>PRODUCTO_MERGED_SORT_COD_COLOR</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PRODUCTO_MERGED_SORT_COD_COLOR</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_COLOR</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>COLOR_SORT_COD_COLOR</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_COLOR</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_SUBGRUPO</from>
+      <to>SUBGRUPO_SORT_COD_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_MARCA</from>
+      <to>MARCA_SORT_COD_MARCA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_MODELO</from>
+      <to>MODELO_SORT_COD_MODELO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_COLOR</from>
+      <to>COLOR_SORT_COD_COLOR</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_GRUPO</from>
+      <to>GRUPO_SORT_GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_PRODUCTO_MERGED_COLOR</from>
+      <to>PRODUCTO_MERGED_SORT_GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>PRODUCTO_MERGED_SORT_GRUPO</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>GRUPO_SORT_GRUPO</from>
+      <to>MERGE_JOIN_PRODUCTO_MERGED_GRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_PRODUCTO_MERGED_GRUPO</from>
+      <to>SELECT_VALUES_DIM_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_DIM_PRODUCTO</from>
+      <to>ADD_FECHA_CARGA_PRODUCTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_PRODUCTO</from>
+      <to>REPLACE_NULL_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REPLACE_NULL_SUBGRUPO</from>
+      <to>PRODUCTO_SORT_COD_SUBGRUPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_PRODUCTO</from>
+      <to>REPLACE_NULL_VALUES</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REPLACE_NULL_VALUES</from>
+      <to>Insert / Update (DIM_PRODUCTO)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FECHA_SORT_FECHA</from>
+      <to>FACTURA_MERGE_JOIN_FECHA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CABECERA_FACTURA_SORT</from>
+      <to>FACTURA_MERGE_JOIN_FECHA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_FECHA</from>
+      <to>FECHA_SORT_FECHA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_FACTURA_CABECERA</from>
+      <to>CABECERA_FACTURA_SORT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FACTURA_MERGE_JOIN_FECHA</from>
+      <to>SELECT_VALUES_DIM</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_DIM</from>
+      <to>ADD_FECHA_CARGA_DOCUMENTO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_DOCUMENTO</from>
+      <to>Insert / Update(DIM_DOCUMENTO)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_TELEFONO</from>
+      <to>SPLIT_TELEFONO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SPLIT_TELEFONO</from>
+      <to>Insert / Update (DIM_TELEFONO)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DSA_LOCAL</from>
+      <to>SPLIT_CODIGO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DIM_UBICACION</from>
+      <to>UBICACION_SORT_UBICACION_PARROQUIA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SPLIT_CODIGO</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>FILTER_REGEX</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_REGEX</from>
+      <to>LOCAL_SORT_UBICACION 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_REGEX</from>
+      <to>MERGE_ZERO_COD_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_SORT_UBICACION 2</from>
+      <to>MERGE_JOIN_FALSE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>UBICACION_SORT_UBICACION_PARROQUIA</from>
+      <to>MERGE_JOIN_FALSE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>UBICACION_SORT_UBICACION_PARROQUIA</from>
+      <to>MERGE_JOIN_TRUE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_FALSE</from>
+      <to>SELECT_VALUES_TO_INSERT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_ZERO_COD_UBICACION</from>
+      <to>LOCAL_SORT_UBICACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>LOCAL_SORT_UBICACION</from>
+      <to>MERGE_JOIN_TRUE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>MERGE_JOIN_TRUE</from>
+      <to>SELECT_VALUES_TO_INSERT 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_LOCAL_TRUE</from>
+      <to>Insert / Update (LOCAL-FALSE)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ADD_FECHA_CARGA_LOCAL_F</from>
+      <to>Insert / Update (LOCAL-TRUE)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TO_INSERT</from>
+      <to>ADD_FECHA_CARGA_LOCAL_F</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SELECT_VALUES_TO_INSERT 2</from>
+      <to>ADD_FECHA_CARGA_LOCAL_TRUE</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <step>
+    <name>ADD_FECHA_CARGA_DIRECCION</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_DOCUMENTO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>2400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL_F</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>1968</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_LOCAL_TRUE</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>2144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_PRODUCTO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ADD_FECHA_CARGA_TELEFONO</name>
+    <type>SystemInfo</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_CARGA</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1072</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CABECERA_FACTURA_SORT</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>FECHA_EMISION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>2352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>COLOR_SORT_COD_COLOR</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_COLOR</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>1264</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CLIENTE</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  ID_CLIENTE
+, CEDULA
+, NOMBRES
+, APELLIDOS
+, FECHA_CARGA
+FROM DIM_CLIENTE
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_CLIENTE_SORT_BY_CEDULA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>CEDULA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_FECHA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  ID_FECHA
+, FECHA
+, ANIO
+, MES
+, DIA
+, FECHA_CARGA
+FROM DIM_FECHA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>2432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_SUBGRUPO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  ID_SUBGRUPO
+, COD_SUBGRUPO
+, SUBGRUPO
+, FECHA_CARGA
+FROM DIM_SUBGRUPO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>672</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIM_UBICACION</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  ID_UBICACION
+, COD_UBICACION_PROVINCIA
+, UBICACION_PROVINCIA
+, COD_UBICACION_CANTON
+, UBICACION_CANTON
+, COD_UBICACION_PARROQUIA
+, UBICACION_PARROQUIA
+, FECHA_CARGA
+FROM DIM_UBICACION_GEOGRAFICA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>2064</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DIRECCION_SORT_BY_CLIENTE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>CEDULA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_COLOR</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_COLOR
+, COLOR
+, FECHA_CARGA
+FROM DSA_COLOR
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1264</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_DIRECCION</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_DIRECCION
+, DIRECCION
+, CALLE_PRINCIPAL
+, NUMERO
+, CALLE_SECUNDARIA
+, COD_TIPO
+, CEDULA
+, FECHA_CARGA
+FROM DSA_DIRECCION
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_FACTURA_CABECERA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  NUMERO_FACTURA
+, CEDULA
+, FECHA_EMISION
+, AUTORIZACION
+, MONTO
+, IVA
+, DESCUENTO
+, COD_LOCAL
+, FECHA_CARGA
+FROM DSA_FACTURA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>2352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_GRUPO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_GRUPO
+, GRUPO
+, COD_SUBGRUPO
+, FECHA_CARGA
+FROM DSA_GRUPO_PRODUCTO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_LOCAL</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_LOCAL
+, COD_UBICACION
+, LOCAL
+, FECHA_CARGA
+FROM DSA_LOCAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_MARCA</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_MARCA
+, MARCA
+, FECHA_CARGA
+FROM DSA_MARCA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>848</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_MODELO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_MODELO
+, MODELO
+, FECHA_CARGA
+FROM DSA_MODELO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_PRODUCTO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_PRODUCTO
+, DESCRIPCION_PRODUCTO
+, PRECIO
+, COD_MARCA
+, COD_MODELO
+, COD_COLOR
+, COD_SUBGRUPO
+, COD_GRUPO
+, FECHA_CARGA
+FROM DSA_PRODUCTO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>736</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_TELEFONO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_TELEFONO
+, NUMERO_TELEFONO
+, COD_TIPO
+, CEDULA
+, FECHA_CARGA
+FROM DSA_TELEFONO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DSA_TIPO</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <sql>SELECT
+  COD_TIPO
+, TIPO
+, FECHA_CARGA
+FROM DSA_TIPO
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FACTURA_MERGE_JOIN_FECHA</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>CABECERA_FACTURA_SORT</step1>
+    <step2>FECHA_SORT_FECHA</step2>
+    <keys_1>
+      <key>FECHA_EMISION</key>
+    </keys_1>
+    <keys_2>
+      <key>FECHA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>2400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FECHA_SORT_FECHA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>FECHA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>2432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>FILTER_REGEX</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>MERGE_ZERO_COD_UBICACION</send_true_to>
+    <send_false_to>LOCAL_SORT_UBICACION 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>COD_UBICACION</leftvalue>
+        <function>REGEXP</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>^\D*\d{5}$</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>GRUPO_SORT_GRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_GRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_DIRECCION</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_DIRECCION
+SET ID_CLIENTE = 
+(SELECT ID_CLIENTE FROM datawarehouse.DIM_CLIENTE
+WHERE CEDULA="-1"),
+COD_DIRECCION = "-1",
+DIRECCION = "NO DEFINIDO",
+CALLE_SECUNDARIA="NO DEFINIDO",
+NUMERO= "NO DEFINIDO",
+COD_TIPO = "NO DEFINIDO",
+TIPO = "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_DOCUMENTO</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_DOCUMENTO
+SET 
+ID_FECHA=(SELECT ID_FECHA FROM datawarehouse.DIM_FECHA
+WHERE ANIO=1992),
+NUMERO_FACTURA = "-1",
+AUTORIZACION = "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>2256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_LOCAL</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_LOCAL
+SET ID_UBICACION = 
+(SELECT ID_UBICACION FROM datawarehouse.DIM_UBICACION_GEOGRAFICA
+WHERE COD_UBICACION_PARROQUIA="-1"),
+COD_LOCAL = "-1",
+LOCAL="NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>1744</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_PRODUCTO</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_PRODUCTO
+SET ID_SUBGRUPO = 
+(SELECT ID_SUBGRUPO FROM datawarehouse.DIM_SUBGRUPO
+WHERE COD_SUBGRUPO="-1"),
+COD_PRODUCTO = "-1",
+DESCRIPCION_PRODUCTO = "NO DEFINIDO",
+PRECIO="NO DEFINIDO",
+COD_MARCA= "NO DEFINIDO",
+MARCA= "NO DEFINIDO",
+COD_MODELO= "NO DEFINIDO",
+MODELO= "NO DEFINIDO",
+COD_COLOR= "NO DEFINIDO",
+COLOR= "NO DEFINIDO",
+COD_GRUPO= "NO DEFINIDO",
+GRUPO= "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>INSERT_UNDEFINED_TELEFONO</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT IGNORE INTO datawarehouse.DIM_TELEFONO
+SET ID_CLIENTE = 
+(SELECT ID_CLIENTE FROM datawarehouse.DIM_CLIENTE
+WHERE CEDULA="-1"),
+COD_TELEFONO = "-1",
+NUMERO_TELEFONO = "NO DEFINIDO",
+COD_TIPO="NO DEFINIDO",
+TIPO= "NO DEFINIDO",
+FECHA_CARGA= CURDATE();
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_DIRECCION)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_DIRECCION</table>
+      <key>
+        <name>COD_DIRECCION</name>
+        <field>COD_DIRECCION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_DIRECCION</name>
+        <rename>COD_DIRECCION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DIRECCION</name>
+        <rename>DIRECCION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CALLE_PRINCIPAL</name>
+        <rename>CALLE_PRINCIPAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUMERO</name>
+        <rename>NUMERO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CALLE_SECUNDARIA</name>
+        <rename>CALLE_SECUNDARIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_TIPO</name>
+        <rename>COD_TIPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TIPO</name>
+        <rename>TIPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1232</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_PRODUCTO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_PRODUCTO</table>
+      <key>
+        <name>COD_PRODUCTO</name>
+        <field>COD_PRODUCTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_PRODUCTO</name>
+        <rename>COD_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <rename>DESCRIPCION_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MARCA</name>
+        <rename>COD_MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_MODELO</name>
+        <rename>COD_MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_COLOR</name>
+        <rename>COD_COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_GRUPO</name>
+        <rename>COD_GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MARCA</name>
+        <rename>MARCA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MODELO</name>
+        <rename>MODELO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COLOR</name>
+        <rename>COLOR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>GRUPO</name>
+        <rename>GRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>1584</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (DIM_TELEFONO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_TELEFONO</table>
+      <key>
+        <name>COD_TELEFONO</name>
+        <field>COD_TELEFONO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_TIPO</name>
+        <rename>COD_TIPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TIPO</name>
+        <rename>TIPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_TELEFONO</name>
+        <rename>COD_TELEFONO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NUMERO_TELEFONO</name>
+        <rename>NUMERO_TELEFONO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (LOCAL-FALSE)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>2144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update (LOCAL-TRUE)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_LOCAL</table>
+      <key>
+        <name>COD_LOCAL</name>
+        <field>COD_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>1968</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update(DIM_DOCUMENTO)</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>MYSQL_TELEFONO</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_DOCUMENTO</table>
+      <key>
+        <name>NUMERO_FACTURA</name>
+        <field>NUMERO_FACTURA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>NUMERO_FACTURA</name>
+        <rename>NUMERO_FACTURA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AUTORIZACION</name>
+        <rename>AUTORIZACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>2400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_UBICACION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>LOCAL_SORT_UBICACION 2</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>1968</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MARCA_SORT_COD_MARCA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_MARCA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>848</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_CLIENTE_DIRECCION</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>DIM_CLIENTE_SORT_BY_CEDULA</step1>
+    <step2>DIRECCION_SORT_BY_CLIENTE</step2>
+    <keys_1>
+      <key>CEDULA</key>
+    </keys_1>
+    <keys_2>
+      <key>CEDULA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_DIRECCION_TIPO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>SORT_BY_TYPE_DIRECCION</step1>
+    <step2>TIPO_SORT_BY_TYPE</step2>
+    <keys_1>
+      <key>COD_TIPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_TIPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_FALSE</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>LOCAL_SORT_UBICACION 2</step1>
+    <step2>UBICACION_SORT_UBICACION_PARROQUIA</step2>
+    <keys_1>
+      <key>COD_UBICACION</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>1968</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_PRODUCTO_MERGED_COLOR</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>PRODUCTO_MERGED_SORT_COD_COLOR</step1>
+    <step2>COLOR_SORT_COD_COLOR</step2>
+    <keys_1>
+      <key>COD_COLOR</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_COLOR</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>1264</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_PRODUCTO_MERGED_GRUPO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>PRODUCTO_MERGED_SORT_GRUPO</step1>
+    <step2>GRUPO_SORT_GRUPO</step2>
+    <keys_1>
+      <key>COD_GRUPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_GRUPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_PRODUCTO_MERGED_MARCA</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>PRODUCTO_MERGED_SORT_MARCA</step1>
+    <step2>MARCA_SORT_COD_MARCA</step2>
+    <keys_1>
+      <key>COD_MARCA</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_MARCA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>848</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_PRODUCTO_MERGED_MODELO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>PRODUCTO_MERGED_SORT_MODELO</step1>
+    <step2>MODELO_SORT_COD_MODELO</step2>
+    <keys_1>
+      <key>COD_MODELO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_MODELO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_SUBGRUPO_PRODUCTO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>PRODUCTO_SORT_COD_SUBGRUPO</step1>
+    <step2>SUBGRUPO_SORT_COD_SUBGRUPO</step2>
+    <keys_1>
+      <key>COD_SUBGRUPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_SUBGRUPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_TELEFONO</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>TIPO_SORT_BY_TYPE</step1>
+    <step2>TELEFONO_ SORT_BY_TYPE</step2>
+    <keys_1>
+      <key>COD_TIPO</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_TIPO</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_JOIN_TRUE</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>LOCAL_SORT_UBICACION</step1>
+    <step2>UBICACION_SORT_UBICACION_PARROQUIA</step2>
+    <keys_1>
+      <key>COD_UBICACION</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_UBICACION_PARROQUIA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>2064</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_TELEFONO_DIM_CLIENTE</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>SORT_TELEFONO_BY_CLIENT</step1>
+    <step2>DIM_CLIENTE_SORT_BY_CEDULA</step2>
+    <keys_1>
+      <key>CEDULA</key>
+    </keys_1>
+    <keys_2>
+      <key>CEDULA</key>
+    </keys_2>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MERGE_ZERO_COD_UBICACION</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator />
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ZERO</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>COD_UBICACION</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>MODELO_SORT_COD_MODELO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_MODELO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>1056</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRODUCTO_MERGED_SORT_COD_COLOR</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_COLOR</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>1136</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRODUCTO_MERGED_SORT_GRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_GRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>1344</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRODUCTO_MERGED_SORT_MARCA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_MARCA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRODUCTO_MERGED_SORT_MODELO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_MODELO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>928</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>PRODUCTO_SORT_COD_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>736</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REMOVE_AUX_COLUMNS</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_TIPO</name>
+      </field>
+      <field>
+        <name>TIPO</name>
+      </field>
+      <field>
+        <name>COD_TELEFONO</name>
+      </field>
+      <field>
+        <name>NUMERO_TELEFONO</name>
+      </field>
+      <field>
+        <name>COD_TIPO_1</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>ID_CLIENTE</name>
+      </field>
+      <field>
+        <name>CEDULA_1</name>
+      </field>
+      <field>
+        <name>NOMBRES</name>
+      </field>
+      <field>
+        <name>APELLIDOS</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_TIPO_1</name>
+      </remove>
+      <remove>
+        <name>CEDULA_1</name>
+      </remove>
+      <remove>
+        <name>CEDULA</name>
+      </remove>
+      <remove>
+        <name>APELLIDOS</name>
+      </remove>
+      <remove>
+        <name>NOMBRES</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REMOVE_FECHA_CARGA</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ID_CLIENTE</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>NOMBRES</name>
+      </field>
+      <field>
+        <name>APELLIDOS</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REMOVE_UNNECESARY_COLUMNS</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_PRODUCTO</name>
+      </field>
+      <field>
+        <name>DESCRIPCION_PRODUCTO</name>
+      </field>
+      <field>
+        <name>PRECIO</name>
+      </field>
+      <field>
+        <name>COD_MARCA</name>
+      </field>
+      <field>
+        <name>COD_MODELO</name>
+      </field>
+      <field>
+        <name>COD_COLOR</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_GRUPO</name>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO_1</name>
+      </field>
+      <field>
+        <name>SUBGRUPO</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_SUBGRUPO_1</name>
+      </remove>
+      <remove>
+        <name>SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_SUBGRUPO</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <value />
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>784</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>REPLACE_NULL_VALUES</name>
+    <type>IfNull</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <replaceAllByValue />
+    <replaceAllMask />
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>PRECIO</name>
+        <value>-1</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_MARCA</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_MODELO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_COLOR</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COD_GRUPO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MARCA</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MODELO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>COLOR</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>GRUPO</name>
+        <value>NO DEFINIDO</value>
+        <mask />
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>1584</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_FIELDS_DIM_DIRECCCION</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ID_CLIENTE</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>NOMBRES</name>
+      </field>
+      <field>
+        <name>APELLIDOS</name>
+      </field>
+      <field>
+        <name>COD_DIRECCION</name>
+      </field>
+      <field>
+        <name>DIRECCION</name>
+      </field>
+      <field>
+        <name>CALLE_PRINCIPAL</name>
+      </field>
+      <field>
+        <name>NUMERO</name>
+      </field>
+      <field>
+        <name>CALLE_SECUNDARIA</name>
+      </field>
+      <field>
+        <name>COD_TIPO</name>
+      </field>
+      <field>
+        <name>CEDULA_1</name>
+      </field>
+      <field>
+        <name>COD_TIPO_1</name>
+      </field>
+      <field>
+        <name>TIPO</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>CEDULA_1</name>
+      </remove>
+      <remove>
+        <name>CEDULA</name>
+      </remove>
+      <remove>
+        <name>COD_TIPO_1</name>
+      </remove>
+      <remove>
+        <name>NOMBRES</name>
+      </remove>
+      <remove>
+        <name>APELLIDOS</name>
+      </remove>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_DIM</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>NUMERO_FACTURA</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>FECHA_EMISION</name>
+      </field>
+      <field>
+        <name>AUTORIZACION</name>
+      </field>
+      <field>
+        <name>MONTO</name>
+      </field>
+      <field>
+        <name>IVA</name>
+      </field>
+      <field>
+        <name>DESCUENTO</name>
+      </field>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <field>
+        <name>ID_FECHA</name>
+      </field>
+      <field>
+        <name>FECHA</name>
+      </field>
+      <field>
+        <name>ANIO</name>
+      </field>
+      <field>
+        <name>MES</name>
+      </field>
+      <field>
+        <name>DIA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>CEDULA</name>
+      </remove>
+      <remove>
+        <name>FECHA_EMISION</name>
+      </remove>
+      <remove>
+        <name>MONTO</name>
+      </remove>
+      <remove>
+        <name>IVA</name>
+      </remove>
+      <remove>
+        <name>DESCUENTO</name>
+      </remove>
+      <remove>
+        <name>COD_LOCAL</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>FECHA</name>
+      </remove>
+      <remove>
+        <name>ANIO</name>
+      </remove>
+      <remove>
+        <name>MES</name>
+      </remove>
+      <remove>
+        <name>DIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <meta>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>NUMERO_FACTURA</name>
+        <rename>NUMERO_FACTURA</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>AUTORIZACION</name>
+        <rename>AUTORIZACION</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>2400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_DIM_PRODUCTO</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_PRODUCTO</name>
+      </field>
+      <field>
+        <name>DESCRIPCION_PRODUCTO</name>
+      </field>
+      <field>
+        <name>PRECIO</name>
+      </field>
+      <field>
+        <name>COD_MARCA</name>
+      </field>
+      <field>
+        <name>COD_MODELO</name>
+      </field>
+      <field>
+        <name>COD_COLOR</name>
+      </field>
+      <field>
+        <name>COD_GRUPO</name>
+      </field>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_MARCA_1</name>
+      </field>
+      <field>
+        <name>MARCA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <field>
+        <name>COD_MODELO_1</name>
+      </field>
+      <field>
+        <name>MODELO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+      </field>
+      <field>
+        <name>COD_COLOR_1</name>
+      </field>
+      <field>
+        <name>COLOR</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_2</name>
+      </field>
+      <field>
+        <name>COD_GRUPO_1</name>
+      </field>
+      <field>
+        <name>GRUPO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_3</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_COLOR_1</name>
+      </remove>
+      <remove>
+        <name>COD_GRUPO_1</name>
+      </remove>
+      <remove>
+        <name>COD_MARCA_1</name>
+      </remove>
+      <remove>
+        <name>COD_MODELO_1</name>
+      </remove>
+      <remove>
+        <name>COD_SUBGRUPO</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_2</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_3</name>
+      </remove>
+      <meta>
+        <name>COD_PRODUCTO</name>
+        <rename>COD_PRODUCTO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>DESCRIPCION_PRODUCTO</name>
+        <rename>DESCRIPCION_PRODUCTO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_MARCA</name>
+        <rename>COD_MARCA</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_MODELO</name>
+        <rename>COD_MODELO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_COLOR</name>
+        <rename>COD_COLOR</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_GRUPO</name>
+        <rename>COD_GRUPO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>MARCA</name>
+        <rename>MARCA</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>MODELO</name>
+        <rename>MODELO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COLOR</name>
+        <rename>COLOR</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>GRUPO</name>
+        <rename>GRUPO</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>1456</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_DIRECCION</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_DIRECCION</name>
+      </field>
+      <field>
+        <name>DIRECCION</name>
+      </field>
+      <field>
+        <name>CALLE_PRINCIPAL</name>
+      </field>
+      <field>
+        <name>NUMERO</name>
+      </field>
+      <field>
+        <name>CALLE_SECUNDARIA</name>
+      </field>
+      <field>
+        <name>COD_TIPO</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <meta>
+        <name>COD_DIRECCION</name>
+        <rename>COD_DIRECCION</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>DIRECCION</name>
+        <rename>DIRECCION</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CALLE_PRINCIPAL</name>
+        <rename>CALLE_PRINCIPAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>NUMERO</name>
+        <rename>NUMERO</rename>
+        <type>None</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CALLE_SECUNDARIA</name>
+        <rename>CALLE_SECUNDARIA</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_TIPO</name>
+        <rename>COD_TIPO</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CEDULA</name>
+        <rename>CEDULA</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_TELEFONO</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_TELEFONO</name>
+      </field>
+      <field>
+        <name>NUMERO_TELEFONO</name>
+      </field>
+      <field>
+        <name>COD_TIPO</name>
+      </field>
+      <field>
+        <name>CEDULA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <meta>
+        <name>COD_TELEFONO</name>
+        <rename>COD_TELEFONO</rename>
+        <type>String</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>NUMERO_TELEFONO</name>
+        <rename>NUMERO_TELEFONO</rename>
+        <type>String</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>COD_TIPO</name>
+        <rename>COD_TIPO</rename>
+        <type>String</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>CEDULA</name>
+        <rename>CEDULA</rename>
+        <type>String</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_TIPO</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_TIPO</name>
+      </field>
+      <field>
+        <name>TIPO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <meta>
+        <name>COD_TIPO</name>
+        <rename>COD_TIPO</rename>
+        <type>String</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>TIPO</name>
+        <rename>TIPO</rename>
+        <type>String</type>
+        <length>50</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_TO_INSERT</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+      </field>
+      <field>
+        <name>LOCAL</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <field>
+        <name>ZERO</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </field>
+      <field>
+        <name>UBICACION_PROVINCIA</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_CANTON</name>
+      </field>
+      <field>
+        <name>UBICACION_CANTON</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </field>
+      <field>
+        <name>UBICACION_PARROQUIA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_UBICACION</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>ZERO</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <meta>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>1968</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SELECT_VALUES_TO_INSERT 2</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>COD_LOCAL</name>
+      </field>
+      <field>
+        <name>COD_UBICACION</name>
+      </field>
+      <field>
+        <name>LOCAL</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <field>
+        <name>ZERO</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_1</name>
+      </field>
+      <field>
+        <name>ID_UBICACION</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </field>
+      <field>
+        <name>UBICACION_PROVINCIA</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_CANTON</name>
+      </field>
+      <field>
+        <name>UBICACION_CANTON</name>
+      </field>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </field>
+      <field>
+        <name>UBICACION_PARROQUIA</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA_1</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>COD_UBICACION</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA</name>
+      </remove>
+      <remove>
+        <name>ZERO</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_1</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PROVINCIA</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>UBICACION_CANTON</name>
+      </remove>
+      <remove>
+        <name>COD_UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>UBICACION_PARROQUIA</name>
+      </remove>
+      <remove>
+        <name>FECHA_CARGA_1</name>
+      </remove>
+      <meta>
+        <name>COD_LOCAL</name>
+        <rename>COD_LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>LOCAL</name>
+        <rename>LOCAL</rename>
+        <type>None</type>
+        <length>100</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>2144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_BY_TYPE_DIRECCION</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_TIPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SORT_TELEFONO_BY_CLIENT</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>CEDULA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SPLIT_CODIGO</name>
+    <type>FieldSplitter</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <splitfield>COD_UBICACION</splitfield>
+    <delimiter>.</delimiter>
+    <enclosure />
+    <fields>
+      <field>
+        <name>COD_UBICACION</name>
+        <id />
+        <idrem>N</idrem>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <currency />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>1872</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SPLIT_TELEFONO</name>
+    <type>FieldSplitter</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <splitfield>COD_TELEFONO</splitfield>
+    <delimiter>.</delimiter>
+    <enclosure />
+    <fields>
+      <field>
+        <name>COD_TELEFONO</name>
+        <id />
+        <idrem>N</idrem>
+        <type>String</type>
+        <format />
+        <group />
+        <decimal />
+        <currency />
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif />
+        <ifnull />
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1248</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SUBGRUPO_SORT_COD_SUBGRUPO</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_SUBGRUPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>672</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TELEFONO_ SORT_BY_TYPE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_TIPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>TIPO_SORT_BY_TYPE</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_TIPO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>UBICACION_SORT_UBICACION_PARROQUIA</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>2064</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step_error_handling>
+  </step_error_handling>
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_transformation>N</slave_transformation>
+</transformation>
