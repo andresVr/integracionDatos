@@ -307,7 +307,7 @@
       <yloc>32</yloc>
     </entry>
     <entry>
-      <name>CATALOG_EXEL_TO_DSA_TO_DTWH</name>
+      <name>CATALOG_EXCEL_TO_DSA_TO_DTWH</name>
       <description />
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -719,7 +719,7 @@
     </hop>
     <hop>
       <from>EVALUATE_VAR</from>
-      <to>CATALOG_EXEL_TO_DSA_TO_DTWH</to>
+      <to>CATALOG_EXCEL_TO_DSA_TO_DTWH</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -727,7 +727,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>CATALOG_EXEL_TO_DSA_TO_DTWH</from>
+      <from>CATALOG_EXCEL_TO_DSA_TO_DTWH</from>
       <to>LOAD_TMP_FECHA_CARGA_VENTAS</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

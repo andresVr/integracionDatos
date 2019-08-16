@@ -307,12 +307,12 @@
       <yloc>32</yloc>
     </entry>
     <entry>
-      <name>CATALOG_EXEL_TO_DSA_TO_DTWH</name>
+      <name>LOAD_CATALOG_PREDSA_TO_DSA</name>
       <description />
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id />
-      <filename>${Internal.Entry.Current.Directory}/ETL_PROJECT.kjb</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/jobs/pre-dsa/LOAD_CATALOG_PREDSA_TO_DSA.kjb</filename>
       <jobname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -369,7 +369,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>432</xloc>
       <yloc>32</yloc>
     </entry>
     <entry>
@@ -600,7 +600,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/ETL_FECHA_CARGA_PARAMETERS.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/control/ETL_FECHA_CARGA_PARAMETERS.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -668,7 +668,7 @@
       <to>ETL_LOAD_CUMULATIVE_DATA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -719,7 +719,7 @@
     </hop>
     <hop>
       <from>EVALUATE_VAR</from>
-      <to>CATALOG_EXEL_TO_DSA_TO_DTWH</to>
+      <to>LOAD_CATALOG_PREDSA_TO_DSA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -727,7 +727,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>CATALOG_EXEL_TO_DSA_TO_DTWH</from>
+      <from>LOAD_CATALOG_PREDSA_TO_DSA</from>
       <to>LOAD_TMP_FECHA_CARGA_VENTAS</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

@@ -312,7 +312,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/ETL_TMP_FECHA_CARGA.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/control/ETL_TMP_FECHA_CARGA.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -402,7 +402,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/UPDATE_ETL_FECHA_CARGA.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/control/UPDATE_ETL_FECHA_CARGA.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

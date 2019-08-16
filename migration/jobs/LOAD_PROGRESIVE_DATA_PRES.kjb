@@ -354,7 +354,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/SET_ENVIROMENT_VARS.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/control/SET_ENVIROMENT_VARS.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -390,7 +390,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/LOAD_TRANS_PRESUPUESTO_TO_DSA.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/pre_dsa/pre_dsa_presupuesto_to_dsa.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -426,7 +426,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/control/SET_CONTROL_STEP_VARIABLE.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/control/SET_CONTROL_STEP_VARIABLE.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -506,7 +506,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/DSA_TO_DTWH_PRES.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/DSA_TO_DTWH_PRES.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -542,7 +542,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/DELETE_PROGRESIVE_IN_PRES.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/DELETE_PROGRESIVE_IN_PRES.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -578,7 +578,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/transformations/FINAL/DATA_ INTEGRITY.ktr</filename>
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/DATA_ INTEGRITY.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

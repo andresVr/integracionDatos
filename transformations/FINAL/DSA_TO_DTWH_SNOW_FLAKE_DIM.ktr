@@ -441,7 +441,7 @@
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>datawarehouse_f</database>
     <port>3306</port>
     <username>root</username>
     <password>Encrypted </password>
