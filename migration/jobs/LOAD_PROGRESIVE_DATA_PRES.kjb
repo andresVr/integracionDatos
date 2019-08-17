@@ -533,7 +533,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1696</xloc>
+      <xloc>1488</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -569,7 +569,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1184</xloc>
+      <xloc>976</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -605,7 +605,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1424</xloc>
+      <xloc>1216</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -641,7 +641,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>976</xloc>
+      <xloc>1696</xloc>
       <yloc>144</yloc>
     </entry>
   </entries>
@@ -685,15 +685,6 @@
     <hop>
       <from>Wait for 2</from>
       <to>SET_ENVIROMENT_DATA_PRESUPUESTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>DSA_TO_DTWH_PRES</from>
-      <to>SET_CONTROL_VAR_PRESUPUESTO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -747,21 +738,30 @@
     </hop>
     <hop>
       <from>LOAD_TRANS_DATA_PRESUPUESTO</from>
-      <to>DELETE_TMP</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>DELETE_TMP</from>
       <to>DELETE_PROGRESIVE_INFO_DTWH</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>DSA_TO_DTWH_PRES</from>
+      <to>DELETE_TMP</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>DELETE_TMP</from>
+      <to>SET_CONTROL_VAR_PRESUPUESTO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

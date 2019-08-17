@@ -1074,7 +1074,7 @@ FROM DSA_FACTURA
       <schema_name />
     </partitioning>
     <connection>FAC_CON</connection>
-    <commit>100</commit>
+    <commit>10</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />

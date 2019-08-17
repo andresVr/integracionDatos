@@ -795,7 +795,7 @@ FROM DSA_PRESUPUESTO
       <schema_name />
     </partitioning>
     <connection>TRANS</connection>
-    <commit>100</commit>
+    <commit>10</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />

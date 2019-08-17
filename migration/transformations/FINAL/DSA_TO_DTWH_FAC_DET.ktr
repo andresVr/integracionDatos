@@ -900,10 +900,10 @@ FROM FAC_CABECERA_FACTURA
       <schema_name />
     </partitioning>
     <connection>FAC_MONTH_CON</connection>
-    <commit>100</commit>
+    <commit>10</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema />
+      <schema>datawarehouse_f</schema>
       <table>FAC_DETALLE_FACTURA</table>
       <key>
         <name>ID_DOCUMENTO</name>

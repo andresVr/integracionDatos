@@ -710,7 +710,7 @@
 , ID_UBICACION
 , ID_SUBGRUPO
 FROM FAC_DETALLE_FACTURA
-WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
+WHERE ID_FECHA BETWEEN ${FECHA_INI_FK} AND ${FECHA_FIN_FK}</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -752,7 +752,7 @@ WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
 , DESCUENTO
 , FECHA_CARGA
 FROM FAC_CABECERA_FACTURA
-WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
+WHERE ID_FECHA BETWEEN ${FECHA_INI_FK} AND ${FECHA_FIN_FK}</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -766,7 +766,7 @@ WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>608</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>

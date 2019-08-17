@@ -547,7 +547,7 @@
       <fields>
         <field>
           <variable_name>INTERVALO_DIVISION</variable_name>
-          <variable_value>25</variable_value>
+          <variable_value>31</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
