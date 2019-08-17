@@ -440,7 +440,7 @@
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>datawarehouse</database>
+    <database>datawarehouse_f</database>
     <port>3306</port>
     <username>root</username>
     <password>Encrypted </password>
@@ -640,6 +640,56 @@
     </GUI>
   </step>
   <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>fecha_i</name>
+        <variable>${FECHA_INI_FK}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>fecha_f</name>
+        <variable>${FECHA_FIN_FK}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>VENTAS_DET_IN</name>
     <type>TableInput</type>
     <description />
@@ -660,7 +710,7 @@
 , ID_UBICACION
 , ID_SUBGRUPO
 FROM FAC_DETALLE_FACTURA
-WHERE ID_FECHA BETWEEN ${FECHA_INI_FK} AND ${FECHA_FIN_FK}</sql>
+WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -702,7 +752,7 @@ WHERE ID_FECHA BETWEEN ${FECHA_INI_FK} AND ${FECHA_FIN_FK}</sql>
 , DESCUENTO
 , FECHA_CARGA
 FROM FAC_CABECERA_FACTURA
-WHERE ID_FECHA BETWEEN ${FECHA_INI_FK} AND ${FECHA_FIN_FK}</sql>
+WHERE ID_FECHA BETWEEN '${FECHA_INI_FK}' AND '${FECHA_FIN_FK}'</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -755,56 +805,6 @@ REVIEW VARS</logmessage>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>fecha_i</name>
-        <variable>${FECHA_INI_FK}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>fecha_f</name>
-        <variable>${FECHA_FIN_FK}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>

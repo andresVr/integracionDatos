@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DSA_TO_DTWH_PRES</name>
+    <name>homologacion</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/07/13 18:01:13.476</created_date>
+    <created_date>2019/08/17 00:07:23.777</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/07/13 18:01:13.476</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/08/17 00:07:23.777</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>TRANS</name>
+    <name>conn</name>
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -478,11 +478,11 @@
       </attribute>
       <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
@@ -492,113 +492,33 @@
   </connection>
   <order>
     <hop>
-      <from>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</from>
-      <to>SELECT_VALUES</to>
+      <from>CABECERA_IN</from>
+      <to>Insert / Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DIM_FECHA_PRE</from>
-      <to>SORT_FECHAS_LOCAL_PRE</to>
+      <from>CABECERA_M_IN</from>
+      <to>Insert / Update 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DIM_LOCAL_PRE</from>
-      <to>SORT_LOCAL_PRE</to>
+      <from>DETALLE_IN</from>
+      <to>Insert / Update 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DIM_SUBGRUPO_PRE</from>
-      <to>SORT_SUBGRUPO</to>
+      <from>DETALLE_M_IN</from>
+      <to>Insert / Update 2 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DSA_PRESUPUESTO</from>
-      <to>PRESUPUESTO_SORT_LOCAL</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>FECHA_MERGE</from>
-      <to>TABLE_MERGED_SUBGRUPO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>LOCAL_MERGE_PRESUPUESTO</from>
-      <to>TABLE_MERGED_TIEMPO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>MERGED_SUBGRUPO</from>
-      <to>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>PRESUPUESTO_SORT_LOCAL</from>
-      <to>LOCAL_MERGE_PRESUPUESTO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SELECT_VALUES</from>
-      <to>Insert / Update (FAC_PRESUPUESTO)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SORT_FECHAS_LOCAL_PRE</from>
-      <to>FECHA_MERGE</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SORT_LOCAL_PRE</from>
-      <to>LOCAL_MERGE_PRESUPUESTO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SORT_SUBGRUPO</from>
-      <to>MERGED_SUBGRUPO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>TABLE_MERGED_SUBGRUPO</from>
-      <to>MERGED_SUBGRUPO</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>TABLE_MERGED_TIEMPO</from>
-      <to>FECHA_MERGE</to>
+      <from>DETALLE_PRES</from>
+      <to>Insert / Update 2 2 2 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ADD_FECHA_CARGA_FAC_DET_DETALLE_FACTURA</name>
-    <type>SystemInfo</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA_CARGA</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_FECHA_PRE</name>
+    <name>CABECERA_IN</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -608,134 +528,23 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>TRANS</connection>
+    <connection>conn</connection>
     <sql>SELECT
   ID_FECHA
-, FECHA
-, ANIO
-, MES
-, DIA
-, FECHA_CARGA
-FROM DIM_FECHA
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_LOCAL_PRE</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>TRANS</connection>
-    <sql>SELECT
-  ID_LOCAL
+, ID_CLIENTE
+, ID_LOCAL
 , ID_UBICACION
-, COD_LOCAL
-, LOCAL
-, FECHA_CARGA
-FROM DIM_LOCAL
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DIM_SUBGRUPO_PRE</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>TRANS</connection>
-    <sql>SELECT
-  ID_SUBGRUPO
-, COD_SUBGRUPO
-, SUBGRUPO
-FROM DIM_SUBGRUPO
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>DSA_PRESUPUESTO</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>TRANS</connection>
-    <sql>SELECT
-  ID_PRESUPUESTO
-, COD_SUBGRUPO
-, COD_LOCAL
+, ID_DOCUMENTO
 , MONTO
-, FECHA
+, IVA
+, DESCUENTO
 , FECHA_CARGA
-FROM DSA_PRESUPUESTO
-
+FROM datawarehouse.FAC_CABECERA_FACTURA
 </sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
@@ -745,46 +554,13 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>48</yloc>
+      <xloc>176</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>FECHA_MERGE</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>TABLE_MERGED_TIEMPO</step1>
-    <step2>SORT_FECHAS_LOCAL_PRE</step2>
-    <keys_1>
-      <key>FECHA</key>
-    </keys_1>
-    <keys_2>
-      <key>FECHA</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update (FAC_PRESUPUESTO)</name>
+    <name>Insert / Update</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -794,12 +570,24 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>TRANS</connection>
+    <connection>conn</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema />
-      <table>FAC_PRESUPUESTO_MENSUAL</table>
+      <schema>datawarehouse_f</schema>
+      <table>FAC_CABECERA_FACTURA</table>
+      <key>
+        <name>ID_FECHA</name>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_CLIENTE</name>
+        <field>ID_CLIENTE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
       <key>
         <name>ID_LOCAL</name>
         <field>ID_LOCAL</field>
@@ -813,25 +601,19 @@ FROM DSA_PRESUPUESTO
         <name2 />
       </key>
       <key>
-        <name>ID_FECHA</name>
-        <field>ID_FECHA</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>ID_SUBGRUPO</name>
-        <field>ID_SUBGRUPO</field>
+        <name>ID_DOCUMENTO</name>
+        <field>ID_DOCUMENTO</field>
         <condition>=</condition>
         <name2 />
       </key>
       <value>
-        <name>MONTO</name>
-        <rename>MONTO</rename>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
         <update>Y</update>
       </value>
       <value>
@@ -845,13 +627,28 @@ FROM DSA_PRESUPUESTO
         <update>Y</update>
       </value>
       <value>
-        <name>ID_FECHA</name>
-        <rename>ID_FECHA</rename>
+        <name>ID_DOCUMENTO</name>
+        <rename>ID_DOCUMENTO</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>ID_SUBGRUPO</name>
-        <rename>ID_SUBGRUPO</rename>
+        <name>MONTO</name>
+        <rename>MONTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>IVA</name>
+        <rename>IVA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCUENTO</name>
+        <rename>DESCUENTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -863,14 +660,14 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>688</yloc>
+      <xloc>336</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>LOCAL_MERGE_PRESUPUESTO</name>
-    <type>MergeJoin</type>
+    <name>Insert / Update 2</name>
+    <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -879,218 +676,67 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <join_type>INNER</join_type>
-    <step1>PRESUPUESTO_SORT_LOCAL</step1>
-    <step2>SORT_LOCAL_PRE</step2>
-    <keys_1>
-      <key>COD_LOCAL</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_LOCAL</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>MERGED_SUBGRUPO</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>TABLE_MERGED_SUBGRUPO</step1>
-    <step2>SORT_SUBGRUPO</step2>
-    <keys_1>
-      <key>COD_SUBGRUPO</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_SUBGRUPO</key>
-    </keys_2>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>PRESUPUESTO_SORT_LOCAL</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SELECT_VALUES</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ID_PRESUPUESTO</name>
-      </field>
-      <field>
-        <name>COD_SUBGRUPO</name>
-      </field>
-      <field>
-        <name>COD_LOCAL</name>
-      </field>
-      <field>
-        <name>MONTO</name>
-      </field>
-      <field>
-        <name>FECHA</name>
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-      </field>
-      <field>
-        <name>ID_LOCAL</name>
-      </field>
-      <field>
-        <name>ID_UBICACION</name>
-      </field>
-      <field>
-        <name>COD_LOCAL_1</name>
-      </field>
-      <field>
-        <name>LOCAL</name>
-      </field>
-      <field>
-        <name>FECHA_CARGA_1</name>
-      </field>
-      <field>
+    <connection>conn</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>FAC_CABECERA_MENSUAL</table>
+      <key>
         <name>ID_FECHA</name>
-      </field>
-      <field>
-        <name>FECHA_1</name>
-      </field>
-      <field>
-        <name>ANIO</name>
-      </field>
-      <field>
-        <name>MES</name>
-      </field>
-      <field>
-        <name>DIA</name>
-      </field>
-      <field>
-        <name>FECHA_CARGA_2</name>
-      </field>
-      <field>
-        <name>ID_SUBGRUPO</name>
-      </field>
-      <field>
-        <name>COD_SUBGRUPO_1</name>
-      </field>
-      <field>
-        <name>SUBGRUPO</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>ID_PRESUPUESTO</name>
-      </remove>
-      <remove>
-        <name>COD_SUBGRUPO</name>
-      </remove>
-      <remove>
-        <name>COD_LOCAL</name>
-      </remove>
-      <remove>
-        <name>FECHA</name>
-      </remove>
-      <remove>
-        <name>COD_LOCAL_1</name>
-      </remove>
-      <remove>
-        <name>LOCAL</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA_1</name>
-      </remove>
-      <remove>
-        <name>FECHA_1</name>
-      </remove>
-      <remove>
-        <name>ANIO</name>
-      </remove>
-      <remove>
-        <name>MES</name>
-      </remove>
-      <remove>
-        <name>DIA</name>
-      </remove>
-      <remove>
-        <name>FECHA_CARGA_2</name>
-      </remove>
-      <remove>
-        <name>COD_SUBGRUPO_1</name>
-      </remove>
-      <remove>
-        <name>SUBGRUPO</name>
-      </remove>
-    </fields>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_CLIENTE</name>
+        <field>ID_CLIENTE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_LOCAL</name>
+        <field>ID_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_UBICACION</name>
+        <field>ID_UBICACION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MONTO</name>
+        <rename>MONTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1099,14 +745,14 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>688</yloc>
+      <xloc>336</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_FECHAS_LOCAL_PRE</name>
-    <type>SortRows</type>
+    <name>CABECERA_M_IN</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1115,23 +761,21 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>FECHA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <connection>conn</connection>
+    <sql>SELECT
+  ID_FECHA
+, ID_CLIENTE
+, ID_LOCAL
+, ID_UBICACION
+, MONTO
+, FECHA_CARGA
+FROM datawarehouse.FAC_CABECERA_MENSUAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1140,14 +784,276 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>176</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update 2 2</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>conn</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>FAC_DETALLE_FACTURA</table>
+      <key>
+        <name>ID_FECHA</name>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_PRODUCTO</name>
+        <field>ID_PRODUCTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_DOCUMENTO</name>
+        <field>ID_DOCUMENTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_CLIENTE</name>
+        <field>ID_CLIENTE</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_LOCAL</name>
+        <field>ID_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_UBICACION</name>
+        <field>ID_UBICACION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_SUBGRUPO</name>
+        <field>ID_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_PRODUCTO</name>
+        <rename>ID_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_DOCUMENTO</name>
+        <rename>ID_DOCUMENTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_CLIENTE</name>
+        <rename>ID_CLIENTE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CANTIDAD</name>
+        <rename>CANTIDAD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PRECIO</name>
+        <rename>PRECIO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>DETALLE_IN</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>conn</connection>
+    <sql>SELECT
+  ID_FECHA
+, ID_PRODUCTO
+, ID_DOCUMENTO
+, ID_CLIENTE
+, ID_LOCAL
+, ID_UBICACION
+, ID_SUBGRUPO
+, CANTIDAD
+, PRECIO
+, FECHA_CARGA
+FROM datawarehouse.FAC_DETALLE_FACTURA
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update 2 2 2</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>conn</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>FAC_DETALLE_FACTURA_MENSUAL</table>
+      <key>
+        <name>ID_FECHA</name>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_PRODUCTO</name>
+        <field>ID_PRODUCTO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_LOCAL</name>
+        <field>ID_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_UBICACION</name>
+        <field>ID_UBICACION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_SUBGRUPO</name>
+        <field>ID_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_PRODUCTO</name>
+        <rename>ID_PRODUCTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CANTIDAD</name>
+        <rename>CANTIDAD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_LOCAL_PRE</name>
-    <type>SortRows</type>
+    <name>DETALLE_M_IN</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1156,23 +1062,22 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_LOCAL</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <connection>conn</connection>
+    <sql>SELECT
+  ID_FECHA
+, ID_PRODUCTO
+, ID_LOCAL
+, ID_UBICACION
+, ID_SUBGRUPO
+, CANTIDAD
+, FECHA_CARGA
+FROM FAC_DETALLE_FACTURA_MENSUAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1181,14 +1086,14 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>192</yloc>
+      <xloc>176</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>SORT_SUBGRUPO</name>
-    <type>SortRows</type>
+    <name>Insert / Update 2 2 2 2</name>
+    <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1197,23 +1102,67 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <connection>conn</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>FAC_PRESUPUESTO_MENSUAL</table>
+      <key>
+        <name>ID_FECHA</name>
+        <field>ID_FECHA</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_LOCAL</name>
+        <field>ID_LOCAL</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_UBICACION</name>
+        <field>ID_UBICACION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>ID_SUBGRUPO</name>
+        <field>ID_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_FECHA</name>
+        <rename>ID_FECHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_LOCAL</name>
+        <rename>ID_LOCAL</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>MONTO</name>
+        <rename>MONTO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1222,14 +1171,14 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>688</yloc>
+      <xloc>336</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>TABLE_MERGED_SUBGRUPO</name>
-    <type>SortRows</type>
+    <name>DETALLE_PRES</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1238,23 +1187,21 @@ FROM DSA_PRESUPUESTO
       <method>none</method>
       <schema_name />
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <connection>conn</connection>
+    <sql>SELECT
+  ID_FECHA
+, ID_LOCAL
+, ID_UBICACION
+, ID_SUBGRUPO
+, MONTO
+, FECHA_CARGA
+FROM datawarehouse.FAC_PRESUPUESTO_MENSUAL
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
     <remotesteps>
       <input>
@@ -1263,49 +1210,8 @@ FROM DSA_PRESUPUESTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>560</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>TABLE_MERGED_TIEMPO</name>
-    <type>SortRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory />
-    <compress>N</compress>
-    <compress_variable />
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>FECHA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>304</yloc>
+      <xloc>176</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

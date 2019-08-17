@@ -453,7 +453,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
+      <xloc>1952</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -475,7 +475,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
+      <xloc>1952</xloc>
       <yloc>256</yloc>
     </entry>
     <entry>
@@ -497,7 +497,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1728</xloc>
+      <xloc>1952</xloc>
       <yloc>352</yloc>
     </entry>
     <entry>
@@ -533,7 +533,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1472</xloc>
+      <xloc>1696</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -569,7 +569,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1184</xloc>
       <yloc>144</yloc>
     </entry>
     <entry>
@@ -605,7 +605,43 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1200</xloc>
+      <xloc>1424</xloc>
+      <yloc>144</yloc>
+    </entry>
+    <entry>
+      <name>DELETE_TMP</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>/Users/andresvr/Documents/Maestría/Integracion de datos/integracionDatos/migration/transformations/FINAL/pre_dsa/delete_tmp_fecha_carga.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>976</xloc>
       <yloc>144</yloc>
     </entry>
   </entries>
@@ -692,15 +728,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>LOAD_TRANS_DATA_PRESUPUESTO</from>
-      <to>DELETE_PROGRESIVE_INFO_DTWH</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>DELETE_PROGRESIVE_INFO_DTWH</from>
       <to>DATA_INTEGRITY</to>
       <from_nr>0</from_nr>
@@ -717,6 +744,24 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>LOAD_TRANS_DATA_PRESUPUESTO</from>
+      <to>DELETE_TMP</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>DELETE_TMP</from>
+      <to>DELETE_PROGRESIVE_INFO_DTWH</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

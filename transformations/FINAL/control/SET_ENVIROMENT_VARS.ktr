@@ -490,25 +490,6 @@
       </attribute>
     </attributes>
   </connection>
-  <connection>
-    <name>control</name>
-    <server>localhost</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>control</database>
-    <port>3306</port>
-    <username>root</username>
-    <password>Encrypted </password>
-    <servername />
-    <data_tablespace />
-    <index_tablespace />
-    <attributes>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>3306</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <order>
     <hop>
       <from>FECHA_INICIO</from>
@@ -568,7 +549,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>control</connection>
+    <connection>CON_CONTROL</connection>
     <sql>SELECT MIN(FECHA_INICIO) FROM control.TMP_FECHA_CARGA WHERE MODULO = '${MODULE_NAME}'</sql>
     <limit>0</limit>
     <lookup />
