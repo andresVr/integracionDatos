@@ -587,11 +587,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows 3</from>
-      <to>SELECT_VALUES_HOMOLOGACION</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filter rows 2</from>
       <to>Select values</to>
       <enabled>Y</enabled>
@@ -603,6 +598,21 @@
     </hop>
     <hop>
       <from>Filter rows 3</from>
+      <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows 3</from>
+      <to>FILTER_INSERT_DATA</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_INSERT_DATA</from>
+      <to>SELECT_VALUES_HOMOLOGACION</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>FILTER_INSERT_DATA</from>
       <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
@@ -633,7 +643,7 @@
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
-      <yloc>640</yloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -671,7 +681,7 @@
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
-      <yloc>560</yloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -817,6 +827,37 @@ var comprobacion = 0;
     </GUI>
   </step>
   <step>
+    <name>DIM_UBICACION</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>con</connection>
+    <sql>SELECT * FROM datawarehouse.DIM_UBICACION_GEOGRAFICA</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>816</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>DSA_SUBGRUPO</name>
     <type>TableInput</type>
     <description />
@@ -849,6 +890,30 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     <GUI>
       <xloc>128</xloc>
       <yloc>122</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -892,6 +957,74 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     <GUI>
       <xloc>608</xloc>
       <yloc>186</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows 2</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>SELECT_VALUES_HOMOLOGACION_INSERT</send_true_to>
+    <send_false_to>Select values</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>SUBGRUPO_1</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows 3</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>FILTER_INSERT_DATA</send_true_to>
+    <send_false_to>Dummy (do nothing)</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>COD_SUBGRUPO_1</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue />
+      </condition>
+    </compare>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -960,7 +1093,7 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>832</xloc>
-      <yloc>640</yloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1208,6 +1341,140 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </GUI>
   </step>
   <step>
+    <name>Insert / Update DIM_UBICACION</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_UBICACION_GEOGRAFICA</table>
+      <key>
+        <name>ID_UBICACION</name>
+        <field>ID_UBICACION</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_UBICACION</name>
+        <rename>ID_UBICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_UBICACION_PROVINCIA</name>
+        <rename>COD_UBICACION_PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_PROVINCIA</name>
+        <rename>UBICACION_PROVINCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_UBICACION_CANTON</name>
+        <rename>COD_UBICACION_CANTON</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_CANTON</name>
+        <rename>UBICACION_CANTON</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_UBICACION_PARROQUIA</name>
+        <rename>COD_UBICACION_PARROQUIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UBICACION_PARROQUIA</name>
+        <rename>UBICACION_PARROQUIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>816</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / Update subgrupo</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>con</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>DIM_SUBGRUPO</table>
+      <key>
+        <name>ID_SUBGRUPO</name>
+        <field>ID_SUBGRUPO</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>ID_SUBGRUPO</name>
+        <rename>ID_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>COD_SUBGRUPO</name>
+        <rename>COD_SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SUBGRUPO</name>
+        <rename>SUBGRUPO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FECHA_CARGA</name>
+        <rename>FECHA_CARGA</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Merge Join</name>
     <type>MergeJoin</type>
     <description />
@@ -1271,7 +1538,7 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
-      <yloc>464</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1437,6 +1704,45 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </GUI>
   </step>
   <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>ID_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>COD_SUBGRUPO</name>
+      </field>
+      <field>
+        <name>SUBGRUPO</name>
+      </field>
+      <field>
+        <name>FECHA_CARGA</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>VALUES_TO_INSERT</name>
     <type>SelectValues</type>
     <description />
@@ -1485,149 +1791,7 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </GUI>
   </step>
   <step>
-    <name>DIM_UBICACION</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>con</connection>
-    <sql>SELECT * FROM datawarehouse.DIM_UBICACION_GEOGRAFICA</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>736</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update DIM_UBICACION</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_UBICACION_GEOGRAFICA</table>
-      <key>
-        <name>ID_UBICACION</name>
-        <field>ID_UBICACION</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>ID_UBICACION</name>
-        <rename>ID_UBICACION</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_UBICACION_PROVINCIA</name>
-        <rename>COD_UBICACION_PROVINCIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UBICACION_PROVINCIA</name>
-        <rename>UBICACION_PROVINCIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_UBICACION_CANTON</name>
-        <rename>COD_UBICACION_CANTON</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UBICACION_CANTON</name>
-        <rename>UBICACION_CANTON</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_UBICACION_PARROQUIA</name>
-        <rename>COD_UBICACION_PARROQUIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UBICACION_PARROQUIA</name>
-        <rename>UBICACION_PARROQUIA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>736</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>SELECT_VALUES_HOMOLOGACION_INSERT</send_true_to>
-    <send_false_to>Select values</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>SUBGRUPO_1</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue />
-      </condition>
-    </compare>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 3</name>
+    <name>FILTER_INSERT_DATA</name>
     <type>FilterRows</type>
     <description />
     <distribute>Y</distribute>
@@ -1642,9 +1806,9 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue>COD_SUBGRUPO_1</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue />
+        <leftvalue>COD_SUBGRUPO</leftvalue>
+        <function>&lt;></function>
+        <rightvalue>COD_SUBGRUPO_1</rightvalue>
       </condition>
     </compare>
     <cluster_schema />
@@ -1656,131 +1820,7 @@ FROM DSA_SUB_GRUPO_PRODUCTO
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>ID_SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>COD_SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>SUBGRUPO</name>
-        <rename />
-      </field>
-      <field>
-        <name>FECHA_CARGA</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / Update subgrupo</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>con</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>DIM_SUBGRUPO</table>
-      <key>
-        <name>ID_SUBGRUPO</name>
-        <field>ID_SUBGRUPO</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>ID_SUBGRUPO</name>
-        <rename>ID_SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>COD_SUBGRUPO</name>
-        <rename>COD_SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>SUBGRUPO</name>
-        <rename>SUBGRUPO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FECHA_CARGA</name>
-        <rename>FECHA_CARGA</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>352</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
